@@ -17,12 +17,9 @@ Effective documentation enhances the usability and maintainability of your Pytho
 
 ## Documentation Tools
 
-There are several tools and formats you can use for writing documentation in Python:
+We use **Markdown** for README files, guides, and documentation.
 
-- **Sphinx**: A powerful documentation generator that supports multiple output formats, including HTML, PDF, and LaTeX.
-- **reStructuredText (reST)**: A lightweight markup language used by Sphinx for formatting documentation.
-- **Markdown**: A simple and widely used markup language for creating README files, guides, and documentation.
-- **Doxygen**: A tool for generating documentation from annotated Python source code.
+For Help With Markdown --> https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet
 
 Choose the tool that best fits your project's needs and preferences.
 
