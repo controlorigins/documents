@@ -1,4 +1,4 @@
-# Company Documentation Repository
+# Control Origins Repository
 
 Welcome to the Company Documentation Repository! This repository is dedicated to storing and managing documentation for our company's various domains.
 
@@ -16,8 +16,9 @@ This repository is designed to house documentation in Markdown (.md) format for 
 ## Folder Structure
 
 We use a folder structure to organize documentation by domains or categories. Each domain will have its dedicated folder with relevant markdown files. Here is an example of the folder structure:
-
 Please ensure that you place your documentation files in the appropriate folders to maintain organization.
+
+
 
 ## Contributing
 
@@ -31,7 +32,7 @@ We encourage all employees to contribute to the documentation repository. To con
 6. Create a pull request (PR) from your branch to this repository.
 7. Wait for a review and approval from a repository maintainer.
 
-By contributing to this repository, you agree that all files you create or modify remain the property of the company.
+By contributing to this repository, you agree that all files you create or modify remain the property of Control Origins.
 
 ## License
 
