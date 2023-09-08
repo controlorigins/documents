@@ -18,13 +18,6 @@ This repository is designed to house documentation in Markdown (.md) format for 
 We use a folder structure to organize documentation by domains or categories. Each domain will have its dedicated folder with relevant markdown files. Here is an example of the folder structure:
 Please ensure that you place your documentation files in the appropriate folders to maintain organization.
 
-```mermaid
-  graph TD;
-      A-->B;
-      A-->C;
-      B-->D;
-      C-->D;
-```
 
 
 
@@ -32,14 +25,29 @@ Please ensure that you place your documentation files in the appropriate folders
 
 We encourage all employees to contribute to the documentation repository. To contribute, follow these steps:
 
-1. Fork this repository to your GitHub account.
-2. Create a new branch for your changes: `git checkout -b my-documentation`
-3. Make your changes to the documentation in Markdown format.
-4. Commit your changes: `git commit -m "Add/update documentation"`
-5. Push the changes to your forked repository: `git push origin my-documentation`
-6. Create a pull request (PR) from your branch to this repository.
-7. Wait for a review and approval from a repository maintainer.
+```mermaid
+graph TD;
+  A[Start] --> B[Create Branch];
+  B --> C[Make Changes];
+  C --> D[Commit Changes];
+  D --> E[Push Branch];
+  E --> F[Create Pull Request];
+  F --> |Review & Approve| G[Approved?];
+  G --> |No| H[Rejected];
+  H --> I[Revise Changes];
+  I --> D; 
+  G --> |Yes| J[Merge Changes];
+  J --> K[End];
+```
 
+
+1. After creating a pull request (F), it goes through a review and approval process (G).
+2. If the pull request is not approved (No), it is marked as "Rejected" (H).
+3. The author revises the changes (I) and then commits and pushes the branch (D and E) to create a new pull request (F) for review.
+4. If the pull request is approved (Yes), the changes are merged (J) into the main document.
+5. Finally, the workflow ends (K) after the changes are merged.
+
+This diagram visualizes the workflow for both approved and rejected pull requests, as well as the process of revising changes when a pull request is rejected.
 By contributing to this repository, you agree that all files you create or modify remain the property of Control Origins.
 
 ## License
