@@ -36,5 +36,6 @@ By contributing to this repository, you agree that all files you create or modif
 
 ## License
 
-All documentation in this repository is proprietary and confidential to our company. Unauthorized distribution or sharing of the documentation is strictly prohibited.
+All documentation in this repository is proprietary and confidential to Control Origins. 
+Unauthorized distribution or sharing of the documentation is strictly prohibited.
 
