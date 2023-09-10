@@ -1,4 +1,7 @@
 <?php
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+
 // Define the file path to the JSON file
 $jsonFile = 'content.json';
 
@@ -11,11 +14,21 @@ function readJSONFile($file) {
 // Function to save JSON data to the file
 function saveJSONFile($file, $data) {
     $json = json_encode($data, JSON_PRETTY_PRINT);
-    if (file_put_contents($file, $json) !== false) {
-        return true;
+
+    if (file_exists($file)) {
+        if (is_writable($file)) {
+            if (file_put_contents($file, $json) !== false) {
+                return true;
+            } else {
+                echo "Error writing data to the file.";
+            }
+        } else {
+            echo "File is not writable. Check file permissions.";
+        }
     } else {
-        return false;
+        echo "File does not exist. Check the file path.";
     }
+    return false;
 }
 
 // Initialize the data
