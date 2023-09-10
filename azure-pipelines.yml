@@ -20,7 +20,7 @@ variables:
   environmentName: 'controlorigins-docs'
 
   # Root folder under which your composer.json file is available.
-  rootFolder: $(System.DefaultWorkingDirectory)/website
+  rootFolder: $(System.DefaultWorkingDirectory)
 
 stages:
 - stage: Build
@@ -49,7 +49,7 @@ stages:
     - task: ArchiveFiles@2
       displayName: 'Archive files'
       inputs:
-        rootFolderOrFile: '$(rootFolder)'
+        rootFolderOrFile: '$(rootFolder)/website'
         includeRootFolder: false
         archiveType: zip
         archiveFile: $(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip
