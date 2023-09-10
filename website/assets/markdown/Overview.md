@@ -18,9 +18,6 @@ This repository is designed to house documentation in Markdown (.md) format for 
 We use a folder structure to organize documentation by domains or categories. Each domain will have its dedicated folder with relevant markdown files. Here is an example of the folder structure:
 Please ensure that you place your documentation files in the appropriate folders to maintain organization.
 
-
-
-
 ## Contributing
 
 We encourage all employees to contribute to the documentation repository. To contribute, follow these steps:
@@ -40,7 +37,6 @@ graph TD;
   J --> K[End];
 ```
 
-
 1. After creating a pull request (F), it goes through a review and approval process (G).
 2. If the pull request is not approved (No), it is marked as "Rejected" (H).
 3. The author revises the changes (I) and then commits and pushes the branch (D and E) to create a new pull request (F) for review.
@@ -54,4 +50,3 @@ By contributing to this repository, you agree that all files you create or modif
 
 All documentation in this repository is proprietary and confidential to Control Origins. 
 Unauthorized distribution or sharing of the documentation is strictly prohibited.
-

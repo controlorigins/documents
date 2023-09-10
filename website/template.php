@@ -43,7 +43,7 @@
         ?>
     </main>
     <footer class="bg-dark text-white text-center py-2">
-        <p>&copy; <?php echo date('Y'); ?> My Website</p>
+        <p>&copy; <?php echo date('Y'); ?> d.b.a. Control Origins</p>
     </footer>
 
 
