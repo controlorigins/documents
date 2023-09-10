@@ -1,4 +1,11 @@
-<h1>Documentation</h1>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Markdown Viewer</title>
+</head>
+<body>
+    <h1>Markdown Files</h1>
     <ul>
         <?php
         // Function to recursively scan a directory and return an array of file paths
@@ -71,3 +78,5 @@
         }
         ?>
     </div>
+</body>
+</html>
