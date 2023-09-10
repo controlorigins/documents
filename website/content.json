@@ -10,5 +10,9 @@
     "data-analysis": {
         "title": "Data Analysis",
         "content": "Data Analysis."
+    },
+    "content-admin": {
+        "title": "Content Admin",
+        "content": "Content Admin."
     }
 }
