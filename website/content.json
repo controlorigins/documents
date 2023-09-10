@@ -1,22 +1,10 @@
 {
     "homepage": {
-        "title": "Welcome to My Website",
-        "content": "This is the homepage of my simple CMS website.",
-        "php_file": "template.php"
+        "title": "Control Origins Documentation",
+        "content": "This is the site for Control Origins Documentation."
     },
-    "about": {
+    "project_list": {
         "title": "Project List",
-        "content": "List of Projects.",
-        "php_file": "project_list.php"
-    },
-    "contact": {
-        "title": "Contact Us",
-        "content": "You can reach us at contact@example.com.",
-        "php_file": "template.php"
-    },
-    "404": {
-        "title": "Page Not Found",
-        "content": "The page you requested could not be found.",
-        "php_file": "template.php"
+        "content": "List of Projects."
     }
 }

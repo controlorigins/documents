@@ -7,15 +7,14 @@ $content = json_decode($jsonContent, true);
 $page = isset($_GET['page']) ? $_GET['page'] : 'homepage';
 
 // Check if the requested page exists in the content
-if (!array_key_exists($page, $content)) {
-    $page = '404'; // Default to a 404 page if the page doesn't exist
+if (!array_key_exists($page, $content) || !isset($content[$page]['title']) || !isset($content[$page]['content'])) {
+    // Default to a 404 page if the page doesn't exist or lacks title/content
+    $page = '404';
+    $content[$page]['title'] = '404 - Not Found';
+    $content[$page]['content'] = 'Page Not Found';
 }
 
-// Include the specified PHP file if available
-if (isset($content[$page]['php_file'])) {
-    include $content[$page]['php_file'];
-} else {
-    // Include the template file if no PHP file is specified
-    include 'template.php';
-}
+// Include the template file
+include 'template.php';
 ?>
+

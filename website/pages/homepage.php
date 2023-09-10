@@ -1,12 +1,4 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Readme Viewer</title>
-</head>
-<body>
-    <h1>Readme Viewer</h1>
-
-    <div id="readme-content">
+<div id="readme-content">
         <?php
         // Include the Parsedown library
         require_once('Parsedown.php');
@@ -29,5 +21,3 @@
         }
         ?>
     </div>
-</body>
-</html>

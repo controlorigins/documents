@@ -1,24 +1,42 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
     <meta charset="utf-8">
-    <title><?php echo $content[$page]['title']; ?></title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title><?php echo isset($content[$page]['title']) ? $content[$page]['title'] : '404 - Not Found'; ?></title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
-    <header>
-        <h1><?php echo $content[$page]['title']; ?></h1>
+    <header class="bg-primary text-white text-center py-4">
+        <h1><?php echo isset($content[$page]['title']) ? $content[$page]['title'] : '404 - Not Found'; ?></h1>
     </header>
-    <nav>
-        <ul>
-            <li><a href="?page=homepage">Home</a></li>
-            <li><a href="?page=about">About</a></li>
-            <li><a href="?page=contact">Contact</a></li>
-        </ul>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container">
+            <ul class="navbar-nav">
+                <?php
+                foreach ($content as $key => $value) {
+                    if ($key !== '404') {
+                        echo '<li class="nav-item"><a class="nav-link" href="?page=' . $key . '">' . $value['title'] . '</a></li>';
+                    }
+                }
+                ?>
+            </ul>
+        </div>
     </nav>
-    <main>
-        <p><?php echo $content[$page]['content']; ?></p>
+    <main class="container mt-4">
+        <?php
+        $phpFile = "pages/$page.php";
+
+        if (file_exists($phpFile)) {
+            include $phpFile;
+        } elseif (isset($content[$page]['content'])) {
+            echo '<div class="alert alert-info">' . $content[$page]['content'] . '</div>';
+        } else {
+            include "pages/404.php";
+        }
+        ?>
     </main>
-    <footer>
+    <footer class="bg-dark text-white text-center py-2">
         <p>&copy; <?php echo date('Y'); ?> My Website</p>
     </footer>
 </body>
