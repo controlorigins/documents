@@ -4,7 +4,7 @@
         require_once('Parsedown.php');
 
         // Specify the path to your readme.md file
-        $readmeFile = '../README.md';
+        $readmeFile = 'README.md';
 
         // Check if the readme file exists
         if (file_exists($readmeFile)) {

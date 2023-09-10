@@ -6,5 +6,9 @@
     "project_list": {
         "title": "Project List",
         "content": "List of Projects."
+    },
+    "data-analysis": {
+        "title": "Data Analysis",
+        "content": "Data Analysis."
     }
 }

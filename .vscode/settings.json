@@ -1,0 +1,4 @@
+{
+    "appService.defaultWebAppToDeploy": "undefined/subscriptions/99d8f664-6f80-4f58-b376-6f8fa975cc8a/resourceGroups/appsvc_linux_centralus/providers/Microsoft.Web/sites/controlorigins-docs",
+    "appService.deploySubpath": "website"
+}
