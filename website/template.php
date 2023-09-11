@@ -42,10 +42,21 @@
         }
         ?>
     </main>
-    <footer class="bg-dark text-white text-center py-2">
-        <p>&copy; <?php echo date('Y'); ?> d.b.a. Control Origins</p>
+    <footer class="bg-dark text-white py-2">
+      <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-3 float-left text-left">
+                <!-- Left column content goes here -->
+            </div>
+            <div class="col-md-6 text-center">
+                <p>&copy; <?php echo date('Y'); ?> d.b.a. Control Origins</p>
+            </div>
+            <div class="col-md-3 float-right text-right">
+                <p><a href='https://markhazleton.controlorigins.com'>markhazleton.controlorigins.com</a></p>
+            </div>
+        </div>
+      </div>
     </footer>
-
 
     <!-- Include Bootstrap JS and jQuery (if needed) -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
