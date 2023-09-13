@@ -110,8 +110,8 @@ In summary, even for small companies with a limited number of developers, SCM of
 Remember that this migration may require some adjustments based on your team's specific needs and the complexity of your PHP applications. 
 Regularly review and adapt your version control process to ensure it aligns with your development goals.
 
-
 References:
+
 - [Git Documentation](https://git-scm.com/doc)
 - [Atlassian Git Tutorials](https://www.atlassian.com/git/tutorials)
 - [GitHub Guides](https://guides.github.com/)

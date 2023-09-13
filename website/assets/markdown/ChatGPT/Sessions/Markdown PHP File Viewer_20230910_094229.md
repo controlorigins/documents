@@ -1,5 +1,7 @@
 # Markdown PHP File Viewer
 ## Mark Hazleton:
+Create a plan to migrate set of php applications to using source code repository.
+## Mark Hazleton:
 I have a folder called assets/markdown which contains markdown file (.md) and sub folders. Create a PHP web page to get all the files under the /assets/markdown folders (including sub folders) and build a navigation list and then allow me to select a file and then render the .md file in html
 ## chatgpt:
 To create a PHP web page that lists all the Markdown files in the `/assets/markdown` folder and its subfolders and renders a selected Markdown file in HTML, you can follow these steps:
@@ -345,3 +347,134 @@ It looks like there is a variable name typo in your code. You are trying to use 
 ```
 
 I've replaced `$markdown` with `$markdownContent` to match the variable you have defined earlier in the code. This should resolve the "Undefined variable" error.
+## Mark Hazleton:
+Update the display tree of the markdown files, to put the files in a folder first and the sub folders at the end. Make the subfolders bold.
+## chatgpt:
+To display the Markdown files in a folder-first hierarchy with subfolders listed at the end and formatting subfolders in bold, you can modify the `renderList` function. Here's the updated code:
+
+```php
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Markdown Viewer</title>
+</head>
+<body>
+    <h1>Markdown Files</h1>
+    <ul>
+        <?php
+        // Function to recursively scan a directory and return an array of file paths
+        function scanDirectory($dir) {
+            $files = [];
+            $folders = [];
+            foreach (scandir($dir) as $file) {
+                if ($file !== '.' && $file !== '..') {
+                    $filePath = $dir . '/' . $file;
+                    if (is_dir($filePath)) {
+                        $subFiles = scanDirectory($filePath);
+                        if (!empty($subFiles)) {
+                            $folders[] = [
+                                'folder' => $file,
+                                'subFiles' => $subFiles,
+                            ];
+                        }
+                    } elseif (pathinfo($file, PATHINFO_EXTENSION) === 'md') {
+                        $files[] = $file;
+                    }
+                }
+            }
+            return array_merge($folders, $files);
+        }
+
+        // Get all Markdown files and folder structure
+        $markdownFiles = scanDirectory('assets/markdown');
+
+        // Function to render a nested list
+        function renderList($items, $basePath = '') {
+            echo '<ul>';
+            foreach ($items as $item) {
+                if (is_array($item)) {
+                    echo '<li><strong>' . $item['folder'] . '</strong>';
+                    renderList($item['subFiles'], $basePath . $item['folder'] . '/');
+                    echo '</li>';
+                } else {
+                    $relativePath = $basePath . $item;
+                    echo '<li><a href="?file=' . urlencode($relativePath) . '">' . $item . '</a></li>';
+                }
+            }
+            echo '</ul>';
+        }
+
+        // Display the nested list
+        renderList($markdownFiles);
+        ?>
+    </ul>
+
+    <hr>
+
+    <div>
+        <?php
+        // Display the selected Markdown file in HTML
+        if (isset($_GET['file'])) {
+            $requestedFile = 'assets/markdown/' . $_GET['file'];
+            if (file_exists($requestedFile) && pathinfo($requestedFile, PATHINFO_EXTENSION) === 'md') {
+                
+                // Include the Parsedown library
+                require_once('pages/Parsedown.php');
+
+                $markdownContent = file_get_contents($requestedFile);
+                // Create a new Parsedown instance
+                $parsedown = new Parsedown();
+                // Parse Markdown to HTML and display it
+                echo $parsedown->text($markdownContent);
+                
+            } else {
+                echo 'File not found or invalid file format.';
+            }
+        }
+        ?>
+    </div>
+</body>
+</html>
+```
+
+In this updated code, the `scanDirectory` function now returns an array with folders first and then files. Subfolders are listed at the end, and subfolders are rendered in bold using `<strong>` HTML tags in the `renderList` function. This should create the desired folder hierarchy with subfolders at the end and proper formatting.
+## Mark Hazleton:
+The renderlist function is not showing the root file first, it is showing a folder first. Change the method so it shows files first and then folders. function renderList($items, $basePath = '') { echo '<ul>'; foreach ($items as $item) { if (is\_array($item)) { echo '<li><strong>' . $item\['folder'\] . '</strong>'; renderList($item\['subFiles'\], $basePath . $item\['folder'\] . '/'); echo '</li>'; } else { $relativePath = $basePath . $item; echo '<li><a href="?file=' . urlencode($relativePath) . '">' . $item . '</a></li>'; } } echo '</ul>'; }
+## chatgpt:
+I understand your request. To show files first and then folders in the renderList function, you can modify the function as follows:
+
+```php
+function renderList($items, $basePath = '') {
+    $files = [];
+    $folders = [];
+
+    // Separate files and folders
+    foreach ($items as $item) {
+        if (is_array($item)) {
+            $folders[] = $item;
+        } else {
+            $files[] = $item;
+        }
+    }
+
+    echo '<ul>';
+    
+    // Display files first
+    foreach ($files as $file) {
+        $relativePath = $basePath . $file;
+        echo '<li><a href="?file=' . urlencode($relativePath) . '">' . $file . '</a></li>';
+    }
+    
+    // Then display folders
+    foreach ($folders as $folder) {
+        echo '<li><strong>' . $folder['folder'] . '</strong>';
+        renderList($folder['subFiles'], $basePath . $folder['folder'] . '/');
+        echo '</li>';
+    }
+
+    echo '</ul>';
+}
+```
+
+In this modified code, we first separate the files and folders into two separate arrays (`$files` and `$folders`). Then, we display the files first, followed by the folders, maintaining the desired order of files before folders.

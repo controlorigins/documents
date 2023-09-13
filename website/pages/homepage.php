@@ -28,21 +28,36 @@
 
         // Function to render a nested list
         function renderList($items, $basePath = '') {
-            echo '<ul>';
+            $files = [];
+            $folders = [];
+        
+            // Separate files and folders
             foreach ($items as $item) {
                 if (is_array($item)) {
-                    echo '<li>' . $item['folder'];
-                    renderList($item['subFiles'], $basePath . $item['folder'] . '/');
-                    echo '</li>';
+                    $folders[] = $item;
                 } else {
-                    $relativePath = $basePath . $item;
-                    echo '<li><a href="?file=' . urlencode($relativePath) . '">' . $item . '</a></li>';
+                    $files[] = $item;
                 }
             }
+        
+            echo '<ul>';
+            
+            // Display files first
+            foreach ($files as $file) {
+                $relativePath = $basePath . $file;
+                echo '<li><a href="?file=' . urlencode($relativePath) . '">' . $file . '</a></li>';
+            }
+            
+            // Then display folders
+            foreach ($folders as $folder) {
+                echo '<li><strong>' . $folder['folder'] . '</strong>';
+                renderList($folder['subFiles'], $basePath . $folder['folder'] . '/');
+                echo '</li>';
+            }
+        
             echo '</ul>';
         }
-
-        // Display the nested list
+                // Display the nested list
         renderList($markdownFiles);
         ?>
     </ul>
