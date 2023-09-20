@@ -2,6 +2,10 @@
 
 Welcome to the Company Documentation Repository! This repository is dedicated to storing and managing documentation for our company's various domains.
 
+- [Published Website](https://controlorigins-docs.azurewebsites.net/?page=homepage)
+- [DevOps Project](https://dev.azure.com/ControlOrigins/Documentation)
+- [GitHub Repository](https://github.com/controlorigins/documents)
+
 ## Table of Contents
 
 - [Introduction](#introduction)
