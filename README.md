@@ -18,9 +18,6 @@ This repository is designed to house documentation in Markdown (.md) format for 
 We use a folder structure to organize documentation by domains or categories. Each domain will have its dedicated folder with relevant markdown files. Here is an example of the folder structure:
 Please ensure that you place your documentation files in the appropriate folders to maintain organization.
 
-
-
-
 ## Contributing
 
 We encourage all employees to contribute to the documentation repository. To contribute, follow these steps:
