@@ -61,16 +61,20 @@
         
                 foreach ($header as $field) {
                     $fieldData = array_column($data, array_search($field, $header));
-                    $min = min($fieldData);
-                    $max = max($fieldData);
-                    $average = array_sum($fieldData) / count($fieldData);
-                    $distinctCount = count(array_count_values($fieldData));
-                    $valueCounts = array_count_values($fieldData);
+                    // Filter out non-integer and non-string values
+                    $filteredFieldData = array_filter($fieldData, function($value) {
+                        return is_string($value) || is_numeric($value);
+                    });
+                    $min = min($filteredFieldData);
+                    $max = max($filteredFieldData);
+                    $average = array_sum($filteredFieldData) / count($filteredFieldData);
+                    $distinctCount = count(array_count_values($filteredFieldData));
+                    $valueCounts = array_count_values($filteredFieldData);
                     arsort($valueCounts);
                     $mostCommon = key($valueCounts);
                     end($valueCounts);
                     $leastCommon = key($valueCounts);
-        
+                            
                     echo "<tr>";
                     echo "<td>$field</td>";
                     echo "<td>$min</td>";
@@ -86,23 +90,21 @@
         
                 // Output the CSV data in a table
                 echo "<h3>Data Table:</h3>";
-                echo "<table class='table table-bordered'>";
-        
-                $firstRow = true;
+                echo "<table class='table table-bordered display' id='myTable'>";
+                echo "<thead><tr>";
+                foreach ($header as $field) {
+                    echo "<th>$field</th>";
+                }
+                echo "</thead></tr>";
+                echo "<tbody>";
                 foreach ($data as $rowData) {
                     echo "<tr>";
                     foreach ($rowData as $cell) {
-                        if ($firstRow) {
-                            echo "<th scope='col'>$cell</th>"; // Display as header
-                        } else {
-                            echo "<td>$cell</td>";
-                        }
+                        echo "<td>$cell</td>";
                     }
                     echo "</tr>";
-                    $firstRow = false;
                 }
-        
-                echo "</table>";
+                echo "</tbody></table>";
             } else {
                 echo "<p>Please select a CSV file to view.</p>";
             }

@@ -1,6 +1,6 @@
     <div class="container mt-4">
         <h1>Projects</h1>
-        <table class="table table-bordered">
+        <table class="table table-bordered display" id="myTable">
             <thead>
                 <tr>
                     <th>Image</th>
