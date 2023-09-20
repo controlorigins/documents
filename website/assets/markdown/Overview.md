@@ -1,4 +1,4 @@
-# Control Origins Repository
+# Document Repository
 
 Welcome to the Company Documentation Repository! This repository is dedicated to storing and managing documentation for our company's various domains.
 
@@ -38,10 +38,10 @@ graph TD;
 ```
 
 1. After creating a pull request (F), it goes through a review and approval process (G).
-2. If the pull request is not approved (No), it is marked as "Rejected" (H).
-3. The author revises the changes (I) and then commits and pushes the branch (D and E) to create a new pull request (F) for review.
-4. If the pull request is approved (Yes), the changes are merged (J) into the main document.
-5. Finally, the workflow ends (K) after the changes are merged.
+1. If the pull request is not approved (No), it is marked as "Rejected" (H).
+1. The author revises the changes (I) and then commits and pushes the branch (D and E) to create a new pull request (F) for review.
+1. If the pull request is approved (Yes), the changes are merged (J) into the main document.
+1. Finally, the workflow ends (K) after the changes are merged.
 
 This diagram visualizes the workflow for both approved and rejected pull requests, as well as the process of revising changes when a pull request is rejected.
 By contributing to this repository, you agree that all files you create or modify remain the property of Control Origins.

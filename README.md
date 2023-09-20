@@ -2,6 +2,13 @@
 
 Welcome to the Company Documentation Repository! This repository is dedicated to storing and managing documentation for our company's various domains.
 
+
+ - [Published Website](https://controlorigins-docs.azurewebsites.net/?page=homepage)
+ - [DevOps Project](https://dev.azure.com/ControlOrigins/Documentation)
+ 
+
+
+
 ## Table of Contents
 
 - [Introduction](#introduction)
@@ -17,9 +24,6 @@ This repository is designed to house documentation in Markdown (.md) format for 
 
 We use a folder structure to organize documentation by domains or categories. Each domain will have its dedicated folder with relevant markdown files. Here is an example of the folder structure:
 Please ensure that you place your documentation files in the appropriate folders to maintain organization.
-
-
-
 
 ## Contributing
 
