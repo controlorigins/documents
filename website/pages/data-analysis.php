@@ -34,21 +34,64 @@
 
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $selectedFile = $_POST["csvFile"];
-
+        
             if ($selectedFile) {
                 // Read and display the contents of the selected CSV file
                 $csvData = file_get_contents("data/" . $selectedFile);
                 $lines = explode(PHP_EOL, $csvData);
-
+        
                 echo "<h2>Contents of $selectedFile:</h2>";
-                echo "<table class='table table-bordered'>";
-                
+        
                 // Parse the CSV data
-                $firstRow = true;
+                $data = [];
+                $header = null;
                 foreach ($lines as $line) {
-                    echo "<tr>";
                     $cells = str_getcsv($line);
-                    foreach ($cells as $cell) {
+                    if (!$header) {
+                        $header = $cells; // Store the header row
+                    } else {
+                        $data[] = $cells; // Store data rows
+                    }
+                }
+        
+                // Output summary for each field
+                echo "<h3>Field Summary:</h3>";
+                echo "<table class='table table-bordered'>";
+                echo "<tr><th>Field</th><th>Minimum</th><th>Average</th><th>Maximum</th><th>Most Common</th><th>Least Common</th><th>Distinct Count</th></tr>";
+        
+                foreach ($header as $field) {
+                    $fieldData = array_column($data, array_search($field, $header));
+                    $min = min($fieldData);
+                    $max = max($fieldData);
+                    $average = array_sum($fieldData) / count($fieldData);
+                    $distinctCount = count(array_count_values($fieldData));
+                    $valueCounts = array_count_values($fieldData);
+                    arsort($valueCounts);
+                    $mostCommon = key($valueCounts);
+                    end($valueCounts);
+                    $leastCommon = key($valueCounts);
+        
+                    echo "<tr>";
+                    echo "<td>$field</td>";
+                    echo "<td>$min</td>";
+                    echo "<td>$average</td>";
+                    echo "<td>$max</td>";
+                    echo "<td>$mostCommon</td>";
+                    echo "<td>$leastCommon</td>";
+                    echo "<td>$distinctCount</td>";
+                    echo "</tr>";
+                }
+        
+                echo "</table>";
+        
+                // Output the CSV data in a table
+                echo "<h3>Data Table:</h3>";
+                echo "<table class='table table-bordered'>";
+        
+                $firstRow = true;
+                foreach ($data as $rowData) {
+                    echo "<tr>";
+                    foreach ($rowData as $cell) {
                         if ($firstRow) {
                             echo "<th scope='col'>$cell</th>"; // Display as header
                         } else {
@@ -58,7 +101,7 @@
                     echo "</tr>";
                     $firstRow = false;
                 }
-
+        
                 echo "</table>";
             } else {
                 echo "<p>Please select a CSV file to view.</p>";
