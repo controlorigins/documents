@@ -1,4 +1,5 @@
 # Chat GPT Overview
+<a id="top"></a>
 
 <a href="https://www.youtube.com/watch?v=C_78DM8fG6E" target="_new">
   <img src="https://img.youtube.com/vi/C_78DM8fG6E/0.jpg" alt="Sample Video">
@@ -15,11 +16,11 @@ ChatGPT, a powerful AI language model, can assist in creating comprehensive docu
 - [Best Practices](#best-practices)
 - [Examples](#examples)
 
-## Introduction
+## Introduction <a id="introduction"></a> | [Back to Top](#top)
 
 Effective documentation is essential for software applications. It helps users, developers, and stakeholders understand how to use, maintain, and contribute to your software. ChatGPT can be a valuable tool in the documentation process, offering assistance with generating content, explanations, and code samples.
 
-## Using ChatGPT for Documentation
+## Using ChatGPT for Documentation <a id="using-chatgpt-for-documentation"></a> | [Back to Top](#top)
 
 To use ChatGPT for software documentation, follow these steps:
 
@@ -37,7 +38,7 @@ To use ChatGPT for software documentation, follow these steps:
 
 7. **Add Visuals**: If applicable, include diagrams, images, and charts to enhance the documentation's visual appeal and clarity.
 
-## Best Practices
+## Best Practices <a id="best-practices"></a> | [Back to Top](#top)
 
 To make the most of ChatGPT for software documentation:
 
@@ -47,7 +48,7 @@ To make the most of ChatGPT for software documentation:
 - Regularly update and maintain the documentation as your software evolves.
 - Combine ChatGPT-generated content with manual input and expertise for the best results.
 
-## Examples
+## Examples <a id="examples"></a> | [Back to Top](#top)
 
 ### Example 1: Creating a README.md
 
