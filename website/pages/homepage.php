@@ -1,4 +1,6 @@
 <h1>Documentation</h1>
+<div class="row">
+    <div class="col-3">
     <ul>
         <?php
         // Function to recursively scan a directory and return an array of file paths
@@ -61,11 +63,9 @@
         renderList($markdownFiles);
         ?>
     </ul>
-
-    <hr>
-
-    <div>
-        <?php
+    </div>
+    <div class="col-9">
+    <?php
         // Display the selected Markdown file in HTML
         if (isset($_GET['file'])) {
             $requestedFile = 'assets/markdown/' . $_GET['file'];
@@ -86,3 +86,4 @@
         }
         ?>
     </div>
+</div>

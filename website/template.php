@@ -30,7 +30,7 @@
             </ul>
         </div>
     </nav>
-    <main class="container mt-4">
+    <main class="container-fluid mt-4">
         <?php
         $phpFile = "pages/$page.php";
 
