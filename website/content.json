@@ -1,7 +1,7 @@
 {
     "homepage": {
         "title": "Home",
-        "content": "Control Origins Documentation."
+        "content": "Documentation Home"
     },
     "project_list": {
         "title": "Project List",
@@ -10,9 +10,5 @@
     "data-analysis": {
         "title": "Data Analysis",
         "content": "Data Analysis."
-    },
-    "content-admin": {
-        "title": "Content Admin",
-        "content": "Content Admin."
     }
 }
