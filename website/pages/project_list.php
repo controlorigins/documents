@@ -11,7 +11,7 @@
             </thead>
             <tbody>
                 <?php
-                $jsonFile = 'projects.json';
+                $jsonFile = 'data/projects.json';
                 $jsonData = file_get_contents($jsonFile);
                 $projects = json_decode($jsonData, true);
 

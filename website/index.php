@@ -1,6 +1,6 @@
 <?php
 // Read the JSON content
-$jsonContent = file_get_contents('content.json');
+$jsonContent = file_get_contents('data/content.json');
 $content = json_decode($jsonContent, true);
 
 // Check if a page is specified in the URL
