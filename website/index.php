@@ -4,7 +4,7 @@ $jsonContent = file_get_contents('content.json');
 $content = json_decode($jsonContent, true);
 
 // Check if a page is specified in the URL
-$page = isset($_GET['page']) ? (string)$_GET['page'] : 'homepage';
+$page = isset($_GET['page']) ? (string)$_GET['page'] : 'document_view';
 
 // Check if the requested page exists in the content
 if (!array_key_exists($page, $content) || !isset($content[$page]['title']) || !isset($content[$page]['content'])) {

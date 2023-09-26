@@ -22,7 +22,6 @@
                                 }
                             }
                         }
-
                         return array_merge($files, $subFiles);
                     }
 
