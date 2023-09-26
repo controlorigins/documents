@@ -1,15 +1,22 @@
-    <div class="container">
-        <h1>Select a CSV File</h1>
+<div class='card'>
+    <div class='card-header'>
+        <h1>CSV File Analysis</h1>  
+        <a href='/?file=ChatGPT%252FSessions%252FList%2BCSV%2BFiles%2BPHP.md'>
+        How this page was created</a>
+    </div>
+    <div class="card-body">
+        <div class="container-fluid mt-4">
+            <strong>Select a CSV File</strong><br/>
 
         <?php
         $folderPath = 'data'; // Specify the folder path
-
+        
         // Check if the folder exists
         if (is_dir($folderPath)) {
             // Open the directory
             if ($dirHandle = opendir($folderPath)) {
                 echo "<form method='POST' action=''>"; // Form to select a CSV file
-
+        
                 echo "List of CSV files in the 'data' folder:<br>";
 
                 // Loop through the files in the directory
@@ -34,14 +41,14 @@
 
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $selectedFile = $_POST["csvFile"];
-        
+
             if ($selectedFile) {
                 // Read and display the contents of the selected CSV file
                 $csvData = file_get_contents("data/" . $selectedFile);
                 $lines = explode(PHP_EOL, $csvData);
-        
+
                 echo "<h2>Contents of $selectedFile:</h2>";
-        
+
                 // Parse the CSV data
                 $data = [];
                 $header = null;
@@ -53,16 +60,16 @@
                         $data[] = $cells; // Store data rows
                     }
                 }
-        
+
                 // Output summary for each field
                 echo "<h3>Field Summary:</h3>";
                 echo "<table class='table table-bordered'>";
                 echo "<tr><th>Field</th><th>Minimum</th><th>Average</th><th>Maximum</th><th>Most Common</th><th>Least Common</th><th>Distinct Count</th></tr>";
-        
+
                 foreach ($header as $field) {
                     $fieldData = array_column($data, array_search($field, $header));
                     // Filter out non-integer and non-string values
-                    $filteredFieldData = array_filter($fieldData, function($value) {
+                    $filteredFieldData = array_filter($fieldData, function ($value) {
                         return is_string($value) || is_numeric($value);
                     });
                     $min = min($filteredFieldData);
@@ -74,7 +81,7 @@
                     $mostCommon = key($valueCounts);
                     end($valueCounts);
                     $leastCommon = key($valueCounts);
-                            
+
                     echo "<tr>";
                     echo "<td>$field</td>";
                     echo "<td>$min</td>";
@@ -85,9 +92,9 @@
                     echo "<td>$distinctCount</td>";
                     echo "</tr>";
                 }
-        
+
                 echo "</table>";
-        
+
                 // Output the CSV data in a table
                 echo "<h3>Data Table:</h3>";
                 echo "<table class='table table-bordered display' id='myTable'>";
@@ -111,3 +118,10 @@
         }
         ?>
     </div>
+    <div class="card-footer">
+        <br/>
+        <br/>
+    </div>
+</div>
+<br/><br/><br/><br/>
+    

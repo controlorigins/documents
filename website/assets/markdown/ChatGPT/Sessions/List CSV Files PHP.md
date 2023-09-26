@@ -292,268 +292,170 @@ To style the HTML table using Bootstrap and add alternating row backgrounds, you
 
 In this updated code:
 
-1.  Bootstrap CSS is included from a CDN.
-2.  A custom style is added to apply alternating row background colors using the `nth-child` CSS selector.
-3.  Bootstrap classes are used to style the table (`table table-bordered`) and the submit button (`btn btn-primary`).
+1. Bootstrap CSS is included from a CDN.
+1. A custom style is added to apply alternating row background colors using the `nth-child` CSS selector.
+1. Bootstrap classes are used to style the table (`table table-bordered`) and the submit button (`btn btn-primary`).
 
 Make sure you have an internet connection to load Bootstrap from the CDN, and you can further customize the styling according to your preferences by adjusting the Bootstrap classes and custom CSS.
-## Mark Hazleton:
-I do not want the 404 page to show up in the navigation in the template.php file
+
+
+
 ## chatgpt:
-If you don't want the "404" page to appear in the navigation menu in the `template.php` file, you can simply add a conditional check to exclude it. Here's the updated `template.php` file with the "404" page excluded from the navigation menu:
+This PHP page is designed to do the following:
 
-```php
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="utf-8">
-    <title><?php echo $content[$page]['title']; ?></title>
-</head>
-<body>
-    <header>
-        <h1><?php echo $content[$page]['title']; ?></h1>
-    </header>
-    <nav>
-        <ul>
-            <?php
-            foreach ($content as $key => $value) {
-                // Exclude the "404" page from navigation
-                if ($key !== '404') {
-                    echo '<li><a href="?page=' . $key . '">' . $value['title'] . '</a></li>';
-                }
-            }
-            ?>
-        </ul>
-    </nav>
-    <main>
-        <?php include "pages/$page.php"; ?>
-    </main>
-    <footer>
-        <p>&copy; <?php echo date('Y'); ?> My Website</p>
-    </footer>
-</body>
-</html>
-```
+1.  **Display a Form:** It presents a web page with a form that allows users to select a CSV (Comma-Separated Values) file. The form is displayed within a container.
+    
+2.  **List CSV Files:** It checks a specific folder named 'data' to see if it exists. If the folder exists, it proceeds to list all the CSV files present in that folder. For each CSV file found, it generates a radio button so that users can select one of them.
+    
+3.  **Submit Selection:** Users can then submit their selection by clicking the "View Selected CSV" button.
+    
+4.  **Display CSV Contents:** After submission, the PHP code checks if a CSV file has been selected. If a file is selected, it reads the contents of the chosen CSV file, parses it, and displays the data in an HTML table format. The first row of the CSV is treated as the header row and displayed as table headers.
+    
 
-With this modification, the "404" page will not be included in the navigation menu. All other pages defined in the `content.json` file will still appear in the menu as before.
+In summary, this PHP page serves as a basic interface for users to select and view the contents of CSV files stored in a 'data' folder. It lists the available CSV files, allows users to choose one, and then displays the data from the selected CSV file in a structured table format.
+
+References:
+
+1.  [PHP opendir() Function](https://www.php.net/manual/en/function.opendir)
+2.  [PHP file\_get\_contents() Function](https://www.php.net/manual/en/function.file-get-contents)
+3.  [PHP str\_getcsv() Function](https://www.php.net/manual/en/function.str-getcsv)
+4.  [HTML Forms](https://developer.mozilla.org/en-US/docs/Learn/Forms/Your_first_form)
 ## Mark Hazleton:
-404 is still showing up in the navigation
+When we display the contents of the CSV file, I want to create a summary analysis of the file. The summary should include a table of all the fields in the csv file. For each field show the minimum value , average value , maximum value , most common value, least common value, and distinct value count Add this above the table that displays the values in the csv
 ## chatgpt:
-I apologize for the oversight. To exclude the "404" page from the navigation, you should use a conditional check to skip it during the navigation menu generation. Make sure you have properly defined your `content.json` file and that the "404" page is not included there. Here's the updated `template.php` file:
-
-```php
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="utf-8">
-    <title><?php echo $content[$page]['title']; ?></title>
-</head>
-<body>
-    <header>
-        <h1><?php echo $content[$page]['title']; ?></h1>
-    </header>
-    <nav>
-        <ul>
-            <?php
-            foreach ($content as $key => $value) {
-                // Exclude the "404" page from navigation
-                if ($key !== '404') {
-                    echo '<li><a href="?page=' . $key . '">' . $value['title'] . '</a></li>';
-                }
-            }
-            ?>
-        </ul>
-    </nav>
-    <main>
-        <?php include "pages/$page.php"; ?>
-    </main>
-    <footer>
-        <p>&copy; <?php echo date('Y'); ?> My Website</p>
-    </footer>
-</body>
-</html>
-```
-
-Ensure that the "404" page is not present in your `content.json` file, and this updated `template.php` code will exclude it from the navigation menu.
-## Mark Hazleton:
-when I put in a bad page name, rather than gettign the 404, I am getting the following error: Warning: Undefined array key 404 in C:\\GitHub\\ControlOrigins\\documents\\website\\template.php on line 9 Warning: Trying to access array offset on value of type null in C:\\GitHub\\ControlOrigins\\documents\\website\\template.php on line 9
-## chatgpt:
-I apologize for the oversight. To properly handle cases where an invalid page name is provided in the URL, you should check whether the requested page exists in the `content.json` array before trying to access it. Here's an updated `template.php` that includes error handling for such cases:
-
-```php
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="utf-8">
-    <title><?php echo isset($content[$page]['title']) ? $content[$page]['title'] : 'Page Not Found'; ?></title>
-</head>
-<body>
-    <header>
-        <h1><?php echo isset($content[$page]['title']) ? $content[$page]['title'] : 'Page Not Found'; ?></h1>
-    </header>
-    <nav>
-        <ul>
-            <?php
-            foreach ($content as $key => $value) {
-                // Exclude the "404" page from navigation
-                if ($key !== '404') {
-                    echo '<li><a href="?page=' . $key . '">' . $value['title'] . '</a></li>';
-                }
-            }
-            ?>
-        </ul>
-    </nav>
-    <main>
-        <?php
-        // Include the specified PHP file if available
-        if (isset($content[$page]['php_file'])) {
-            include "pages/" . $content[$page]['php_file'];
-        } else {
-            // Include the specific page content if it exists, or display a 404 message
-            if (isset($content[$page]['content'])) {
-                echo $content[$page]['content'];
-            } else {
-                echo "Page not found.";
-            }
-        }
-        ?>
-    </main>
-    <footer>
-        <p>&copy; <?php echo date('Y'); ?> My Website</p>
-    </footer>
-</body>
-</html>
-```
-
-With this updated code, it first checks if the requested page exists in the `content.json` array. If it doesn't, it displays a "Page Not Found" message. This should prevent the error you were encountering when using an invalid page name in the URL.
-## Mark Hazleton:
-for this line <?php include "pages/$page.php"; ?> I want to add code to make sure the file exists and only include it if it is found, otherwise display content from the "pages/404.php" file
-## chatgpt:
-To include a specific PHP file only if it exists and display content from a `pages/404.php` file when the requested PHP file is not found, you can use the `file_exists()` function. Here's how you can modify the `template.php` file to achieve this:
-
-```php
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="utf-8">
-    <title><?php echo isset($content[$page]['title']) ? $content[$page]['title'] : 'Page Not Found'; ?></title>
-</head>
-<body>
-    <header>
-        <h1><?php echo isset($content[$page]['title']) ? $content[$page]['title'] : 'Page Not Found'; ?></h1>
-    </header>
-    <nav>
-        <ul>
-            <?php
-            foreach ($content as $key => $value) {
-                // Exclude the "404" page from navigation
-                if ($key !== '404') {
-                    echo '<li><a href="?page=' . $key . '">' . $value['title'] . '</a></li>';
-                }
-            }
-            ?>
-        </ul>
-    </nav>
-    <main>
-        <?php
-        $phpFile = "pages/$page.php";
-
-        if (file_exists($phpFile)) {
-            include $phpFile;
-        } elseif (isset($content[$page]['content'])) {
-            echo $content[$page]['content'];
-        } else {
-            include "pages/404.php";
-        }
-        ?>
-    </main>
-    <footer>
-        <p>&copy; <?php echo date('Y'); ?> My Website</p>
-    </footer>
-</body>
-</html>
-```
-
-With this modification, it checks if the requested PHP file exists using `file_exists()`. If the file exists, it includes it; otherwise, it checks if the page content is specified in the `content.json` file and displays it. If neither the file nor content is found, it includes the `pages/404.php` file as a fallback.
-## Mark Hazleton:
-In the index.php, I want to validate the $page variable so that it always contains a valid title and content. if the requested page is not found default &page title to "404 - Not Found" and content to "Page Not Found" <?php // Read the JSON content $jsonContent = file\_get\_contents('content.json'); $content = json\_decode($jsonContent, true); // Check if a page is specified in the URL $page = isset($\_GET\['page'\]) ? $\_GET\['page'\] : 'homepage'; // Check if the requested page exists in the content if (!array\_key\_exists($page, $content)) { $page = '404'; // Default to a 404 page if the page doesn't exist } // Include the template file include 'template.php'; ?>
-## chatgpt:
-To validate the `$page` variable in your `index.php` and ensure it always contains a valid title and content, you can modify your code as follows:
+To achieve the summary analysis of the CSV file, including statistics for each field, you can modify the PHP code as follows. We'll calculate the minimum, average, maximum, most common, least common, and distinct value count for each field in the CSV data and display this summary above the table:
 
 ```php
 <?php
-// Read the JSON content
-$jsonContent = file_get_contents('content.json');
-$content = json_decode($jsonContent, true);
+// ... (previous code remains unchanged)
 
-// Check if a page is specified in the URL
-$page = isset($_GET['page']) ? $_GET['page'] : 'homepage';
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $selectedFile = $_POST["csvFile"];
 
-// Check if the requested page exists in the content
-if (!array_key_exists($page, $content) || !isset($content[$page]['title']) || !isset($content[$page]['content'])) {
-    // Default to a 404 page if the page doesn't exist or lacks title/content
-    $page = '404';
-    $content[$page]['title'] = '404 - Not Found';
-    $content[$page]['content'] = 'Page Not Found';
+    if ($selectedFile) {
+        // Read and display the contents of the selected CSV file
+        $csvData = file_get_contents("data/" . $selectedFile);
+        $lines = explode(PHP_EOL, $csvData);
+
+        echo "<h2>Contents of $selectedFile:</h2>";
+
+        // Parse the CSV data
+        $data = [];
+        $header = null;
+        foreach ($lines as $line) {
+            $cells = str_getcsv($line);
+            if (!$header) {
+                $header = $cells; // Store the header row
+            } else {
+                $data[] = $cells; // Store data rows
+            }
+        }
+
+        // Output summary for each field
+        echo "<h3>Field Summary:</h3>";
+        echo "<table class='table table-bordered'>";
+        echo "<tr><th>Field</th><th>Minimum</th><th>Average</th><th>Maximum</th><th>Most Common</th><th>Least Common</th><th>Distinct Count</th></tr>";
+
+        foreach ($header as $field) {
+            $fieldData = array_column($data, array_search($field, $header));
+            $min = min($fieldData);
+            $max = max($fieldData);
+            $average = array_sum($fieldData) / count($fieldData);
+            $distinctCount = count(array_count_values($fieldData));
+            $valueCounts = array_count_values($fieldData);
+            arsort($valueCounts);
+            $mostCommon = key($valueCounts);
+            end($valueCounts);
+            $leastCommon = key($valueCounts);
+
+            echo "<tr>";
+            echo "<td>$field</td>";
+            echo "<td>$min</td>";
+            echo "<td>$average</td>";
+            echo "<td>$max</td>";
+            echo "<td>$mostCommon</td>";
+            echo "<td>$leastCommon</td>";
+            echo "<td>$distinctCount</td>";
+            echo "</tr>";
+        }
+
+        echo "</table>";
+
+        // Output the CSV data in a table
+        echo "<h3>Data Table:</h3>";
+        echo "<table class='table table-bordered'>";
+
+        $firstRow = true;
+        foreach ($data as $rowData) {
+            echo "<tr>";
+            foreach ($rowData as $cell) {
+                if ($firstRow) {
+                    echo "<th scope='col'>$cell</th>"; // Display as header
+                } else {
+                    echo "<td>$cell</td>";
+                }
+            }
+            echo "</tr>";
+            $firstRow = false;
+        }
+
+        echo "</table>";
+    } else {
+        echo "<p>Please select a CSV file to view.</p>";
+    }
 }
-
-// Include the template file
-include 'template.php';
 ?>
 ```
 
-This code first checks if the requested page exists and if it has both a title and content. If any of these conditions are not met, it defaults to the "404" page with the specified title and content. This ensures that `$page` always contains valid title and content information.
+This code calculates the requested statistics for each field in the CSV and displays them in a summary table above the table displaying the CSV data.
+
+References:
+
+1.  [PHP array\_column() Function](https://www.php.net/manual/en/function.array-column)
+2.  [PHP array\_sum() Function](https://www.php.net/manual/en/function.array-sum)
+3.  [PHP array\_count\_values() Function](https://www.php.net/manual/en/function.array-count-values)
+4.  [PHP min() Function](https://www.php.net/manual/en/function.min)
+5.  [PHP max() Function](https://www.php.net/manual/en/function.max)
 ## Mark Hazleton:
-Update template.php to include Bootstrap for formatting, update navigation and content to use bootstrap classes
+Write an updated description of what the page does for a non-technical audience of executives.
 ## chatgpt:
-To incorporate Bootstrap for formatting in your `template.php` file and update the navigation and content to use Bootstrap classes, you'll need to include the Bootstrap CSS and modify the HTML structure accordingly. Make sure you have the Bootstrap CSS file (e.g., `bootstrap.min.css`) available in your project directory or linked to from a content delivery network (CDN). Here's an updated `template.php` file:
+Certainly, here's an updated description of what the page does for non-technical executives:
 
-```php
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title><?php echo isset($content[$page]['title']) ? $content[$page]['title'] : '404 - Not Found'; ?></title>
-    <link href="path-to-bootstrap/bootstrap.min.css" rel="stylesheet">
-</head>
-<body>
-    <header class="bg-primary text-white text-center py-4">
-        <h1><?php echo isset($content[$page]['title']) ? $content[$page]['title'] : '404 - Not Found'; ?></h1>
-    </header>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <div class="container">
-            <ul class="navbar-nav">
-                <?php
-                foreach ($content as $key => $value) {
-                    if ($key !== '404') {
-                        echo '<li class="nav-item"><a class="nav-link" href="?page=' . $key . '">' . $value['title'] . '</a></li>';
-                    }
-                }
-                ?>
-            </ul>
-        </div>
-    </nav>
-    <main class="container mt-4">
-        <?php
-        $phpFile = "pages/$page.php";
+* * *
 
-        if (file_exists($phpFile)) {
-            include $phpFile;
-        } elseif (isset($content[$page]['content'])) {
-            echo '<div class="alert alert-info">' . $content[$page]['content'] . '</div>';
-        } else {
-            include "pages/404.php";
-        }
-        ?>
-    </main>
-    <footer class="bg-dark text-white text-center py-2">
-        <p>&copy; <?php echo date('Y'); ?> My Website</p>
-    </footer>
-</body>
-</html>
-```
+**Overview of CSV Analysis Tool**
 
-This updated code includes the Bootstrap CSS and applies Bootstrap classes to the header, navigation, content, and footer sections to improve formatting and styling. It uses Bootstrap's navigation classes and container layout for better responsiveness and visual appeal.
+Imagine you have a bunch of data stored in CSV files (those are files containing tables of information, like spreadsheets). Now, you want to quickly understand what's in those files without diving into complex data analysis tools. That's where this web page comes in.
 
-Ensure you replace `"path-to-bootstrap/bootstrap.min.css"` with the correct path to your Bootstrap CSS file or use a CDN link to include Bootstrap.
+**Selecting a CSV File**
+
+When you visit this page, it shows you a simple form. In this form, you can pick one of your CSV files from a list. It's like choosing a file from your computer.
+
+**Getting Key Insights**
+
+Once you've selected a file and clicked a button, magic happens behind the scenes. The page reads your CSV file and then tells you some important things about it, without making you sift through all the data.
+
+**The Insights**
+
+For each column or "field" in your CSV file (like names, dates, or numbers), the tool provides:
+
+1.  **Minimum:** This is the smallest value in that column.
+2.  **Average:** It calculates the typical value for that column.
+3.  **Maximum:** This is the largest value found.
+4.  **Most Common:** Tells you what value appears most often.
+5.  **Least Common:** Shows the value that's not seen much.
+6.  **Distinct Count:** Counts how many different values are in the column.
+
+**Easy to Understand**
+
+These insights are displayed neatly in a table that's easy to read and understand. It's like getting a quick summary of your data, which can be super helpful for making decisions or spotting trends.
+
+**See the Data**
+
+And if you still want to see the actual data from your CSV file, don't worry, that's there too! The tool also shows you the full table of data, so you can dive deeper if needed.
+
+So, in a nutshell, this web page makes it easy for you to pick a CSV file, get key information about it, and even see the data—all without needing to be a data expert.
+
+It's like having your own data assistant to help you make sense of your information effortlessly.
+
+* * *

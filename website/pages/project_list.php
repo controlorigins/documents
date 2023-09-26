@@ -1,5 +1,12 @@
-    <div class="container mt-4">
-        <h1>Projects</h1>
+<div class='card'>
+    <div class='card-header'>
+        <h1>Projects List</h1>  
+        <a href='/?file=ChatGPT%252FSessions%252FCreate%2BPHP%2BProject%2BTable.md'>
+        How this page was created</a>
+    </div>
+    <div class="card-body">
+
+    <div class="container-fluid mt-4">
         <table class="table table-bordered display" id="myTable">
             <thead>
                 <tr>
@@ -29,3 +36,10 @@
             </tbody>
         </table>
     </div>
+    <div class="card-footer">
+        <br/>
+        <br/>
+    </div>
+</div>
+<br/><br/><br/><br/>
+

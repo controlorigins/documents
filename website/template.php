@@ -11,6 +11,18 @@
         tbody tr:nth-child(odd) {
             background-color: #f2f2f2;
         }
+        pre {
+            background-color: beige;
+            max-width: 100%;
+            border: 1px solid #ccc;
+        }
+        
+        pre code {
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            max-width: 100%;
+        }
+
     </style>
 </head>
 <body>

@@ -10,5 +10,9 @@
     "data-analysis": {
         "title": "Data Analysis",
         "content": "Data Analysis."
+    },
+    "search": {
+        "title": "Search Documents",
+        "content": "Search Documents"
     }
 }

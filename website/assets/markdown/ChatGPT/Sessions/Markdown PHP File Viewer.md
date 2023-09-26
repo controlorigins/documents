@@ -1,8 +1,10 @@
 # Markdown PHP File Viewer
+
 ## Mark Hazleton:
-Create a plan to migrate set of php applications to using source code repository.
-## Mark Hazleton:
+
+```
 I have a folder called assets/markdown which contains markdown file (.md) and sub folders. Create a PHP web page to get all the files under the /assets/markdown folders (including sub folders) and build a navigation list and then allow me to select a file and then render the .md file in html
+```
 ## chatgpt:
 To create a PHP web page that lists all the Markdown files in the `/assets/markdown` folder and its subfolders and renders a selected Markdown file in HTML, you can follow these steps:
 

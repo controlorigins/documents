@@ -1,9 +1,8 @@
 # Document Repository
 
-Welcome to the Company Documentation Repository! This repository is dedicated to storing and managing documentation for our company's various domains.
+Welcome to the  Documentation Repository! This repository is dedicated to storing and managing documentation for our company's various domains.
 
 - [Published Website](https://controlorigins-docs.azurewebsites.net/?page=homepage)
-- [DevOps Project](https://dev.azure.com/ControlOrigins/Documentation)
 - [GitHub Repository](https://github.com/controlorigins/documents)
 
 ## Table of Contents
@@ -21,6 +20,13 @@ This repository is designed to house documentation in Markdown (.md) format for 
 
 We use a folder structure to organize documentation by domains or categories. Each domain will have its dedicated folder with relevant markdown files. Here is an example of the folder structure:
 Please ensure that you place your documentation files in the appropriate folders to maintain organization.
+
+~~~
+assets\markdown\Overview.md (Root of Document Folder, this file)
+assets\markdown\ChatGPT (ChatGPT domain folder)
+assets\markdown\ChatGPT\1_ChatGPT Overview.md (ChatGPT Overview Document)
+~~~
+
 
 ## Contributing
 
@@ -52,5 +58,5 @@ By contributing to this repository, you agree that all files you create or modif
 
 ## License
 
-All documentation in this repository is proprietary and confidential to Control Origins. 
-Unauthorized distribution or sharing of the documentation is strictly prohibited.
+All documentation in this repository is proprietary and confidential to Control Origins.  
+Unauthorized distribution or sharing of the documentation is strictly prohibited.  

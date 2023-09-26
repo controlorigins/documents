@@ -584,3 +584,4 @@ To incorporate Bootstrap for formatting in your `template.php` file and update t
 This updated code includes the Bootstrap CSS and applies Bootstrap classes to the header, navigation, content, and footer sections to improve formatting and styling. It uses Bootstrap's navigation classes and container layout for better responsiveness and visual appeal.
 
 Ensure you replace `"path-to-bootstrap/bootstrap.min.css"` with the correct path to your Bootstrap CSS file or use a CDN link to include Bootstrap.
+
