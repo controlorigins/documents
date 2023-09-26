@@ -3,55 +3,56 @@
         <form action="" method="GET">
             <div class="form-group">
                 <label for="fileSelect"><small>Select a file:</small></label>
-                <select class="form-control" name="file" id="fileSelect">
-                    <?php
-                    // Function to recursively scan a directory and return an array of file paths
-                    function scanDirectory($dir, $basePath = '')
-                    {
-                        $files = [];
-                        $subFiles = [];
-
-                        foreach (scandir($dir) as $file) {
-                            if ($file !== '.' && $file !== '..') {
-                                $filePath = $dir . '/' . $file;
-                                $relativePath = $basePath . $file;
-                                if (is_dir($filePath)) {
-                                    $subFiles = array_merge($subFiles, scanDirectory($filePath, $relativePath . '/'));
-                                } elseif (pathinfo($file, PATHINFO_EXTENSION) === 'md') {
-                                    $files[] = $relativePath;
-                                }
+                <select name="file" id="fileSelect">
+            <?php
+            // Function to recursively scan a directory and return an array of file paths
+            function scanDirectory($dir)
+            {
+                $files = [];
+                $subfolderFiles = [];
+                foreach (scandir($dir) as $file) {
+                    if ($file !== '.' && $file !== '..') {
+                        $filePath = $dir . '/' . $file;
+                        if (is_dir($filePath)) {
+                            $subFiles = scanDirectory($filePath);
+                            if (!empty($subFiles)) {
+                                $subfolderFiles[] = [
+                                    'folder' => $file,
+                                    'subFiles' => $subFiles,
+                                ];
                             }
+                        } elseif (pathinfo($file, PATHINFO_EXTENSION) === 'md') {
+                            $files[] = $file;
                         }
-                        return array_merge($files, $subFiles);
                     }
+                }
+                return array_merge($files, $subfolderFiles);
+            }
 
-                    // Get all Markdown files and folder structure
-                    $markdownFiles = scanDirectory('assets/markdown');
+            // Get all Markdown files and folder structure
+            $markdownFiles = scanDirectory('assets/markdown');
 
-                    // Function to render options for the dropdown
-                    function renderDropdownOptions($items, $basePath = '')
-                    {
-                        $options = '';
-
-                        foreach ($items as $item) {
-                            if (is_array($item)) {
-                                $folderName = $item['folder'];
-                                $subOptions = renderDropdownOptions($item['subFiles'], $basePath . $folderName . '/');
-                                if (!empty($subOptions)) {
-                                    $options .= '<optgroup label="' . $folderName . '">' . $subOptions . '</optgroup>';
-                                }
-                            } else {
-                                $relativePath = $basePath . $item;
-                                $options .= '<option value="' . urlencode($relativePath) . '">' . $item . '</option>';
-                            }
-                        }
-
-                        return $options;
+            // Function to render options for the select dropdown
+            function renderOptions($items, $basePath = '')
+            {
+                foreach ($items as $item) {
+                    if (is_array($item)) {
+                        echo '<optgroup label="' . $item['folder'] . '">';
+                        renderOptions($item['subFiles'], $basePath . $item['folder'] . '/');
+                        echo '</optgroup>';
+                    } else {
+                        $relativePath = $basePath . $item;
+                        // Remove the .md extension for display
+                        $displayValue = pathinfo($item, PATHINFO_FILENAME);
+                        echo '<option value="' . urlencode($relativePath) . '">' . $displayValue . '</option>';
                     }
-                    // Render options for the dropdown
-                    echo renderDropdownOptions($markdownFiles);
-                    ?>
-                </select>
+                }
+            }
+
+            // Display options in the select dropdown
+            renderOptions($markdownFiles);
+            ?>
+        </select>
             </div>
         </form>
         

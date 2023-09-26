@@ -1,6 +1,24 @@
 # Composer Install Error Resolution
 ## Mark Hazleton:
-I am writing an azure devops pipeline for a php web site. I get the following error: 2023-09-10T16:14:34.4599356Z ##\[section\]Starting: Composer install 2023-09-10T16:14:34.4603584Z ============================================================================== 2023-09-10T16:14:34.4603739Z Task : Command line 2023-09-10T16:14:34.4603816Z Description : Run a command line script using Bash on Linux and macOS and cmd.exe on Windows 2023-09-10T16:14:34.4603958Z Version : 2.212.0 2023-09-10T16:14:34.4604048Z Author : Microsoft Corporation 2023-09-10T16:14:34.4604134Z Help : https://docs.microsoft.com/azure/devops/pipelines/tasks/utility/command-line 2023-09-10T16:14:34.4604268Z ============================================================================== 2023-09-10T16:14:34.6154788Z Generating script. 2023-09-10T16:14:34.6166018Z Script contents: 2023-09-10T16:14:34.6166498Z composer install --no-interaction --prefer-dist 2023-09-10T16:14:34.6166790Z ========================== Starting Command Output =========================== 2023-09-10T16:14:34.6195973Z \[command\]/usr/bin/bash --noprofile --norc /home/vsts/work/\_temp/4767a146-a34b-474c-90e6-6eb9274e0800.sh 2023-09-10T16:14:34.8780304Z Composer could not find a composer.json file in /home/vsts/work/1/s 2023-09-10T16:14:34.8781262Z To initialize a project, please create a composer.json file. See https://getcomposer.org/basic-usage 2023-09-10T16:14:34.9073046Z ##\[error\]Bash exited with code '1'. 2023-09-10T16:14:34.9089267Z ##\[section\]Finishing: Composer install
+I am writing an azure devops pipeline for a php web site. I get the following error:  
+
+2023-09-10T16:14:34.4599356Z ##\[section\]Starting: Composer install  
+2023-09-10T16:14:34.4603584Z =============================================================================  
+2023-09-10T16:14:34.4603739Z Task : Command line  
+2023-09-10T16:14:34.4603816Z Description : Run a command line script using Bash on Linux and macOS and cmd.exe on Windows  
+2023-09-10T16:14:34.4603958Z Version : 2.212.0  
+2023-09-10T16:14:34.4604048Z Author : Microsoft Corporation  
+2023-09-10T16:14:34.4604134Z Help : https://docs.microsoft.com/azure/devops/pipelines/tasks/utility/command-line  
+2023-09-10T16:14:34.4604268Z ==============================================================================  
+2023-09-10T16:14:34.6154788Z Generating script. 2023-09-10T16:14:34.6166018Z Script contents:  
+2023-09-10T16:14:34.6166498Z composer install --no-interaction --prefer-dist  
+2023-09-10T16:14:34.6166790Z ========================== Starting Command Output ===========================  
+2023-09-10T16:14:34.6195973Z \[command\]/usr/bin/bash --noprofile --norc /home/vsts/work/\_temp/4767a146-a34b-474c-90e6-6eb9274e0800.sh  
+2023-09-10T16:14:34.8780304Z Composer could not find a composer.json file in /home/vsts/work/1/s  
+2023-09-10T16:14:34.8781262Z To initialize a project, please create a composer.json file. See https://getcomposer.org/basic-usage  
+2023-09-10T16:14:34.9073046Z ##\[error\]Bash exited with code '1'.  
+2023-09-10T16:14:34.9089267Z ##\[section\]Finishing: Composer install  
+
 ## chatgpt:
 The error message you're encountering, "Composer could not find a composer.json file," indicates that the `composer` command is being run in a directory where there is no `composer.json` file. The `composer.json` file is essential for Composer to understand the dependencies and configuration for your PHP project.
 
@@ -71,7 +89,29 @@ Remember to add your actual PHP dependencies under the `"require"` section and a
 
 Once you have created this `composer.json` file, you can run `composer install` in your project directory to install the specified dependencies and generate the autoloader based on the configuration in the `composer.json` file.
 ## Mark Hazleton:
-now I get this error 2023-09-10T16:22:40.3352465Z ##\[section\]Starting: Composer install 2023-09-10T16:22:40.3356533Z ============================================================================== 2023-09-10T16:22:40.3356683Z Task : Command line 2023-09-10T16:22:40.3356740Z Description : Run a command line script using Bash on Linux and macOS and cmd.exe on Windows 2023-09-10T16:22:40.3356844Z Version : 2.212.0 2023-09-10T16:22:40.3356915Z Author : Microsoft Corporation 2023-09-10T16:22:40.3356979Z Help : https://docs.microsoft.com/azure/devops/pipelines/tasks/utility/command-line 2023-09-10T16:22:40.3357075Z ============================================================================== 2023-09-10T16:22:40.5080297Z Generating script. 2023-09-10T16:22:40.5091466Z Script contents: 2023-09-10T16:22:40.5091973Z composer install --no-interaction --prefer-dist 2023-09-10T16:22:40.5092185Z ========================== Starting Command Output =========================== 2023-09-10T16:22:40.5120433Z \[command\]/usr/bin/bash --noprofile --norc /home/vsts/work/\_temp/ba5b0305-8de0-4374-9e06-5bc52029abc6.sh 2023-09-10T16:22:40.8724377Z No composer.lock file present. Updating dependencies to latest instead of installing from lock file. See https://getcomposer.org/install for more information. 2023-09-10T16:22:40.8724985Z Loading composer repositories with package information 2023-09-10T16:22:40.9234444Z Updating dependencies 2023-09-10T16:22:40.9289026Z Your requirements could not be resolved to an installable set of packages. 2023-09-10T16:22:40.9289347Z 2023-09-10T16:22:40.9289622Z Problem 1 2023-09-10T16:22:40.9290957Z - Root composer.json requires php ^8.2 but your php version (8.1.2) does not satisfy that requirement. 2023-09-10T16:22:40.9291483Z 2023-09-10T16:22:40.9586633Z ##\[error\]Bash exited with code '2'. 2023-09-10T16:22:40.9634288Z ##\[section\]Finishing: Composer install
+now I get this error  
+2023-09-10T16:22:40.3352465Z ##\[section\]Starting: Composer install  
+2023-09-10T16:22:40.3356533Z ==============================================================================  
+2023-09-10T16:22:40.3356683Z Task : Command line  
+2023-09-10T16:22:40.3356740Z Description : Run a command line script using Bash on Linux and macOS and cmd.exe on Windows  
+2023-09-10T16:22:40.3356844Z Version : 2.212.0  
+2023-09-10T16:22:40.3356915Z Author : Microsoft Corporation  
+2023-09-10T16:22:40.3356979Z Help : https://docs.microsoft.com/azure/devops/pipelines/tasks/utility/command-line  
+2023-09-10T16:22:40.3357075Z ==============================================================================  
+2023-09-10T16:22:40.5080297Z Generating script.  
+2023-09-10T16:22:40.5091466Z Script contents:  
+2023-09-10T16:22:40.5091973Z composer install --no-interaction --prefer-dist  
+2023-09-10T16:22:40.5092185Z ========================== Starting Command Output ===========================  
+2023-09-10T16:22:40.5120433Z \[command\]/usr/bin/bash --noprofile --norc /home/vsts/work/\_temp/ba5b0305-8de0-4374-9e06-5bc52029abc6.sh  
+2023-09-10T16:22:40.8724377Z No composer.lock file present. Updating dependencies to latest instead of installing from lock file. See https://getcomposer.org/install for more information.  
+2023-09-10T16:22:40.8724985Z Loading composer repositories with package information  
+2023-09-10T16:22:40.9234444Z Updating dependencies 2023-09-10T16:22:40.9289026Z Your requirements could not be resolved to an installable set of packages.  
+2023-09-10T16:22:40.9289347Z 2023-09-10T16:22:40.9289622Z Problem 1  
+2023-09-10T16:22:40.9290957Z - Root composer.json requires php ^8.2 but your php version (8.1.2) does not satisfy that requirement.  
+2023-09-10T16:22:40.9291483Z  
+2023-09-10T16:22:40.9586633Z ##\[error\]Bash exited with code '2'.  
+2023-09-10T16:22:40.9634288Z ##\[section\]Finishing: Composer install  
+
 ## chatgpt:
 The error message you're encountering is because your `composer.json` file specifies a required PHP version (`^8.2`) that is not satisfied by the PHP version available in your Azure DevOps environment (`8.1.2`). To resolve this issue, you have a few options:
 

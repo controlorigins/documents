@@ -1,7 +1,5 @@
 # Source Code Management
 
-## Why Souce Code Management?
-
 Source Code Management (SCM), also known as Version Control, offers several benefits to small companies with only a few developers. Even with a small team, implementing SCM can significantly improve the development process and code management. Here are the benefits:
 
 1. **Version Control:**
