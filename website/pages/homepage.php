@@ -1,13 +1,13 @@
-<h1>Documentation</h1>
 <div class="row">
     <div class="col-12">
         <form action="" method="GET">
             <div class="form-group">
-                <label for="fileSelect"><h2>Select a file:</h2></label>
+                <label for="fileSelect"><small>Select a file:</small></label>
                 <select class="form-control" name="file" id="fileSelect">
                     <?php
                     // Function to recursively scan a directory and return an array of file paths
-                    function scanDirectory($dir, $basePath = '') {
+                    function scanDirectory($dir, $basePath = '')
+                    {
                         $files = [];
                         $subFiles = [];
 
@@ -30,27 +30,25 @@
                     $markdownFiles = scanDirectory('assets/markdown');
 
                     // Function to render options for the dropdown
-                    function renderDropdownOptions($items) {
+                    function renderDropdownOptions($items, $basePath = '')
+                    {
                         $options = '';
 
                         foreach ($items as $item) {
                             if (is_array($item)) {
                                 $folderName = $item['folder'];
-                                $subOptions = renderDropdownOptions($item['subFiles']);
+                                $subOptions = renderDropdownOptions($item['subFiles'], $basePath . $folderName . '/');
                                 if (!empty($subOptions)) {
                                     $options .= '<optgroup label="' . $folderName . '">' . $subOptions . '</optgroup>';
                                 }
                             } else {
-                                $encodedPath = urlencode($item);
-                                // Check if this option should be selected
-                                $selected = ($_GET['file'] === $encodedPath || (!isset($_GET['file']) && $item === reset($items))) ? 'selected' : '';
-                                $options .= '<option value="' . $encodedPath . '" ' . $selected . '>' . $item . '</option>';
+                                $relativePath = $basePath . $item;
+                                $options .= '<option value="' . urlencode($relativePath) . '">' . $item . '</option>';
                             }
                         }
 
                         return $options;
                     }
-
                     // Render options for the dropdown
                     echo renderDropdownOptions($markdownFiles);
                     ?>
@@ -89,14 +87,10 @@
         // Redirect to the selected file
         window.location.href = `?file=${encodeURIComponent(selectedFile)}`;
     });
-</script>
 
-<script>
-    // JavaScript to automatically load the document when the select changes
-    const fileSelect = document.getElementById('fileSelect');
-    fileSelect.addEventListener('change', () => {
-        const selectedFile = fileSelect.value;
-        // Redirect to the selected file
-        window.location.href = `?file=${encodeURIComponent(selectedFile)}`;
+    // Populate the selected value on page load
+    window.addEventListener('DOMContentLoaded', () => {
+        const currentFile = '<?php echo isset($_GET['file']) ? $_GET['file'] : $markdownFiles[0]; ?>';
+        fileSelect.value = currentFile;
     });
 </script>
