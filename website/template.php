@@ -27,7 +27,8 @@
 </head>
 <body>
     <header class="bg-primary text-white text-center py-4">
-        <h1><?php echo isset($content[$page]['title']) ? $content[$page]['title'] : '404 - Not Found'; ?></h1>
+        <h1>Control Origins by Mark Hazleton</h1>
+        <h2><?php echo isset($content[$page]['title']) ? $content[$page]['title'] : '404 - Not Found'; ?></h2>
     </header>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container">
