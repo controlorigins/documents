@@ -259,7 +259,70 @@ I apologize for the error. It appears there's an issue with the code when trying
 
 I've added a `$basePath` parameter to the `renderList` function, which is used to keep track of the relative path of each item in the hierarchy. This should resolve the "Array to string conversion" error you encountered, and the navigation links should work correctly now.
 ## Mark Hazleton:
-Here is my updated script <!DOCTYPE html> <html lang="en"> <head> <meta charset="UTF-8"> <title>Markdown Viewer</title> </head> <body> <h1>Markdown Files</h1> <ul> <?php // Function to recursively scan a directory and return an array of file paths function scanDirectory($dir) { $files = \[\]; foreach (scandir($dir) as $file) { if ($file !== '.' && $file !== '..') { $filePath = $dir . '/' . $file; if (is\_dir($filePath)) { $subFiles = scanDirectory($filePath); if (!empty($subFiles)) { $files\[\] = \[ 'folder' => $file, 'subFiles' => $subFiles, \]; } } elseif (pathinfo($file, PATHINFO\_EXTENSION) === 'md') { $files\[\] = $file; } } } return $files; } // Get all Markdown files and folder structure $markdownFiles = scanDirectory('assets/markdown'); // Function to render a nested list function renderList($items, $basePath = '') { echo '<ul>'; foreach ($items as $item) { if (is\_array($item)) { echo '<li>' . $item\['folder'\]; renderList($item\['subFiles'\], $basePath . $item\['folder'\] . '/'); echo '</li>'; } else { $relativePath = $basePath . $item; echo '<li><a href="?file=' . urlencode($relativePath) . '">' . $item . '</a></li>'; } } echo '</ul>'; } // Display the nested list renderList($markdownFiles); ?> </ul> <hr> <div> <?php // Display the selected Markdown file in HTML if (isset($\_GET\['file'\])) { $requestedFile = 'assets/markdown/' . $\_GET\['file'\]; if (file\_exists($requestedFile) && pathinfo($requestedFile, PATHINFO\_EXTENSION) === 'md') { // Include the Parsedown library require\_once('pages/Parsedown.php'); $markdownContent = file\_get\_contents($requestedFile); // Create a new Parsedown instance $parsedown = new Parsedown(); // Parse Markdown to HTML and display it echo $parsedown->text($markdown); } else { echo 'File not found or invalid file format.'; } } ?> </div> </body> </html> I am getting an error Warning: Undefined variable $markdown in C:\\GitHub\\ControlOrigins\\documents\\website\\markdown.php on line 73
+Here is my updated script 
+```php
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Markdown Viewer</title>
+</head>
+<body>
+<h1>Markdown Files</h1>
+<ul>
+<?php
+// Function to recursively scan a directory and return an array of file paths
+function scanDirectory($dir)
+{
+  $files = \[\];
+  foreach (scandir($dir) as $file)
+  {
+    if ($file !== '.' && $file !== '..')
+      {
+         $filePath = $dir . '/' . $file;
+         if (is\_dir($filePath))
+         {
+            $subFiles = scanDirectory($filePath);
+            if (!empty($subFiles)) { $files\[\] = \[ 'folder' => $file, 'subFiles' => $subFiles, \]; } }
+            elseif (pathinfo($file, PATHINFO\_EXTENSION) === 'md') { $files\[\] = $file; } } } return $files; }
+ // Get all Markdown files and folder structure
+ $markdownFiles = scanDirectory('assets/markdown');
+
+// Function to render a nested list function 
+ renderList($items, $basePath = '')
+{
+echo '<ul>';
+foreach ($items as $item) {
+if (is\_array($item))
+{
+echo '<li>' . $item\['folder'\]; renderList($item\['subFiles'\], $basePath . $item\['folder'\] . '/');
+echo '</li>'; }
+else
+{ $relativePath = $basePath . $item; echo '<li><a href="?file=' . urlencode($relativePath) . '">' . $item . '</a></li>'; } }
+echo '</ul>'; }
+// Display the nested list renderList($markdownFiles); ?>
+</ul>
+<hr>
+<div>
+<?php
+// Display the selected Markdown file in HTML
+if (isset($\_GET\['file'\])) { $requestedFile = 'assets/markdown/' . $\_GET\['file'\];
+if (file\_exists($requestedFile) && pathinfo($requestedFile, PATHINFO\_EXTENSION) === 'md') {
+// Include the Parsedown library
+require\_once('pages/Parsedown.php');
+$markdownContent = file\_get\_contents($requestedFile);
+  // Create a new Parsedown instance
+  $parsedown = new Parsedown();
+  // Parse Markdown to HTML and display it
+  echo $parsedown->text($markdown); }
+else { echo 'File not found or invalid file format.'; } } ?>
+</div>
+</body>
+</html>
+```
+
+I am getting an error Warning: Undefined variable $markdown in C:\\GitHub\\ControlOrigins\\documents\\website\\markdown.php on line 73
+
 ## chatgpt:
 It looks like there is a variable name typo in your code. You are trying to use the variable `$markdown` when calling the `Parsedown` library, but you have stored the Markdown content in the variable named `$markdownContent`. To fix this error, you should replace `$markdown` with `$markdownContent` when calling `Parsedown`. Here's the corrected code:
 
