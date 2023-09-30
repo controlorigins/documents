@@ -1,9 +1,19 @@
+<div class='card'>
+    <div class='card-header'>
+        <h1>Document Viewer</h1>  
+        <a href='/?file=ChatGPT%252FSessions%252FMarkdown%2BPHP%2BFile%2BViewer.md'>
+        How this page was created</a>
+    </div>
+    <div class="card-body">
+
 <div class="row">
     <div class="col-12">
         <form action="" method="GET">
-            <div class="form-group">
-                <label for="fileSelect"><small>Select a file:</small></label>
-                <select name="file" id="fileSelect">
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <label class="input-group-text" for="inputGroupSelect01">Document</label>
+                </div>
+                <select class="custom-select" name="file" id="fileSelect">
             <?php
             // Function to recursively scan a directory and return an array of file paths
             function scanDirectory($dir)
@@ -78,6 +88,17 @@
         </div>
     </div>
 </div>
+
+
+</div>
+    <div class="card-footer">
+        <br/>
+        <br/>
+    </div>
+</div>
+<br/><br/><br/><br/>
+
+
 
 <script>
     // JavaScript to automatically load the document when the select changes
