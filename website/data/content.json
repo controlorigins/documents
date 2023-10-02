@@ -14,5 +14,9 @@
     "search": {
         "title": "Search Documents",
         "content": "Search Documents"
+    },
+    "joke": {
+        "title": "Fetch Joke",
+        "content": "Fetch a Joke"
     }
 }
