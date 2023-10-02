@@ -32,18 +32,23 @@
     </header>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container">
-            <ul class="navbar-nav">
-                <?php
-                foreach ($content as $key => $value) {
-                    if ($key !== '404') {
-                        echo '<li class="nav-item"><a class="nav-link" href="?page=' . $key . '">' . $value['title'] . '</a></li>';
+            <a class="navbar-brand" href="/">Documentation</a>  <!-- Add a Navbar brand (optional) -->
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <?php
+                    foreach ($content as $key => $value) {
+                        if ($key !== '404') {
+                            echo '<li class="nav-item"><a class="nav-link" href="?page=' . $key . '">' . $value['title'] . '</a></li>';
+                        }
                     }
-                }
-                ?>
-            </ul>
+                    ?>
+                </ul>
+            </div>
         </div>
-    </nav>
-    <main class="container-fluid mt-4">
+    </nav>    <main class="container-fluid mt-4">
         <?php
         $phpFile = "pages/$page.php";
 
@@ -74,8 +79,7 @@
 
     <!-- Include Bootstrap JS and jQuery (if needed) -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap5.min.js"></script>
     <script>
