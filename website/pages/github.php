@@ -111,8 +111,26 @@
 </footer>
 </div>
     <div class="card-footer">
-        <br/>
-        <br/>
+    <div class="container mt-5">
+    <h2 class="text-center">Executive Summary</h2>
+    <h4>Objective:</h4>
+    <p>The primary goal of this project was to facilitate a deeper understanding of PHP programming and accessing the GitHub API. We aimed to create a web page that fetches and displays information about a specific GitHub repository.</p>
+
+    <h4>Tasks Completed:</h4>
+    <ul>
+        <li>API Integration</li>
+        <li>Data Display</li>
+        <li>User-Friendly Formatting</li>
+        <li>Caching Mechanism</li>
+        <li>Security</li>
+        <li>Error Handling</li>
+    </ul>
+
+    <h4>Summary of Steps Taken:</h4>
+    <p>Initial Setup, API Calls, Data Processing, UI Design, Date Formatting, Caching, Security Measures, Footer Information, Testing and Debugging.</p>
+
+    <p>By completing these tasks, we have successfully created a PHP-based web page that interacts with the GitHub API to fetch and display relevant information. This project serves as a practical example of how to leverage PHP for backend development and API interactions, providing valuable insights into real-world applications of these technologies.</p>
+</div>
     </div>
 </div>
 <br/><br/><br/><br/>
