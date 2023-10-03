@@ -22,5 +22,9 @@
     "github": {
         "title": "Github Api",
         "content": "Github Api"
+    },
+    "crud": {
+        "title": "Database CRUD",
+        "content": "Database CRUD"
     }
 }
