@@ -13,6 +13,10 @@
 
     <button onclick="fetchJoke()" class="btn btn-primary mb-3">Fetch a new Joke</button>
 
+</div>
+
+</div>
+    <div class="card-footer">
     <div class="executive-summary">
         <h3>Explanation</h3>
         <p>
@@ -45,12 +49,6 @@
             <li>Resolved an initial script loading issue to ensure smooth operation of the feature.</li>
         </ol>
     </div>
-</div>
-
-</div>
-    <div class="card-footer">
-        <br/>
-        <br/>
     </div>
 </div>
 <br/><br/><br/><br/>

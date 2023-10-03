@@ -6,7 +6,7 @@
     </div>
     <div class="card-body">
 
-<div class="container mt-5">
+<div class="container">
     <?php
     function fetchApiData($url, $token)
     {
@@ -111,7 +111,7 @@
 </footer>
 </div>
     <div class="card-footer">
-    <div class="container mt-5">
+    <div class="container-fluid">
     <h2 class="text-center">Executive Summary</h2>
     <h4>Objective:</h4>
     <p>The primary goal of this project was to facilitate a deeper understanding of PHP programming and accessing the GitHub API. We aimed to create a web page that fetches and displays information about a specific GitHub repository.</p>

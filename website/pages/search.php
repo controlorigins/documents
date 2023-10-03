@@ -79,7 +79,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     </div>
 
-<div class="container">
+
+
+
+    </div>
+    <div class="card-footer">
+    <div class="container-fluid">
     <h3>Explanation</h3>
 <h4>What We Did:</h4>
 <p>
@@ -118,13 +123,6 @@ You can integrate this component into different parts of your website, such as y
 Overall, it's a user-focused feature that enhances your website's usability and helps visitors find what they're looking for more easily.
     </p>
 </div>
-
-
-
-    </div>
-    <div class="card-footer">
-        <br/>
-        <br/>
     </div>
 </div>
 <br/><br/><br/><br/>
