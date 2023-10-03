@@ -2,7 +2,8 @@
     <div class='card-header'>
         <h1>Projects List</h1>  
         <a href='/?file=ChatGPT%252FSessions%252FCreate%2BPHP%2BProject%2BTable.md'>
-        How this page was created</a>
+        How this page was created</a><br/>
+        <a href='https://github.com/controlorigins/documents/blob/main/website/pages/project_list.php'target='_blank'>View Page Source</a>
     </div>
     <div class="card-body">
 

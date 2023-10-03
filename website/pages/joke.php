@@ -2,7 +2,8 @@
     <div class='card-header'>
         <h1>Fetch Joke</h1>  
         <a href='/?file=ChatGPT%252FSessions%252FCreate%2BPHP%2BJoke%2BPage.md'>
-        How this page was created</a>
+        How this page was created</a><br/>
+        <a href='https://github.com/controlorigins/documents/blob/main/website/pages/joke.php'target='_blank'>View Page Source</a>
     </div>
     <div class="card-body">
 

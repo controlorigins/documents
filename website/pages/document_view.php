@@ -2,7 +2,8 @@
     <div class='card-header'>
         <h1>Document Viewer</h1>  
         <a href='/?file=ChatGPT%252FSessions%252FMarkdown%2BPHP%2BFile%2BViewer.md'>
-        How this page was created</a>
+        How this page was created</a><br/>
+        <a href='https://github.com/controlorigins/documents/blob/main/website/pages/document_view.php'target='_blank'>View Page Source</a>
     </div>
     <div class="card-body">
 

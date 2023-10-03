@@ -2,7 +2,8 @@
     <div class='card-header'>
         <h1>GitHub Repository Information</h1>  
         <a href='/?file=ChatGPT%252FSessions%252FGitHub%2BAPI%2BAccess%2BPHP.md'>
-        How this page was created</a>
+        How this page was created</a><br/>
+        <a href='https://github.com/controlorigins/documents/blob/main/website/pages/github.php'target='_blank'>View Page Source</a>
     </div>
     <div class="card-body">
 
@@ -52,39 +53,41 @@
         echo "<p>Open Issues: {$repoInfo['open_issues_count']}</p>";
         echo "<hr>";
     }
-    // Display the last 5 commits
-    if (isset($cachedData['commits']) && !empty($cachedData['commits'])) {
-        echo '<h2>Last 5 Commits</h2>';
-        echo '<ul class="list-group">';
-        foreach ($cachedData['commits'] as $commit) {
-            $date = new DateTime($commit['commit']['author']['date']);
-            $formattedDate = $date->format('F j, Y g:i A');
-            $commitDetails = $commit['details'];
+// Display the last 5 commits
+if (isset($cachedData['commits']) && !empty($cachedData['commits'])) {
+    echo '<h2>Last 5 Commits</h2>';
+    echo '<ul class="list-group">';
+    foreach ($cachedData['commits'] as $commit) {
+        $date = new DateTime($commit['commit']['author']['date']);
+        $formattedDate = $date->format('F j, Y g:i A');
+        $commitDetails = $commit['details'];
 
-            $filesImpacted = isset($commitDetails['files']) ? count($commitDetails['files']) : 'N/A';
+        $filesImpacted = isset($commitDetails['files']) ? count($commitDetails['files']) : 'N/A';
 
-            echo '<li class="list-group-item">';
-            echo '<strong>Commit message:</strong> ' . $commit['commit']['message'] . '<br>';
-            echo '<strong>Author:</strong> ' . $commit['commit']['author']['name'] . '<br>';
-            echo '<strong>Date:</strong> ' . $formattedDate . '<br>';
-            echo '<strong>Files Impacted:</strong> ' . $filesImpacted . '<br>';
+        echo '<li class="list-group-item">';
+        echo '<strong>Commit message:</strong> ' . $commit['commit']['message'] . '<br>';
+        echo '<strong>Author:</strong> ' . $commit['commit']['author']['name'] . '<br>';
+        echo '<strong>Date:</strong> ' . $formattedDate . '<br>';
+        echo '<strong>Files Impacted:</strong> ' . $filesImpacted . '<br>';
 
-            if (isset($commitDetails['files']) && is_array($commitDetails['files'])) {
-                echo '<strong>File Names:</strong> <ul>';
-                foreach ($commitDetails['files'] as $file) {
-                    echo '<li>' . $file['filename'] . '</li>';
-                }
-                echo '</ul>';
-            } else {
-                echo '<strong>File Names:</strong> N/A<br>';
+        if (isset($commitDetails['files']) && is_array($commitDetails['files'])) {
+            echo '<strong>File Names:</strong> <ul>';
+            foreach ($commitDetails['files'] as $file) {
+                $filePath = $file['filename'];
+                $fileUrl = "https://github.com/controlorigins/documents/blob/main/$filePath";
+                echo '<li><a href="' . $fileUrl . '" target="_blank">' . $filePath . '</a></li>';
             }
-
-            echo '</li>';
+            echo '</ul>';
+        } else {
+            echo '<strong>File Names:</strong> N/A<br>';
         }
-        echo '</ul>';
-    } else {
-        echo '<div class="alert alert-danger">No commits found or an error occurred.</div>';
+
+        echo '</li>';
     }
+    echo '</ul>';
+} else {
+    echo '<div class="alert alert-danger">No commits found or an error occurred.</div>';
+}
     ?>
 </div>
 

@@ -49,7 +49,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <div class='card-header'>
         <h1>Search Documents</h1>  
         <a href='/?file=ChatGPT%2FSessions%2FSearch%20Markdown%20Files%20PHP.md'>
-        How this page was created</a>
+        How this page was created</a><br/>
+        <a href='https://github.com/controlorigins/documents/blob/main/website/pages/search.php'target='_blank'>View Page Source</a>
     </div>
     <div class="card-body">
 

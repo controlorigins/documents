@@ -2,7 +2,8 @@
     <div class='card-header'>
         <h1>CSV File Analysis</h1>  
         <a href='/?file=ChatGPT%252FSessions%252FList%2BCSV%2BFiles%2BPHP.md'>
-        How this page was created</a>
+        How this page was created</a><br/>
+        <a href='https://github.com/controlorigins/documents/blob/main/website/pages/data-analysis.php'target='_blank'>View Page Source</a>
     </div>
     <div class="card-body">
         <div class="container-fluid mt-4">
