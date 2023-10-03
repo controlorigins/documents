@@ -18,5 +18,9 @@
     "joke": {
         "title": "Fetch Joke",
         "content": "Fetch a Joke"
+    },
+    "github": {
+        "title": "Github Api",
+        "content": "Github Api"
     }
 }
