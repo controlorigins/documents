@@ -26,5 +26,9 @@
     "crud": {
         "title": "Database CRUD",
         "content": "Database CRUD"
+    },
+    "chart": {
+        "title": "Chart",
+        "content": "Chart"
     }
 }
