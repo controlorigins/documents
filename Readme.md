@@ -3,15 +3,17 @@
 Welcome to the Company Documentation Repository! This repository is dedicated to storing and managing documentation for our company's various domains.
 
 - [Published Website](https://controlorigins-docs.azurewebsites.net/)
-- [Article - Creating A PHP Website with ChatGPT](https://markhazleton.controlorigins.com/creating-a-php-website-with-chat-gpt.html)
+- [Article - Creating A PHP Website with ChatGPT](https://markhazleton.com/creating-a-php-website-with-chat-gpt.html)
 - [StoryBird.ai Generated Story Of Page Creation](https://storybird.ai/library/the-code-conjurer)
 
 ## Table of Contents
 
-- [Introduction](#introduction)
-- [Folder Structure](#folder-structure)
-- [Contributing](#contributing)
-- [License](#license)
+- [Control Origins Repository](#control-origins-repository)
+  - [Table of Contents](#table-of-contents)
+  - [Introduction](#introduction)
+  - [Folder Structure](#folder-structure)
+  - [Contributing](#contributing)
+  - [License](#license)
 
 ## Introduction
 

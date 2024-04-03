@@ -68,10 +68,10 @@
                 <!-- Left column content goes here -->
             </div>
             <div class="col-md-6 text-center">
-                <p>&copy; <?php echo date('Y'); ?> d.b.a. Control Origins</p>
+                <p>&copy; <?php echo date('Y'); ?> Mark Hazleton</p>
             </div>
             <div class="col-md-3 float-right text-right">
-                <p><a href='https://markhazleton.controlorigins.com'>markhazleton.controlorigins.com</a></p>
+                <p><a href='https://markhazleton.com' target="_new" title='MarkHazleton.com' alt='MarkHazleton.com'>markhazleton.com</a></p>
             </div>
         </div>
       </div>

@@ -27,7 +27,7 @@
             ],
             "program": "${workspaceFolder}/website/index.php",
             "cwd": "${workspaceFolder}/website",
-            "port": 9000,
+            "port": 8000,
             "serverReadyAction": {
                 "pattern": "Development Server \\(http://localhost:8000\\) started",
                 "uriFormat": "http://localhost:8000",
