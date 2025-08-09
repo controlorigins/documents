@@ -1,37 +1,82 @@
 <!doctype html>
-<html>
+<html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <title>Redirecting...</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Loading...</title>
     <script>
-      // JavaScript-based routing fallback for Azure App Service
+      // Enhanced routing fallback for Azure App Service
       (function () {
         const path = window.location.pathname;
         const search = window.location.search;
+        const hash = window.location.hash;
+
+        console.log('Routing check - Path:', path, 'Search:', search);
 
         // If this is a /doc/ URL, redirect to index.php with the path as a parameter
         if (path.match(/^\/doc(\/.*)?$/i)) {
-          const newUrl = '/index.php?path=' + encodeURIComponent(path) + search;
+          const newUrl =
+            '/index.php?path=' +
+            encodeURIComponent(path) +
+            (search ? '&' + search.substring(1) : '') +
+            hash;
+          console.log('Redirecting to:', newUrl);
           window.location.replace(newUrl);
           return;
         }
 
-        // For root or other paths, redirect to index.php
+        // For root or index.html, redirect to index.php
         if (path === '/' || path === '/index.html') {
-          window.location.replace('/index.php' + search);
+          const newUrl = '/index.php' + search + hash;
+          console.log('Home redirect to:', newUrl);
+          window.location.replace(newUrl);
           return;
         }
 
-        // Fallback - redirect to index.php with current path
-        const newUrl = '/index.php?path=' + encodeURIComponent(path) + search;
+        // For any other unmatched paths, try routing through PHP
+        const newUrl =
+          '/index.php?path=' +
+          encodeURIComponent(path) +
+          (search ? '&' + search.substring(1) : '') +
+          hash;
+        console.log('Fallback redirect to:', newUrl);
         window.location.replace(newUrl);
       })();
     </script>
     <noscript>
       <meta http-equiv="refresh" content="0; url=/index.php" />
     </noscript>
+    <style>
+      body {
+        font-family: system-ui;
+        text-align: center;
+        padding: 50px;
+        color: #666;
+      }
+      .spinner {
+        border: 2px solid #f3f3f3;
+        border-top: 2px solid #3498db;
+        border-radius: 50%;
+        width: 20px;
+        height: 20px;
+        animation: spin 1s linear infinite;
+        margin: 20px auto;
+      }
+      @keyframes spin {
+        0% {
+          transform: rotate(0deg);
+        }
+        100% {
+          transform: rotate(360deg);
+        }
+      }
+    </style>
   </head>
   <body>
-    <p>Redirecting...</p>
+    <div class="spinner"></div>
+    <p>Loading application...</p>
+    <p>
+      <small>If you're not redirected, <a href="/index.php">click here</a></small>
+    </p>
   </body>
 </html>
