@@ -2,103 +2,107 @@
 
 // CSS Variables
 :root {
-    --primary-color: #0d6efd;
-    --secondary-color: #6c757d;
-    --accent-color: #ffc107;
-    --light-bg: #f8f9fa;
-    --dark-bg: #212529;
+  --primary-color: #0d6efd;
+  --secondary-color: #6c757d;
+  --accent-color: #ffc107;
+  --light-bg: #f8f9fa;
+  --dark-bg: #212529;
 }
 
 // Sidebar styles
 .sidebar {
-    min-height: 100vh;
-    border-right: 1px solid #dee2e6;
+  min-height: 100vh;
+  border-right: 1px solid #dee2e6;
 }
 
 // Custom card styling
 .card {
-    border-radius: 10px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s ease;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
 
-    &:hover {
-        transform: translateY(-5px);
-    }
+  &:hover {
+    transform: translateY(-5px);
+  }
 }
 
 .card-header {
-    background: linear-gradient(to right, var(--primary-color), #0b5ed7);
-    color: white;
-    border-radius: 10px 10px 0 0 !important;
-    padding: 1.25rem;
+  background: linear-gradient(to right, var(--primary-color), #0b5ed7);
+  color: white;
+  border-radius: 10px 10px 0 0 !important;
+  padding: 1.25rem;
 }
 
 .card-footer {
-    background-color: var(--light-bg);
-    border-radius: 0 0 10px 10px !important;
+  background-color: var(--light-bg);
+  border-radius: 0 0 10px 10px !important;
 }
 
 // Navbar customization
 .navbar-brand {
-    font-weight: 700;
-    font-size: 1.5rem;
+  font-weight: 700;
+  font-size: 1.5rem;
 }
 
 // Button styling
 .btn-primary {
-    background-color: var(--primary-color);
-    border-color: var(--primary-color);
-    padding: 0.5rem 1.25rem;
-    border-radius: 5px;
-    font-weight: 500;
+  background-color: var(--primary-color);
+  border-color: var(--primary-color);
+  padding: 0.5rem 1.25rem;
+  border-radius: 5px;
+  font-weight: 500;
 
-    &:hover {
-        background-color: #0b5ed7;
-        border-color: #0a58ca;
-    }
+  &:hover {
+    background-color: #0b5ed7;
+    border-color: #0a58ca;
+  }
 }
 
 // Table styling
 .table {
-    border-radius: 8px;
-    overflow: hidden;
+  border-radius: 8px;
+  overflow: hidden;
 }
 
 // Custom thumbnail image size
 .thumbnail-img {
-    max-width: 100px;
-    max-height: 80px;
-    object-fit: cover;
+  max-width: 100px;
+  max-height: 80px;
+  object-fit: cover;
 }
 
 // Footer styling
 footer {
-    background-color: var(--dark-bg);
-    color: white;
-    padding: 1.5rem 0;
+  background-color: var(--dark-bg);
+  color: white;
+  padding: 1.5rem 0;
 }
 
 // Animation effects
 .fade-in {
-    animation: fadeIn 0.5s ease-in;
+  animation: fadeIn 0.5s ease-in;
 }
 
 @keyframes fadeIn {
-    from { opacity: 0; }
-    to { opacity: 1; }
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 
 // Navigation pills
 .nav-pills .nav-link.active {
-    background-color: var(--primary-color);
+  background-color: var(--primary-color);
 }
 
 // Responsive adjustments
 @media (max-width: 768px) {
-    .sidebar {
-        min-height: auto;
-        border-right: none;
-        border-bottom: 1px solid #dee2e6;
-        margin-bottom: 1rem;
-    }
+  .sidebar {
+    min-height: auto;
+    border-right: none;
+    border-bottom: 1px solid #dee2e6;
+    margin-bottom: 1rem;
+  }
 }

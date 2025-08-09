@@ -53,6 +53,7 @@ php -S localhost:8001
 ## File Structure Rules
 
 - **Website root**: All web-accessible files must be in `/website/` directory
+- **Markdown files**: ALL `.md` files (except root `README.md` which stays as GitHub repository standard) MUST be placed under `/website/assets/markdown/` folder tree
 - **PHP includes**: Use relative paths from website directory
 - **Database location**: `website/data/database.db`
 - **Page routing**: Handled by `index.php` with `?page=` parameter
@@ -188,4 +189,4 @@ php -r "try { new PDO('sqlite:data/database.db'); echo 'SQLite OK'; } catch(Exce
 
 ---
 
-**Remember**: This project structure requires the web server to run from the `/website` directory to properly serve files and handle routing. Always check for existing terminals before creating new ones. NEVER start the web server in any other directory, it MUST be /website. 
+**Remember**: This project structure requires the web server to run from the `/website` directory to properly serve files and handle routing. Always check for existing terminals before creating new ones. NEVER start the web server in any other directory, it MUST be /website.

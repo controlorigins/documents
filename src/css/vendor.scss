@@ -1,17 +1,18 @@
 // Vendor CSS imports
 // Bootstrap
-@use 'bootstrap/scss/bootstrap';
+@use "bootstrap/scss/bootstrap";
 
 // Bootstrap Icons - Define the font-face with correct paths
 @font-face {
   font-family: "bootstrap-icons";
-  src: url("../fonts/bootstrap-icons.woff2") format("woff2"),
-       url("../fonts/bootstrap-icons.woff") format("woff");
+  src:
+    url("../fonts/bootstrap-icons.woff2") format("woff2"),
+    url("../fonts/bootstrap-icons.woff") format("woff");
   font-display: block;
 }
 
 // Import Bootstrap Icons classes and content
-@import './bootstrap-icons.scss';
+@import "./bootstrap-icons.scss";
 
 // Import DataTables Bootstrap 5 Integration
-@import './datatables.scss';
+@import "./datatables.scss";
