@@ -1,6 +1,10 @@
 # PHP as Linux Web App on Azure
-# Build, package and deploy your PHP project to Azure Linux Web App.
-# Add steps that run tests and more:
+# Build, package and deploy your PHP project to Azure Linux Web A                      # Configure the router as startup file and set routing mode
+                      az webapp config set \
+                        --name $(webAppName) \
+                        --resource-group rg-controlorigins-docs \
+                        --startup-file "router.php" \
+                        --linux-fx-version "PHP|8.4" Add steps that run tests and more:
 # https://docs.microsoft.com/azure/devops/pipelines/languages/php
 
 trigger:
@@ -90,7 +94,7 @@ stages:
                       # Enable URL rewriting and configure PHP settings
                       az webapp config appsettings set \
                         --name $(webAppName) \
-                        --resource-group controlorigins-docs \
+                        --resource-group rg-controlorigins-docs \
                         --settings \
                           WEBSITE_DYNAMIC_CACHE=0 \
                           WEBSITE_LOCAL_CACHE_OPTION=Never \
@@ -99,17 +103,17 @@ stages:
                       # Configure the router as startup file and set routing mode
                       az webapp config set \
                         --name $(webAppName) \
-                        --resource-group controlorigins-docs \
+                        --resource-group rg-controlorigins-docs \
                         --startup-file "router.php" \
                         --linux-fx-version "PHP|8.4"
 
                       # Set additional configuration for PHP routing
                       az webapp config appsettings set \
                         --name $(webAppName) \
-                        --resource-group controlorigins-docs \
+                        --resource-group rg-controlorigins-docs \
                         --settings \
                           WEBSITE_ROLE_INSTANCE_ID=0 \
                           WEBSITE_HTTPLOGGING_RETENTION_DAYS=3
                           
                       # Restart the app to apply settings
-                      az webapp restart --name $(webAppName) --resource-group controlorigins-docs
+                      az webapp restart --name $(webAppName) --resource-group rg-controlorigins-docs

@@ -4,6 +4,11 @@ ini_set('display_errors', 1);
 require_once __DIR__ . '/includes/config.php';
 require_once __DIR__ . '/includes/docs.php';
 
+// Handle path parameter from JavaScript redirect fallback
+if (isset($_GET['path'])) {
+    $_SERVER['REQUEST_URI'] = $_GET['path'] . (isset($_GET['query']) ? '?' . $_GET['query'] : '');
+}
+
 $requestPath = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH) ?? '/';
 $requestPath = preg_replace('#/+#','/',$requestPath);
 

@@ -1,0 +1,37 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Redirecting...</title>
+    <script>
+      // JavaScript-based routing fallback for Azure App Service
+      (function () {
+        const path = window.location.pathname;
+        const search = window.location.search;
+
+        // If this is a /doc/ URL, redirect to index.php with the path as a parameter
+        if (path.match(/^\/doc(\/.*)?$/i)) {
+          const newUrl = '/index.php?path=' + encodeURIComponent(path) + search;
+          window.location.replace(newUrl);
+          return;
+        }
+
+        // For root or other paths, redirect to index.php
+        if (path === '/' || path === '/index.html') {
+          window.location.replace('/index.php' + search);
+          return;
+        }
+
+        // Fallback - redirect to index.php with current path
+        const newUrl = '/index.php?path=' + encodeURIComponent(path) + search;
+        window.location.replace(newUrl);
+      })();
+    </script>
+    <noscript>
+      <meta http-equiv="refresh" content="0; url=/index.php" />
+    </noscript>
+  </head>
+  <body>
+    <p>Redirecting...</p>
+  </body>
+</html>
