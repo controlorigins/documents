@@ -26,7 +26,7 @@ stages:
   - stage: Build
     displayName: Build stage
     variables:
-      phpVersion: '8.1.2'
+      phpVersion: '8.4'
     jobs:
       - job: BuildJob
         pool:
@@ -100,7 +100,8 @@ stages:
                       az webapp config set \
                         --name $(webAppName) \
                         --resource-group controlorigins-docs \
-                        --startup-file "router.php"
+                        --startup-file "router.php" \
+                        --linux-fx-version "PHP|8.4"
 
                       # Set additional configuration for PHP routing
                       az webapp config appsettings set \
