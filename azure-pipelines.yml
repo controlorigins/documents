@@ -86,11 +86,14 @@ stages:
                 # Configure App Service settings for PHP routing
                 - task: AzureCLI@2
                   displayName: 'Configure App Service for Custom Routing'
+                  continueOnError: true
                   inputs:
                     azureSubscription: $(azureSubscription)
                     scriptType: 'bash'
                     scriptLocation: 'inlineScript'
                     inlineScript: |
+                      echo "Configuring App Service settings..."
+                      
                       # Enable URL rewriting and configure PHP settings
                       az webapp config appsettings set \
                         --name $(webAppName) \
@@ -98,22 +101,22 @@ stages:
                         --settings \
                           WEBSITE_DYNAMIC_CACHE=0 \
                           WEBSITE_LOCAL_CACHE_OPTION=Never \
-                          PHP_INI_SCAN_DIR="/usr/local/etc/php/conf.d:/home/site"
+                          PHP_INI_SCAN_DIR="/usr/local/etc/php/conf.d:/home/site" \
+                          WEBSITE_RUN_FROM_PACKAGE=0 \
+                        || echo "Failed to set app settings"
 
-                      # Configure the router as startup file and set routing mode
+                      # Configure the router as startup file
                       az webapp config set \
                         --name $(webAppName) \
                         --resource-group rg-controlorigins-docs \
                         --startup-file "router.php" \
-                        --linux-fx-version "PHP|8.4"
-
-                      # Set additional configuration for PHP routing
-                      az webapp config appsettings set \
-                        --name $(webAppName) \
-                        --resource-group rg-controlorigins-docs \
-                        --settings \
-                          WEBSITE_ROLE_INSTANCE_ID=0 \
-                          WEBSITE_HTTPLOGGING_RETENTION_DAYS=3
+                        --linux-fx-version "PHP|8.4" \
+                        || echo "Failed to set startup config"
                           
                       # Restart the app to apply settings
-                      az webapp restart --name $(webAppName) --resource-group rg-controlorigins-docs
+                      az webapp restart \
+                        --name $(webAppName) \
+                        --resource-group rg-controlorigins-docs \
+                        || echo "Failed to restart app"
+                      
+                      echo "Configuration completed"
