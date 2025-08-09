@@ -95,6 +95,20 @@ stages:
                           WEBSITE_DYNAMIC_CACHE=0 \
                           WEBSITE_LOCAL_CACHE_OPTION=Never \
                           PHP_INI_SCAN_DIR="/usr/local/etc/php/conf.d:/home/site"
+
+                      # Configure the router as startup file and set routing mode
+                      az webapp config set \
+                        --name $(webAppName) \
+                        --resource-group controlorigins-docs \
+                        --startup-file "router.php"
+
+                      # Set additional configuration for PHP routing
+                      az webapp config appsettings set \
+                        --name $(webAppName) \
+                        --resource-group controlorigins-docs \
+                        --settings \
+                          WEBSITE_ROLE_INSTANCE_ID=0 \
+                          WEBSITE_HTTPLOGGING_RETENTION_DAYS=3
                           
                       # Restart the app to apply settings
                       az webapp restart --name $(webAppName) --resource-group controlorigins-docs

@@ -37,6 +37,27 @@ echo "SERVER_SOFTWARE: " . ($_SERVER['SERVER_SOFTWARE'] ?? 'Not set') . "\n";
 echo "PHP_VERSION: " . phpversion() . "\n";
 echo "DOCUMENT_ROOT: " . ($_SERVER['DOCUMENT_ROOT'] ?? 'Not set') . "\n";
 echo "SCRIPT_FILENAME: " . ($_SERVER['SCRIPT_FILENAME'] ?? 'Not set') . "\n";
+echo "SERVER_NAME: " . ($_SERVER['SERVER_NAME'] ?? 'Not set') . "\n";
+echo "REQUEST_SCHEME: " . ($_SERVER['REQUEST_SCHEME'] ?? 'Not set') . "\n";
+
+// Check if running on Azure App Service
+echo "\n--- Azure App Service Detection ---\n";
+echo "WEBSITE_SITE_NAME: " . ($_SERVER['WEBSITE_SITE_NAME'] ?? 'Not set') . "\n";
+echo "WEBSITE_INSTANCE_ID: " . ($_SERVER['WEBSITE_INSTANCE_ID'] ?? 'Not set') . "\n";
+echo "WEBSITE_RESOURCE_GROUP: " . ($_SERVER['WEBSITE_RESOURCE_GROUP'] ?? 'Not set') . "\n";
+
+// Check for Nginx vs Apache
+$serverSoftware = $_SERVER['SERVER_SOFTWARE'] ?? '';
+if (stripos($serverSoftware, 'nginx') !== false) {
+    echo "\n🔍 DETECTED: Nginx server (not Apache)\n";
+    echo "❌ .htaccess files are ignored by Nginx\n";
+    echo "✅ Need nginx.conf or App Service configuration\n";
+} elseif (stripos($serverSoftware, 'apache') !== false) {
+    echo "\n🔍 DETECTED: Apache server\n";
+    echo "✅ .htaccess files should work\n";
+} else {
+    echo "\n🔍 Server type unclear from: $serverSoftware\n";
+}
 ?></pre>
     </div>
 
@@ -45,6 +66,7 @@ echo "SCRIPT_FILENAME: " . ($_SERVER['SCRIPT_FILENAME'] ?? 'Not set') . "\n";
         <?php
         $htaccessPath = __DIR__ . '/.htaccess';
         $webConfigPath = __DIR__ . '/web.config';
+        $routerPath = __DIR__ . '/router.php';
         
         if (file_exists($htaccessPath)) {
             echo '<div class="success">.htaccess file found ✓</div>';
@@ -58,12 +80,26 @@ echo "SCRIPT_FILENAME: " . ($_SERVER['SCRIPT_FILENAME'] ?? 'Not set') . "\n";
             echo '<div class="warning">web.config file not found (OK for Linux)</div>';
         }
         
+        if (file_exists($routerPath)) {
+            echo '<div class="success">router.php file found ✓</div>';
+        } else {
+            echo '<div class="error">router.php file NOT found ✗</div>';
+        }
+        
         // Test if mod_rewrite is working by checking if we can access this file via a fake URL
         if (isset($_GET['test']) && $_GET['test'] === 'rewrite') {
             echo '<div class="success">URL Rewriting is working! ✓</div>';
         }
+        
+        // Show current routing method
+        echo '<div class="info"><strong>Current Request Info:</strong><br>';
+        echo 'REQUEST_URI: ' . ($_SERVER['REQUEST_URI'] ?? 'Not set') . '<br>';
+        echo 'SCRIPT_NAME: ' . ($_SERVER['SCRIPT_NAME'] ?? 'Not set') . '<br>';
+        echo 'PHP_SELF: ' . ($_SERVER['PHP_SELF'] ?? 'Not set') . '<br>';
+        echo '</div>';
         ?>
         
+        <p><strong>Test Links:</strong></p>
         <p><a href="/diagnostics.php?test=rewrite">Test URL Rewriting</a></p>
         <p><a href="/fake-url-that-should-redirect">Test Pretty URL Routing</a></p>
     </div>
