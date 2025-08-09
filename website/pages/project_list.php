@@ -1,46 +1,292 @@
-<div class='card'>
-    <div class='card-header'>
-        <h1>Projects List</h1>  
-        <a href='/?file=ChatGPT%252FSessions%252FCreate%2BPHP%2BProject%2BTable.md'>
-        How this page was created</a><br/>
-        <a href='https://github.com/controlorigins/documents/blob/main/website/pages/project_list.php'target='_blank'>View Page Source</a>
+<?php
+// Load projects data
+$jsonFile = 'data/projects.json';
+$projects = [];
+
+if (file_exists($jsonFile)) {
+    $jsonData = file_get_contents($jsonFile);
+    $projects = json_decode($jsonData, true) ?? [];
+}
+
+// Group projects by first letter for filtering
+$groupedProjects = [];
+$projectLetters = [];
+
+foreach ($projects as $project) {
+    $firstLetter = strtoupper(substr($project['p'], 0, 1));
+    if (!in_array($firstLetter, $projectLetters)) {
+        $projectLetters[] = $firstLetter;
+    }
+    
+    if (!isset($groupedProjects[$firstLetter])) {
+        $groupedProjects[$firstLetter] = [];
+    }
+    
+    $groupedProjects[$firstLetter][] = $project;
+}
+
+// Sort letters alphabetically
+sort($projectLetters);
+?>
+
+<div class="card shadow-sm fade-in">
+    <div class="card-header d-flex justify-content-between align-items-center">
+        <div>
+            <h2 class="mb-0"><i class="bi bi-kanban me-2"></i>Projects List</h2>
+            <p class="text-light mb-0">Explore our project portfolio</p>
+        </div>
+        <div>
+            <a href="/?file=ChatGPT%252FSessions%252FCreate%2BPHP%2BProject%2BTable.md" class="btn btn-light btn-sm">
+                <i class="bi bi-info-circle me-1"></i> How this page was created
+            </a>
+            <a href="https://github.com/controlorigins/documents/blob/main/website/pages/project_list.php" target="_blank" class="btn btn-light btn-sm">
+                <i class="bi bi-code-slash me-1"></i> View Source
+            </a>
+        </div>
     </div>
+    
     <div class="card-body">
-
-    <div class="container-fluid mt-4">
-        <table class="table table-bordered display" id="myTable">
-            <thead>
-                <tr>
-                    <th>Image</th>
-                    <th>Name</th>
-                    <th>Description</th>
-                    <th>Link</th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php
-                $jsonFile = 'data/projects.json';
-                $jsonData = file_get_contents($jsonFile);
-                $projects = json_decode($jsonData, true);
-
-                if ($projects !== null) {
-                    foreach ($projects as $project) {
-                        echo '<tr>';
-                        echo '<td><img src="' . $project['image'] . '" alt="' . $project['p'] . '" class="thumbnail-img img-fluid"></td>';
-                        echo '<td>' . $project['p'] . '</td>';
-                        echo '<td>' . $project['d'] . '</td>';
-                        echo '<td><a href="' . $project['h'] . '" target="_blank">' . $project['h'] . '</a></td>';
-                        echo '</tr>';
-                    }
-                }
-                ?>
-            </tbody>
-        </table>
+        <?php if (!empty($projects)): ?>
+        <!-- Project Filters -->
+        <div class="mb-4">
+            <div class="d-flex justify-content-between align-items-center mb-3">
+                <h5><i class="bi bi-funnel me-2"></i>Filter Projects</h5>
+                <div class="input-group" style="max-width: 300px;">
+                    <span class="input-group-text">
+                        <i class="bi bi-search"></i>
+                    </span>
+                    <input type="text" id="projectSearch" class="form-control" placeholder="Search projects...">
+                </div>
+            </div>
+            
+            <div class="btn-group flex-wrap" role="group">
+                <button type="button" class="btn btn-outline-primary active" data-filter="all">
+                    All
+                </button>
+                <?php foreach ($projectLetters as $letter): ?>
+                <button type="button" class="btn btn-outline-primary" data-filter="<?php echo $letter; ?>">
+                    <?php echo $letter; ?>
+                </button>
+                <?php endforeach; ?>
+            </div>
+        </div>
+        
+        <!-- Projects Display -->
+        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4 mb-4" id="projectsContainer">
+            <?php foreach ($projects as $index => $project): ?>
+            <div class="col project-item" data-letter="<?php echo strtoupper(substr($project['p'], 0, 1)); ?>">
+                <div class="card h-100 project-card">
+                    <div class="card-img-top project-image-container">
+                        <img src="<?php echo $project['image']; ?>" class="img-fluid project-image" alt="<?php echo htmlspecialchars($project['p']); ?>">
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title">
+                            <?php echo htmlspecialchars($project['p']); ?>
+                        </h5>
+                        <p class="card-text">
+                            <?php echo htmlspecialchars($project['d']); ?>
+                        </p>
+                    </div>
+                    <div class="card-footer">
+                        <a href="<?php echo $project['h']; ?>" class="btn btn-primary w-100" target="_blank">
+                            <i class="bi bi-box-arrow-up-right me-1"></i> View Project
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <?php endforeach; ?>
+        </div>
+        
+        <!-- Pagination for larger datasets -->
+        <nav aria-label="Project pagination">
+            <ul class="pagination justify-content-center" id="projectPagination">
+                <!-- Pagination will be generated by JavaScript -->
+            </ul>
+        </nav>
+        
+        <?php else: ?>
+        <div class="alert alert-warning">
+            <i class="bi bi-exclamation-triangle me-2"></i> No projects found. Please check the JSON data file.
+        </div>
+        <?php endif; ?>
     </div>
+    
     <div class="card-footer">
-        <br/>
-        <br/>
+        <div class="d-flex justify-content-between align-items-center">
+            <div>
+                <i class="bi bi-kanban me-1"></i> <span id="projectCount" class="badge bg-primary rounded-pill"><?php echo count($projects); ?></span> projects
+            </div>
+            <div>
+                <a href="/?page=github" class="btn btn-sm btn-outline-secondary">
+                    <i class="bi bi-github me-1"></i> View GitHub Repository
+                </a>
+            </div>
+        </div>
     </div>
 </div>
-<br/><br/><br/><br/>
 
+<style>
+    .project-card {
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    
+    .project-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    }
+    
+    .project-image-container {
+        height: 200px;
+        overflow: hidden;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: #f8f9fa;
+    }
+    
+    .project-image {
+        max-height: 100%;
+        object-fit: cover;
+        width: 100%;
+    }
+</style>
+
+<script>
+    $(document).ready(function() {
+        const projectsPerPage = 6;
+        let currentPage = 1;
+        let filteredProjects = $('.project-item');
+        
+        // Function to show projects based on current page and filters
+        function displayProjects() {
+            const startIndex = (currentPage - 1) * projectsPerPage;
+            const endIndex = startIndex + projectsPerPage;
+            
+            // Hide all projects first
+            $('.project-item').hide();
+            
+            // Show only the projects for current page
+            filteredProjects.slice(startIndex, endIndex).show();
+            
+            // Update project count
+            $('#projectCount').text(filteredProjects.length);
+            
+            // Generate pagination
+            generatePagination();
+        }
+        
+        // Generate pagination links
+        function generatePagination() {
+            const totalPages = Math.ceil(filteredProjects.length / projectsPerPage);
+            const pagination = $('#projectPagination');
+            pagination.empty();
+            
+            // Don't show pagination if only one page
+            if (totalPages <= 1) {
+                return;
+            }
+            
+            // Previous button
+            pagination.append(`
+                <li class="page-item ${currentPage === 1 ? 'disabled' : ''}">
+                    <a class="page-link" href="#" data-page="${currentPage - 1}">
+                        <i class="bi bi-chevron-left"></i>
+                    </a>
+                </li>
+            `);
+            
+            // Page numbers
+            for (let i = 1; i <= totalPages; i++) {
+                pagination.append(`
+                    <li class="page-item ${i === currentPage ? 'active' : ''}">
+                        <a class="page-link" href="#" data-page="${i}">${i}</a>
+                    </li>
+                `);
+            }
+            
+            // Next button
+            pagination.append(`
+                <li class="page-item ${currentPage === totalPages ? 'disabled' : ''}">
+                    <a class="page-link" href="#" data-page="${currentPage + 1}">
+                        <i class="bi bi-chevron-right"></i>
+                    </a>
+                </li>
+            `);
+            
+            // Attach click event to pagination links
+            $('.page-link').click(function(e) {
+                e.preventDefault();
+                const page = $(this).data('page');
+                
+                if (page >= 1 && page <= totalPages) {
+                    currentPage = page;
+                    displayProjects();
+                    
+                    // Scroll to top of projects container
+                    $('html, body').animate({
+                        scrollTop: $('#projectsContainer').offset().top - 100
+                    }, 300);
+                }
+            });
+        }
+        
+        // Filter projects by letter
+        $('.btn-group .btn').click(function() {
+            // Update active button
+            $('.btn-group .btn').removeClass('active');
+            $(this).addClass('active');
+            
+            const filter = $(this).data('filter');
+            
+            if (filter === 'all') {
+                filteredProjects = $('.project-item');
+            } else {
+                filteredProjects = $(`.project-item[data-letter="${filter}"]`);
+            }
+            
+            // Reset to first page
+            currentPage = 1;
+            displayProjects();
+        });
+        
+        // Search functionality
+        $('#projectSearch').on('input', function() {
+            const searchText = $(this).val().toLowerCase();
+            
+            // Get current letter filter
+            const letterFilter = $('.btn-group .btn.active').data('filter');
+            
+            if (searchText === '') {
+                // If search is empty, just apply letter filter
+                if (letterFilter === 'all') {
+                    filteredProjects = $('.project-item');
+                } else {
+                    filteredProjects = $(`.project-item[data-letter="${letterFilter}"]`);
+                }
+            } else {
+                // Apply both search and letter filter
+                if (letterFilter === 'all') {
+                    filteredProjects = $('.project-item').filter(function() {
+                        const projectTitle = $(this).find('.card-title').text().toLowerCase();
+                        const projectDesc = $(this).find('.card-text').text().toLowerCase();
+                        return projectTitle.includes(searchText) || projectDesc.includes(searchText);
+                    });
+                } else {
+                    filteredProjects = $(`.project-item[data-letter="${letterFilter}"]`).filter(function() {
+                        const projectTitle = $(this).find('.card-title').text().toLowerCase();
+                        const projectDesc = $(this).find('.card-text').text().toLowerCase();
+                        return projectTitle.includes(searchText) || projectDesc.includes(searchText);
+                    });
+                }
+            }
+            
+            // Reset to first page
+            currentPage = 1;
+            displayProjects();
+        });
+        
+        // Initial display
+        displayProjects();
+    });
+</script>

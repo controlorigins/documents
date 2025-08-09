@@ -1,67 +1,132 @@
-<div class='card'>
-    <div class='card-header'>
-        <h1>Fetch Joke</h1>  
-        <a href='/?file=ChatGPT%252FSessions%252FCreate%2BPHP%2BJoke%2BPage.md'>
-        How this page was created</a><br/>
-        <a href='https://github.com/controlorigins/documents/blob/main/website/pages/joke.php'target='_blank'>View Page Source</a>
+<div class="card shadow-sm fade-in">
+    <div class="card-header d-flex justify-content-between align-items-center">
+        <div>
+            <h2 class="mb-0"><i class="bi bi-emoji-laughing me-2"></i>Random Jokes</h2>
+            <p class="text-light mb-0">Enjoy some humor from an external API</p>
+        </div>
+        <div>
+            <a href="/?file=ChatGPT%252FSessions%252FCreate%2BPHP%2BJoke%2BPage.md" class="btn btn-light btn-sm">
+                <i class="bi bi-info-circle me-1"></i> How this page was created
+            </a>
+            <a href="https://github.com/controlorigins/documents/blob/main/website/pages/joke.php" target="_blank" class="btn btn-light btn-sm">
+                <i class="bi bi-code-slash me-1"></i> View Source
+            </a>
+        </div>
     </div>
+    
     <div class="card-body">
-
-    <div class="container mt-5">
-    <div id="joke-container" class="mb-3 p-3 border rounded">
-        <!-- Joke will be displayed here -->
+        <div class="row">
+            <div class="col-md-8 mx-auto">
+                <div class="card joke-card mb-4 border-primary">
+                    <div class="card-header bg-primary text-white">
+                        <h5 class="mb-0"><i class="bi bi-chat-square-quote me-2"></i>Today's Joke</h5>
+                    </div>
+                    <div class="card-body p-4">
+                        <div id="joke-container" class="py-3">
+                            <div class="d-flex justify-content-center">
+                                <div class="spinner-border text-primary" role="status">
+                                    <span class="visually-hidden">Loading...</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer text-center">
+                        <button onclick="fetchJoke()" class="btn btn-primary">
+                            <i class="bi bi-arrow-repeat me-1"></i> Get Another Joke
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title"><i class="bi bi-lightbulb me-2"></i>About This Feature</h5>
+                        <p class="card-text">
+                            This page demonstrates PHP's ability to fetch data from an external API and dynamically display the results. 
+                            It uses AJAX to make asynchronous requests to a PHP script that interacts with the JokeAPI service.
+                        </p>
+                        <p class="card-text">
+                            The jokes are fetched in real-time each time you click the button, showcasing how PHP can act as an 
+                            intermediary between your website and external data sources.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-
-    <button onclick="fetchJoke()" class="btn btn-primary mb-3">Fetch a new Joke</button>
-
-</div>
-
-</div>
+    
     <div class="card-footer">
-    <div class="executive-summary">
-        <h3>Explanation</h3>
-        <p>
-            The primary objective of this page was to showcase the capability of PHP 
-            in making calls to an external API and dynamically displaying the fetched data 
-            on the company's website. A 'Joke Display' feature was developed and integrated, 
-            which fetches humor content from an external REST API and displays it on the website, 
-            providing a clear demonstration of PHP's capacity for real-time data retrieval 
-            and manipulation on a web platform.</p>
-        <h4>Key Points</h4>
-        <dl>
-            <dt>PHP to API Interaction:</dt>
-            <dd>The core of this demonstration revolved around developing a PHP script capable of making GET requests to an external joke API. This illustrated how PHP can interact with APIs to fetch real-time data.</dd>
-            <dt>Dynamic Content Display:</dt>
-            <dd> The fetched data was dynamically displayed on the website, exemplifying how real-time data from external sources can be incorporated into our web pages to enhance content dynamism.</dd>
-            <dt>User Engagement: </dt>
-            <dd>A 'Fetch a new Joke' button was added, allowing users to interact and view new content, thus demonstrating a simple yet effective user engagement feature.</dd>
-            <dt>Styling and Formatting: </dt>
-            <dd>Employing the Bootstrap framework, the visual presentation of the dynamic content was enhanced to ensure a pleasant user experience while keeping the focus on the PHP to API interaction demonstration.</dd>
-            <dt>Issue Resolution: </dt>
-            <dd>An initial script loading issue was resolved ensuring smooth operation of the feature on both manual user interaction and automatic page load, demonstrating our ability to troubleshoot and optimize the web feature.</dd>
-        </dl>
-        <p>The success of this demonstration underscores the versatility and capabilities of PHP in interacting with external APIs to enrich web content dynamically.</p>   
-        <p>As we REST assured, the project added not only a technical demonstration but also a touch of humor to our digital platform, providing a lighthearted example of how APIs can be leveraged to keep the content fresh and engaging.</p>
-        
-        <h4>Step-by-Step Breakdown</h4>
-        <ol>
-            <li>Developed a PHP script to make GET requests to the external joke API.</li>
-            <li>Created a button on the webpage to trigger the fetching of new jokes.</li>
-            <li>Resolved an initial script loading issue to ensure smooth operation of the feature.</li>
-        </ol>
-    </div>
+        <div class="executive-summary">
+            <h5><i class="bi bi-file-text me-2"></i>Implementation Details</h5>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="alert alert-primary">
+                        <h6><i class="bi bi-code-slash me-2"></i>PHP Backend</h6>
+                        <p class="mb-0">Makes cURL requests to the JokeAPI and formats the response</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="alert alert-success">
+                        <h6><i class="bi bi-arrow-repeat me-2"></i>JavaScript/AJAX</h6>
+                        <p class="mb-0">Handles asynchronous requests to the PHP backend</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="alert alert-info">
+                        <h6><i class="bi bi-bootstrap me-2"></i>Bootstrap UI</h6>
+                        <p class="mb-0">Provides responsive, attractive styling for the joke display</p>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
-<br/><br/><br/><br/>
-
 
 <script type="text/javascript">
+    let jokeCount = 0;
+    
     function fetchJoke() {
+        // Show loading spinner
+        document.getElementById('joke-container').innerHTML = `
+            <div class="d-flex justify-content-center">
+                <div class="spinner-border text-primary" role="status">
+                    <span class="visually-hidden">Loading...</span>
+                </div>
+            </div>
+        `;
+        
+        // Fetch joke with AJAX
         $.ajax({
             url: 'pages/fetch_joke.php',
             method: 'GET',
             success: function(response) {
-                $('#joke-container').html(response);
+                jokeCount++;
+                
+                // Add animation class
+                const jokeContainer = $('#joke-container');
+                jokeContainer.fadeOut(200, function() {
+                    // Update content
+                    jokeContainer.html(`
+                        <div class="text-center">
+                            <div class="joke-content">
+                                ${response}
+                            </div>
+                            <div class="mt-3 text-muted">
+                                <small>Joke #${jokeCount}</small>
+                            </div>
+                        </div>
+                    `);
+                    
+                    // Fade back in
+                    jokeContainer.fadeIn(200);
+                });
+            },
+            error: function() {
+                $('#joke-container').html(`
+                    <div class="alert alert-danger">
+                        <i class="bi bi-exclamation-triangle me-2"></i>
+                        Oops! Failed to fetch a joke. Please try again later.
+                    </div>
+                `);
             }
         });
     }
@@ -70,5 +135,26 @@
     window.onload = function() {
         fetchJoke();
     };
-
 </script>
+
+<style>
+    .joke-card {
+        box-shadow: 0 6px 10px rgba(0,0,0,0.08);
+        transition: all 0.3s ease;
+    }
+    
+    .joke-card:hover {
+        transform: translateY(-5px);
+    }
+    
+    #joke-container {
+        min-height: 150px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    
+    .joke-content {
+        font-size: 1.2rem;
+    }
+</style>

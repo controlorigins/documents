@@ -1,128 +1,322 @@
-<div class='card'>
-    <div class='card-header'>
-        <h1>CSV File Analysis</h1>  
-        <a href='/?file=ChatGPT%252FSessions%252FList%2BCSV%2BFiles%2BPHP.md'>
-        How this page was created</a><br/>
-        <a href='https://github.com/controlorigins/documents/blob/main/website/pages/data-analysis.php'target='_blank'>View Page Source</a>
-    </div>
-    <div class="card-body">
-        <div class="container-fluid mt-4">
-            <strong>Select a CSV File</strong><br/>
+<?php
+$folderPath = 'data'; // Specify the folder path
+$selectedFile = '';
+$data = [];
+$header = [];
+$fieldSummaries = [];
 
-        <?php
-        $folderPath = 'data'; // Specify the folder path
+// Check if the folder exists
+if (is_dir($folderPath)) {
+    // Open the directory
+    if ($dirHandle = opendir($folderPath)) {
+        $csvFiles = [];
         
-        // Check if the folder exists
-        if (is_dir($folderPath)) {
-            // Open the directory
-            if ($dirHandle = opendir($folderPath)) {
-                echo "<form method='POST' action=''>"; // Form to select a CSV file
-        
-                echo "List of CSV files in the 'data' folder:<br>";
-
-                // Loop through the files in the directory
-                while (false !== ($file = readdir($dirHandle))) {
-                    // Check if the file has a ".csv" extension
-                    if (pathinfo($file, PATHINFO_EXTENSION) === 'csv') {
-                        echo "<input type='radio' name='csvFile' value='$file'> $file<br>";
-                    }
-                }
-
-                echo "<input type='submit' class='btn btn-primary' value='View Selected CSV'>";
-                echo "</form>";
-
-                // Close the directory handle
-                closedir($dirHandle);
-            } else {
-                echo "Unable to open the 'data' folder.";
+        // Loop through the files in the directory
+        while (false !== ($file = readdir($dirHandle))) {
+            // Check if the file has a ".csv" extension
+            if (pathinfo($file, PATHINFO_EXTENSION) === 'csv') {
+                $csvFiles[] = $file;
             }
-        } else {
-            echo "The 'data' folder does not exist.";
         }
-
-        if ($_SERVER["REQUEST_METHOD"] == "POST") {
+        
+        // Close the directory handle
+        closedir($dirHandle);
+        
+        // Sort files alphabetically
+        sort($csvFiles);
+        
+        // Process selected file
+        if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["csvFile"])) {
             $selectedFile = $_POST["csvFile"];
-
-            if ($selectedFile) {
-                // Read and display the contents of the selected CSV file
-                $csvData = file_get_contents("data/" . $selectedFile);
-                $lines = explode(PHP_EOL, $csvData);
-
-                echo "<h2>Contents of $selectedFile:</h2>";
-
-                // Parse the CSV data
-                $data = [];
-                $header = null;
-                foreach ($lines as $line) {
-                    $cells = str_getcsv($line);
-                    if (!$header) {
-                        $header = $cells; // Store the header row
-                    } else {
-                        $data[] = $cells; // Store data rows
+            
+            // Read and parse the CSV file
+            $csvData = file_get_contents("data/" . $selectedFile);
+            $lines = explode(PHP_EOL, $csvData);
+            
+            foreach ($lines as $line) {
+                $cells = str_getcsv($line);
+                if (!$header) {
+                    $header = $cells; // Store the header row
+                } else if (count($cells) === count($header)) {
+                    $data[] = $cells; // Store data rows
+                }
+            }
+            
+            // Calculate field summaries
+            foreach ($header as $index => $field) {
+                $fieldData = array_column($data, $index);
+                
+                // Filter out non-integer and non-string values
+                $filteredFieldData = array_filter($fieldData, function ($value) {
+                    return is_string($value) || is_numeric($value);
+                });
+                
+                if (empty($filteredFieldData)) {
+                    continue;
+                }
+                
+                $min = min($filteredFieldData);
+                $max = max($filteredFieldData);
+                
+                // Check if all values are numeric for average calculation
+                $allNumeric = true;
+                foreach ($filteredFieldData as $value) {
+                    if (!is_numeric($value)) {
+                        $allNumeric = false;
+                        break;
                     }
                 }
-
-                // Output summary for each field
-                echo "<h3>Field Summary:</h3>";
-                echo "<table class='table table-bordered'>";
-                echo "<tr><th>Field</th><th>Minimum</th><th>Average</th><th>Maximum</th><th>Most Common</th><th>Least Common</th><th>Distinct Count</th></tr>";
-
-                foreach ($header as $field) {
-                    $fieldData = array_column($data, array_search($field, $header));
-                    // Filter out non-integer and non-string values
-                    $filteredFieldData = array_filter($fieldData, function ($value) {
-                        return is_string($value) || is_numeric($value);
-                    });
-                    $min = min($filteredFieldData);
-                    $max = max($filteredFieldData);
-                    $average = array_sum($filteredFieldData) / count($filteredFieldData);
-                    $distinctCount = count(array_count_values($filteredFieldData));
-                    $valueCounts = array_count_values($filteredFieldData);
-                    arsort($valueCounts);
-                    $mostCommon = key($valueCounts);
-                    end($valueCounts);
-                    $leastCommon = key($valueCounts);
-
-                    echo "<tr>";
-                    echo "<td>$field</td>";
-                    echo "<td>$min</td>";
-                    echo "<td>$average</td>";
-                    echo "<td>$max</td>";
-                    echo "<td>$mostCommon</td>";
-                    echo "<td>$leastCommon</td>";
-                    echo "<td>$distinctCount</td>";
-                    echo "</tr>";
-                }
-
-                echo "</table>";
-
-                // Output the CSV data in a table
-                echo "<h3>Data Table:</h3>";
-                echo "<table class='table table-bordered display' id='myTable'>";
-                echo "<thead><tr>";
-                foreach ($header as $field) {
-                    echo "<th>$field</th>";
-                }
-                echo "</thead></tr>";
-                echo "<tbody>";
-                foreach ($data as $rowData) {
-                    echo "<tr>";
-                    foreach ($rowData as $cell) {
-                        echo "<td>$cell</td>";
-                    }
-                    echo "</tr>";
-                }
-                echo "</tbody></table>";
-            } else {
-                echo "<p>Please select a CSV file to view.</p>";
+                
+                $average = $allNumeric ? round(array_sum($filteredFieldData) / count($filteredFieldData), 2) : 'N/A';
+                $distinctCount = count(array_count_values($filteredFieldData));
+                $valueCounts = array_count_values($filteredFieldData);
+                arsort($valueCounts);
+                $mostCommon = key($valueCounts);
+                end($valueCounts);
+                $leastCommon = key($valueCounts);
+                
+                $fieldSummaries[] = [
+                    'field' => $field,
+                    'min' => $min,
+                    'max' => $max,
+                    'average' => $average,
+                    'distinctCount' => $distinctCount,
+                    'mostCommon' => $mostCommon,
+                    'leastCommon' => $leastCommon
+                ];
             }
         }
-        ?>
+    }
+}
+?>
+
+<div class="card shadow-sm fade-in">
+    <div class="card-header d-flex justify-content-between align-items-center">
+        <div>
+            <h2 class="mb-0"><i class="bi bi-table me-2"></i>CSV Data Analysis</h2>
+            <p class="text-light mb-0">Analyze and explore your CSV files</p>
+        </div>
+        <div>
+            <a href="/?file=ChatGPT%252FSessions%252FList%2BCSV%2BFiles%2BPHP.md" class="btn btn-light btn-sm">
+                <i class="bi bi-info-circle me-1"></i> How this page was created
+            </a>
+            <a href="https://github.com/controlorigins/documents/blob/main/website/pages/data-analysis.php" target="_blank" class="btn btn-light btn-sm">
+                <i class="bi bi-code-slash me-1"></i> View Source
+            </a>
+        </div>
     </div>
+    
+    <div class="card-body">
+        <div class="row">
+            <!-- CSV File Selector -->
+            <div class="col-md-4 mb-4">
+                <div class="card h-100 border-primary">
+                    <div class="card-header bg-primary text-white">
+                        <h5 class="mb-0"><i class="bi bi-file-earmark-spreadsheet me-2"></i>CSV Files</h5>
+                    </div>
+                    <div class="card-body">
+                        <?php if (!empty($csvFiles)): ?>
+                        <form method="POST" action="" id="csvSelectForm">
+                            <div class="mb-3">
+                                <label class="form-label">
+                                    <i class="bi bi-files me-1"></i> Available CSV files:
+                                </label>
+                                
+                                <?php foreach ($csvFiles as $file): ?>
+                                <div class="form-check mb-2">
+                                    <input class="form-check-input" type="radio" name="csvFile" id="<?php echo $file; ?>" value="<?php echo $file; ?>" <?php echo $selectedFile === $file ? 'checked' : ''; ?>>
+                                    <label class="form-check-label" for="<?php echo $file; ?>">
+                                        <i class="bi bi-file-earmark-text me-1"></i> <?php echo $file; ?>
+                                    </label>
+                                </div>
+                                <?php endforeach; ?>
+                            </div>
+                            
+                            <button type="submit" class="btn btn-primary w-100">
+                                <i class="bi bi-search me-1"></i> Analyze CSV
+                            </button>
+                        </form>
+                        <?php else: ?>
+                        <div class="alert alert-warning">
+                            <i class="bi bi-exclamation-triangle me-2"></i> No CSV files found in the data folder.
+                        </div>
+                        <?php endif; ?>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Analysis Results -->
+            <div class="col-md-8">
+                <?php if (!empty($selectedFile)): ?>
+                <div class="card mb-4">
+                    <div class="card-header bg-light">
+                        <h5 class="mb-0">
+                            <i class="bi bi-graph-up me-2"></i>
+                            Analysis of <?php echo $selectedFile; ?>
+                        </h5>
+                    </div>
+                    <div class="card-body">
+                        <!-- Field Summary -->
+                        <h6 class="card-subtitle mb-3 text-muted">
+                            <i class="bi bi-list-columns me-1"></i> Field Summary
+                        </h6>
+                        
+                        <div class="table-responsive mb-4">
+                            <table class="table table-striped table-bordered">
+                                <thead class="table-dark">
+                                    <tr>
+                                        <th>Field</th>
+                                        <th>Minimum</th>
+                                        <th>Average</th>
+                                        <th>Maximum</th>
+                                        <th>Most Common</th>
+                                        <th>Least Common</th>
+                                        <th>Distinct Count</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <?php foreach ($fieldSummaries as $summary): ?>
+                                    <tr>
+                                        <td><strong><?php echo $summary['field']; ?></strong></td>
+                                        <td><?php echo $summary['min']; ?></td>
+                                        <td><?php echo $summary['average']; ?></td>
+                                        <td><?php echo $summary['max']; ?></td>
+                                        <td><?php echo $summary['mostCommon']; ?></td>
+                                        <td><?php echo $summary['leastCommon']; ?></td>
+                                        <td>
+                                            <span class="badge bg-primary rounded-pill">
+                                                <?php echo $summary['distinctCount']; ?>
+                                            </span>
+                                        </td>
+                                    </tr>
+                                    <?php endforeach; ?>
+                                </tbody>
+                            </table>
+                        </div>
+                        
+                        <!-- Quick Stats -->
+                        <div class="row mb-4">
+                            <div class="col-md-4">
+                                <div class="card bg-primary text-white">
+                                    <div class="card-body text-center">
+                                        <h5><i class="bi bi-grid-3x3 me-2"></i>Rows</h5>
+                                        <h2><?php echo count($data); ?></h2>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="card bg-success text-white">
+                                    <div class="card-body text-center">
+                                        <h5><i class="bi bi-columns me-2"></i>Columns</h5>
+                                        <h2><?php echo count($header); ?></h2>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="card bg-info text-white">
+                                    <div class="card-body text-center">
+                                        <h5><i class="bi bi-cells me-2"></i>Cells</h5>
+                                        <h2><?php echo count($data) * count($header); ?></h2>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Actions Row -->
+                        <div class="d-flex justify-content-between mb-3">
+                            <h6 class="card-subtitle text-muted">
+                                <i class="bi bi-table me-1"></i> Data Table
+                            </h6>
+                            <div>
+                                <a href="/?page=chart" class="btn btn-sm btn-outline-primary">
+                                    <i class="bi bi-bar-chart me-1"></i> Visualize Data
+                                </a>
+                            </div>
+                        </div>
+                        
+                        <!-- Data Table -->
+                        <div class="table-responsive">
+                            <table id="dataTable" class="table table-striped table-bordered table-hover">
+                                <thead class="table-dark">
+                                    <tr>
+                                        <?php foreach ($header as $field): ?>
+                                        <th><?php echo $field; ?></th>
+                                        <?php endforeach; ?>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <?php foreach ($data as $row): ?>
+                                    <tr>
+                                        <?php foreach ($row as $cell): ?>
+                                        <td><?php echo $cell; ?></td>
+                                        <?php endforeach; ?>
+                                    </tr>
+                                    <?php endforeach; ?>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <?php else: ?>
+                <div class="card h-100">
+                    <div class="card-body text-center p-5">
+                        <i class="bi bi-file-earmark-spreadsheet text-muted" style="font-size: 5rem;"></i>
+                        <h3 class="mt-4 mb-3">Select a CSV File</h3>
+                        <p class="text-muted">
+                            Choose a CSV file from the list to view its contents and analysis.
+                        </p>
+                    </div>
+                </div>
+                <?php endif; ?>
+            </div>
+        </div>
+    </div>
+    
     <div class="card-footer">
-        <br/>
-        <br/>
+        <div class="alert alert-info mb-0">
+            <div class="d-flex">
+                <div class="me-3">
+                    <i class="bi bi-lightbulb fs-3"></i>
+                </div>
+                <div>
+                    <h5>What's CSV?</h5>
+                    <p class="mb-0">
+                        CSV (Comma-Separated Values) is a simple file format used to store tabular data, such as a spreadsheet or database.
+                        Each line of the file is a data record consisting of one or more fields, separated by commas.
+                        This tool helps you analyze and explore your CSV data with ease.
+                    </p>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
-<br/><br/><br/><br/>
-    
+
+<script>
+    $(document).ready(function() {
+        if ($('#dataTable').length) {
+            $('#dataTable').DataTable({
+                responsive: true,
+                pageLength: 10,
+                lengthMenu: [[5, 10, 25, 50, -1], [5, 10, 25, 50, "All"]],
+                dom: 'Bfrtip',
+                buttons: [
+                    {
+                        extend: 'collection',
+                        text: '<i class="bi bi-download"></i> Export',
+                        buttons: [
+                            'csv',
+                            'excel',
+                            'pdf'
+                        ]
+                    },
+                    'colvis'
+                ]
+            });
+        }
+        
+        // Auto-submit when a different CSV file is selected
+        $('input[name="csvFile"]').change(function() {
+            $('#csvSelectForm').submit();
+        });
+    });
+</script>

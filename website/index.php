@@ -1,20 +1,52 @@
 <?php
-// Read the JSON content
-$jsonContent = file_get_contents('data/content.json');
-$content = json_decode($jsonContent, true);
+// Turn on error reporting for debugging
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
 
-// Check if a page is specified in the URL
-$page = isset($_GET['page']) ? (string)$_GET['page'] : 'document_view';
+// Simple router
+$page = $_GET['page'] ?? 'document_view'; // Default page
+$validPages = [
+    'document_view',
+    'data-analysis',
+    'chart',
+    'project_list',
+    'github',
+    'crud',
+    'joke',
+    'search',
+    '404'
+];
 
-// Check if the requested page exists in the content
-if (!array_key_exists($page, $content) || !isset($content[$page]['title']) || !isset($content[$page]['content'])) {
-    // Default to a 404 page if the page doesn't exist or lacks title/content
-    $page = 'document_view';
-    $content[$page]['title'] = '404 - Not Found';
-    $content[$page]['content'] = 'Page Not Found';
+// Check if the requested page is valid
+if (!in_array($page, $validPages)) {
+    $page = '404';
 }
 
-// Include the template file
-include 'template.php';
-?>
+// Page titles
+$pageTitles = [
+    'document_view' => 'Document Viewer',
+    'data-analysis' => 'CSV File Analysis',
+    'chart' => 'Interactive Charting',
+    'project_list' => 'Projects List',
+    'github' => 'GitHub Repository Info',
+    'crud' => 'Database CRUD',
+    'joke' => 'Random Jokes',
+    'search' => 'Search Documents',
+    '404' => 'Page Not Found'
+];
 
+// Set the page title
+$pageTitle = $pageTitles[$page] . ' | Control Origins Docs';
+
+// Start output buffering to capture page content
+ob_start();
+
+// Include the requested page
+include 'pages/' . $page . '.php';
+
+// Get the buffered content
+$pageContent = ob_get_clean();
+
+// Include the layout template
+include 'layout.php';
+?>
