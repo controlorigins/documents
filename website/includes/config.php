@@ -2,6 +2,9 @@
 // Global configuration for PHPDocSpark
 $CANONICAL_BASE = 'https://phpdocspark.markhazleton.com'; // Long-term canonical domain
 
+// Load version information
+require_once __DIR__ . '/version.php';
+
 // Brand constants
 define('PHPSPARK_BRAND', 'PHPDocSpark by Mark Hazleton');
 define('PHPSPARK_SHORT', 'PHPDocSpark');

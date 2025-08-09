@@ -1,6 +1,6 @@
 {
   "name": "documents",
-  "version": "1.0.0",
+  "version": "1.2.0",
   "description": "PHPDocSpark documentation platform by Mark Hazleton",
   "main": "index.js",
   "engines": {
@@ -8,6 +8,7 @@
     "npm": ">=8.0.0"
   },
   "scripts": {
+    "update-version": "node scripts/update-version.js",
     "dev": "vite build --watch",
     "dev:serve": "concurrently \"npm run dev\" \"npm run serve\"",
     "build": "node scripts/build.js",

@@ -1,11 +1,5 @@
 # PHP as Linux Web App on Azure
-# Build, package and deploy your PHP project to Azure Linux Web A                      # Configure the router as startup file and set routing mode
-                      az webapp config set \
-                        --name $(webAppName) \
-                        --resource-group rg-controlorigins-docs \
-                        --startup-file "router.php" \
-                        --linux-fx-version "PHP|8.4" Add steps that run tests and more:
-# https://docs.microsoft.com/azure/devops/pipelines/languages/php
+# Build, package and deploy your PHP project to Azure Linux Web App
 
 trigger:
   - main
@@ -46,6 +40,12 @@ stages:
             workingDirectory: $(rootFolder)
             displayName: 'Use PHP version $(phpVersion)'
 
+          - script: |
+              echo "Updating version information..."
+              node scripts/update-version.js
+            workingDirectory: $(rootFolder)
+            displayName: 'Update Version File'
+
           - script: composer install --no-interaction --prefer-dist
             workingDirectory: $(rootFolder)
             displayName: 'Composer install'
@@ -80,6 +80,7 @@ stages:
                   displayName: 'Deploy Azure Web App : controlorigins-docs'
                   inputs:
                     azureSubscription: $(azureSubscription)
+                    appType: 'webAppLinux'
                     appName: $(webAppName)
                     package: $(Pipeline.Workspace)/drop/$(Build.BuildId).zip
 
@@ -93,7 +94,7 @@ stages:
                     scriptLocation: 'inlineScript'
                     inlineScript: |
                       echo "Configuring App Service settings..."
-                      
+
                       # Enable URL rewriting and configure PHP settings
                       az webapp config appsettings set \
                         --name $(webAppName) \
@@ -118,5 +119,5 @@ stages:
                         --name $(webAppName) \
                         --resource-group rg-controlorigins-docs \
                         || echo "Failed to restart app"
-                      
+
                       echo "Configuration completed"
