@@ -5,23 +5,45 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Loading...</title>
     <script>
-      // Enhanced routing fallback for Azure App Service
+      // Enhanced routing fallback for Azure App Service - Updated approach
       (function () {
         const path = window.location.pathname;
         const search = window.location.search;
         const hash = window.location.hash;
 
-        console.log('Routing check - Path:', path, 'Search:', search);
+        console.log('Routing check - Path:', path, 'Search:', search, 'Hash:', hash);
 
-        // If this is a /doc/ URL, redirect to index.php with the path as a parameter
+        // Don't redirect if we're already on the right page
+        if (search.includes('page=') || search.includes('file=')) {
+          console.log('Already has page/file parameters, not redirecting');
+          return;
+        }
+
+        // If this is a /doc/ URL, convert to proper page parameter
         if (path.match(/^\/doc(\/.*)?$/i)) {
-          const newUrl =
-            '/index.php?path=' +
-            encodeURIComponent(path) +
-            (search ? '&' + search.substring(1) : '') +
-            hash;
-          console.log('Redirecting to:', newUrl);
-          window.location.replace(newUrl);
+          let docPath = path.replace(/^\/doc\/?/, '');
+          if (docPath === '') {
+            // Root doc URL goes to document viewer
+            const newUrl = '/index.php?page=document_view' + hash;
+            console.log('Doc root redirect to:', newUrl);
+            window.location.replace(newUrl);
+          } else {
+            // Convert path to file parameter
+            // Convert /doc/chatgpt/sessions/create-php-joke-page to ChatGPT/Sessions/Create PHP Joke Page.md
+            const pathSegments = docPath.split('/');
+            const convertedSegments = pathSegments.map(segment => {
+              // Convert kebab-case to Title Case with spaces
+              return segment
+                .split('-')
+                .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+                .join(' ');
+            });
+            const filePath = convertedSegments.join('/') + '.md';
+            
+            const newUrl = '/index.php?page=document_view&file=' + encodeURIComponent(filePath) + hash;
+            console.log('Doc file redirect to:', newUrl, 'File:', filePath);
+            window.location.replace(newUrl);
+          }
           return;
         }
 
@@ -33,7 +55,7 @@
           return;
         }
 
-        // For any other unmatched paths, try routing through PHP
+        // For any other unmatched paths, try routing through PHP with path parameter
         const newUrl =
           '/index.php?path=' +
           encodeURIComponent(path) +
