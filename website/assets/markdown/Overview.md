@@ -2,7 +2,7 @@
 
 ## *A World-Class Reference Implementation*
 
-Welcome to **Control Origins Documentation Platform** – a cutting-edge demonstration of how traditional PHP applications can seamlessly integrate with modern frontend build systems to create exceptional web experiences.
+Welcome to **PHPDocSpark by Mark Hazleton** – a cutting-edge demonstration of how traditional PHP applications can seamlessly integrate with modern frontend build systems to create exceptional web experiences. (Legacy references to controlorigins remain in URLs / repo slug for continuity.)
 
 [![Live Demo](https://img.shields.io/badge/🌐_Live_Demo-controlorigins--docs.azurewebsites.net-blue?style=flat-square)](https://controlorigins-docs.azurewebsites.net/)
 [![GitHub](https://img.shields.io/badge/📦_Source_Code-GitHub-black?style=flat-square)](https://github.com/controlorigins/documents)
@@ -300,6 +300,6 @@ graph TD
 
 **🌟 Star this project if it helps your learning journey!**
 
-**Built with ❤️ by [Control Origins](https://github.com/controlorigins) as a gift to the PHP community**
+**Built with ❤️ by [Mark Hazleton](https://github.com/controlorigins) as a gift to the PHP community — part of the WebSpark suite**
 
 </div>  

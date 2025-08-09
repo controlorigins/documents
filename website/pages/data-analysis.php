@@ -1,4 +1,5 @@
 <?php
+require_once __DIR__ . '/../includes/docs.php';
 $folderPath = 'data'; // Specify the folder path
 $selectedFile = '';
 $data = [];
@@ -97,7 +98,7 @@ if (is_dir($folderPath)) {
             <p class="text-light mb-0">Analyze and explore your CSV files</p>
         </div>
         <div>
-            <a href="/?file=ChatGPT%252FSessions%252FList%2BCSV%2BFiles%2BPHP.md" class="btn btn-light btn-sm">
+            <a href="<?= doc_pretty_url('ChatGPT/Sessions/List CSV Files PHP'); ?>" class="btn btn-light btn-sm">
                 <i class="bi bi-info-circle me-1"></i> How this page was created
             </a>
             <a href="https://github.com/controlorigins/documents/blob/main/website/pages/data-analysis.php" target="_blank" class="btn btn-light btn-sm">

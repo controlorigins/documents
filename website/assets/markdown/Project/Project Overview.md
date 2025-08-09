@@ -1,4 +1,4 @@
-# Control Origins Documentation & Demo Application
+# PHPDocSpark Documentation & Demo Application
 
 An educational, full-featured PHP 8 demo website showcasing: markdown documentation management, data exploration & visualization, CRUD with SQLite, API integrations, project portfolio rendering, full‑text markdown search, responsive UI (Bootstrap 5 + DataTables), and CI/CD deployment to Azure Web Apps.
 
@@ -10,7 +10,7 @@ An educational, full-featured PHP 8 demo website showcasing: markdown documentat
 
 ## Table of Contents
 
-- [Control Origins Documentation \& Demo Application](#control-origins-documentation--demo-application)
+- [PHPDocSpark Documentation & Demo Application](#phpdocspark-documentation--demo-application)
   - [Table of Contents](#table-of-contents)
   - [Purpose \& Audience](#purpose--audience)
   - [Key Features](#key-features)
@@ -305,7 +305,9 @@ Guidelines:
 
 ## License & Ownership
 
-All source code, documentation, and content are proprietary and confidential to Control Origins. Redistribution without explicit written authorization is prohibited. By contributing, you agree contributions are assigned to Control Origins.
+Released under the MIT License (c) Mark Hazleton.\
+This project (now branded as PHPDocSpark) supersedes legacy "Control Origins" naming. Historical repository slug and domains may still reference controlorigins for continuity but the authoritative brand is PHPDocSpark by Mark Hazleton.\
+Part of the broader WebSpark suite: [WebSpark](https://webspark.markhazleton.com)
 
 ---
 

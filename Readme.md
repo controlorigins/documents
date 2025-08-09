@@ -1,12 +1,13 @@
-# 🚀 Control Origins Documentation Platform
+# 🚀 PHPDocSpark by Mark Hazleton
 
 [![Live Demo](https://img.shields.io/badge/🌐_Live_Demo-controlorigins--docs.azurewebsites.net-blue?style=for-the-badge)](https://controlorigins-docs.azurewebsites.net/)
+[![Canonical](https://img.shields.io/badge/Canonical-phpdocspark.markhazleton.com-orange?style=for-the-badge)](https://phpdocspark.markhazleton.com)
 [![PHP](https://img.shields.io/badge/PHP-8.2+-777BB4?style=for-the-badge&logo=php&logoColor=white)](https://php.net)
 [![Node.js](https://img.shields.io/badge/Node.js-18+-339933?style=for-the-badge&logo=node.js&logoColor=white)](https://nodejs.org)
 [![Vite](https://img.shields.io/badge/Vite-7.1+-646CFF?style=for-the-badge&logo=vite&logoColor=white)](https://vitejs.dev)
 [![Bootstrap](https://img.shields.io/badge/Bootstrap-5.3-7952B3?style=for-the-badge&logo=bootstrap&logoColor=white)](https://getbootstrap.com)
 
-> **A modern, full-featured PHP documentation platform demonstrating best practices for contemporary web development with hybrid server-side/client-side architecture.**
+> **An open-source PHP documentation & data exploration platform by Mark Hazleton (WebSpark suite) showcasing hybrid server-side + modern asset pipeline techniques.**
 
 **Educational Focus**: This project serves as a comprehensive reference implementation for building modern PHP applications with contemporary tooling, showcasing patterns for documentation management, data visualization, API integration, and responsive UI development.
 
@@ -34,7 +35,7 @@
 
 ## 🎯 Project Overview
 
-This project demonstrates modern PHP web development practices by building a comprehensive documentation and portfolio platform. It showcases the integration of traditional server-side PHP with contemporary client-side build tools, creating a hybrid architecture that leverages the best of both worlds.
+PHPDocSpark demonstrates modern PHP web development practices by building a comprehensive documentation and portfolio platform. It integrates traditional server-side PHP with a contemporary client-side build toolchain, creating a hybrid architecture that leverages the best of both worlds.
 
 ### **Learning Objectives**
 
@@ -45,6 +46,7 @@ This project demonstrates modern PHP web development practices by building a com
 - **API Integration**: GitHub API, external services, caching strategies
 - **Responsive Design**: Bootstrap 5, mobile-first approach
 - **DevOps**: Azure Pipelines, automated deployment workflows
+- **Brand Integration**: Part of the WebSpark suite (<https://webspark.markhazleton.com>)
 
 ### **Target Audience**
 
@@ -557,15 +559,27 @@ We welcome contributions! This project serves as an educational resource, so imp
 
 ## 📝 License
 
-**Proprietary & Educational Use**
+Released under the MIT License — see [LICENSE](LICENSE) for full text.
 
-This project is maintained by Control Origins for educational and demonstration purposes. While the code is publicly viewable for learning, commercial redistribution requires explicit permission.
+Copyright (c) Mark Hazleton.
 
-**Educational Use**: ✅ Encouraged for learning and reference  
-**Commercial Use**: ❌ Requires written permission  
-**Contributions**: Welcome and appreciated  
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
 
-For licensing inquiries, contact: [mark.hazleton@controlorigins.com](mailto:mark.hazleton@controlorigins.com)
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
 
 ---
 
@@ -583,6 +597,6 @@ For licensing inquiries, contact: [mark.hazleton@controlorigins.com](mailto:mark
 
 **[🌐 Live Demo](https://controlorigins-docs.azurewebsites.net/) | [📖 Documentation](https://controlorigins-docs.azurewebsites.net/?page=document_view) | [🔧 GitHub Issues](https://github.com/controlorigins/documents/issues)**
 
-Built with ❤️ by [Control Origins](https://github.com/controlorigins)
+Built with ❤️ by [Mark Hazleton](https://markhazleton.com)
 
 </div>

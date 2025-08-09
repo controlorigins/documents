@@ -1,4 +1,5 @@
 <?php
+require_once __DIR__ . '/../includes/docs.php';
 // Define the root folder
 $rootFolder = 'assets/markdown';
 $searchTerm = '';
@@ -57,9 +58,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                             // Count the number of occurrences
                             $occurrences = substr_count(strtolower($content), strtolower($searchTerm));
                             
-                            // Construct the link with the query parameter
+                            // Construct pretty /doc/ link (remove .md extension)
+                            $prettyPath = doc_pretty_url($currentRelativePath);
                             $results[] = [
-                                'link' => '/?file=' . rawurlencode($currentRelativePath),
+                                'link' => $prettyPath,
                                 'text' => $file,
                                 'title' => $title,
                                 'excerpt' => $excerpt,
@@ -105,7 +107,7 @@ function formatFileSize($bytes) {
             <p class="text-light mb-0">Find content across all documentation</p>
         </div>
         <div>
-            <a href="/?file=ChatGPT%2FSessions%2FSearch%20Markdown%20Files%20PHP.md" class="btn btn-light btn-sm">
+            <a href="<?= doc_pretty_url('ChatGPT/Sessions/Search Markdown Files PHP'); ?>" class="btn btn-light btn-sm">
                 <i class="bi bi-info-circle me-1"></i> How this page was created
             </a>
             <a href="https://github.com/controlorigins/documents/blob/main/website/pages/search.php" target="_blank" class="btn btn-light btn-sm">

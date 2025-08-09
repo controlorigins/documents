@@ -1,12 +1,13 @@
-// Custom JavaScript for Control Origins Documentation
+/* global $, bootstrap */
+// Custom JavaScript for PHPDocSpark (Mark Hazleton)
 
 // DataTables initialization
 $(document).ready(function () {
-  console.log('Custom JavaScript loaded');
+  // (debug log removed)
 
   // Initialize DataTables if table exists
   if ($('#myTable').length) {
-    console.log('Initializing DataTables');
+  // (debug log removed)
     $('#myTable').DataTable({
       responsive: true,
       pageLength: 10,
@@ -19,7 +20,7 @@ $(document).ready(function () {
 
   // Data Analysis Page - DataTable initialization
   if ($('#dataTable').length) {
-    console.log('Initializing DataTable for data-analysis');
+  // (debug log removed)
     $('#dataTable').DataTable({
       responsive: true,
       pageLength: 10,
@@ -46,7 +47,7 @@ $(document).ready(function () {
 
   // Database Page - Initialize DataTable for contacts
   if ($('#contactsTable').length) {
-    console.log('Initializing DataTable for contacts');
+  // (debug log removed)
     $('#contactsTable').DataTable({
       responsive: true,
       pageLength: 5,
@@ -99,7 +100,7 @@ $(document).ready(function () {
 
   // Project List Page - Pagination and filtering functionality
   if ($('#projectsContainer').length) {
-    console.log('Initializing project list functionality');
+  // (debug log removed)
     const projectsPerPage = 6;
     let currentPage = 1;
     let filteredProjects = $('.project-item');
@@ -241,7 +242,7 @@ $(document).ready(function () {
 
   // Joke Page - AJAX functionality
   if ($('#joke-container').length) {
-    console.log('Initializing joke page functionality');
+  // (debug log removed)
     let jokeCount = 0;
 
     window.fetchJoke = function () {
@@ -292,12 +293,14 @@ $(document).ready(function () {
     };
 
     // Auto-load first joke
-    fetchJoke();
+    if (typeof window.fetchJoke === 'function') {
+      window.fetchJoke();
+    }
   }
 
   // DataTable component initialization (for datatable.php)
   if ($('#myTable').length && !$('#dataTable').length && !$('#contactsTable').length) {
-    console.log('Initializing generic DataTable');
+  // (debug log removed)
     $('#myTable').DataTable({
       responsive: true,
       pageLength: 10,
@@ -334,5 +337,5 @@ $(document).ready(function () {
   }
 
   // Add any other custom initialization here
-  console.log('Control Origins Documentation initialized');
+  // (debug log removed)
 });

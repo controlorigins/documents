@@ -6,4 +6,3 @@ import './css/site.scss';
 import './js/vendor.js';
 import './js/custom.js';
 
-console.log('Control Origins Documentation - Assets Loaded');

@@ -6,7 +6,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><?php echo $pageTitle ?? 'Control Origins Documentation'; ?></title>
+    <title><?php echo $pageTitle ?? PHPSPARK_BRAND; ?></title>
+    <?php require_once __DIR__ . '/includes/seo.php'; ?>
     <!-- Compiled and minified CSS -->
     <link href="/assets/css/site.css" rel="stylesheet">
     <!-- Custom CSS -->
@@ -16,10 +17,11 @@
 </head>
 <body>
     <!-- Top Navigation -->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
+    <a href="#main-content" class="visually-hidden-focusable position-absolute top-0 start-0 p-2 bg-dark text-white">Skip to content</a>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top" role="navigation" aria-label="Main navigation">
         <div class="container-fluid">
-            <a class="navbar-brand" href="/">
-                <i class="bi bi-journals me-2"></i>Control Origins Docs
+            <a class="navbar-brand" href="/" aria-label="Home: <?php echo e(PHPSPARK_BRAND); ?>">
+                <i class="bi bi-journals me-2"></i><?php echo e(PHPSPARK_SHORT); ?>
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                 <span class="navbar-toggler-icon"></span>
@@ -68,24 +70,26 @@
     </nav>
 
     <!-- Main Content -->
-    <div class="container-fluid mt-4 mb-5">
+    <main id="main-content" class="container-fluid mt-4 mb-5" role="main">
         <div class="row">
             <!-- Page Content -->
             <div class="col-12">
                 <?php echo $pageContent ?? ''; ?>
             </div>
         </div>
-    </div>
+    </main>
 
     <!-- Footer -->
     <footer class="mt-5">
         <div class="container">
             <div class="row">
                 <div class="col-md-6">
-                    <h5>Control Origins Documentation</h5>
+                    <h5><?php echo e(PHPSPARK_BRAND); ?></h5>
                     <p>
                         <i class="bi bi-link-45deg"></i> 
-                        <a href="https://controlorigins-docs.azurewebsites.net/" class="text-light">Published Website</a>
+                        <a href="https://controlorigins-docs.azurewebsites.net/" class="text-light">Current Hosting (Temporary)</a>
+                        <br>
+                        <a href="<?php echo e(PHPSPARK_SUITE_URL); ?>" class="text-light">Part of the <?php echo e(PHPSPARK_SUITE_NAME); ?> Suite</a>
                     </p>
                 </div>
                 <div class="col-md-6 text-md-end">
@@ -101,7 +105,7 @@
             </div>
             <div class="row mt-3">
                 <div class="col-12 text-center">
-                    <small>© <?php echo date('Y'); ?> Control Origins. All documentation in this repository is proprietary and confidential.</small>
+                    <small>© <?php echo date('Y'); ?> <?php echo e(PHPSPARK_AUTHOR); ?>. Released under the MIT License. <a href="/LICENSE" class="text-decoration-underline text-light">View License</a>.</small>
                 </div>
             </div>
         </div>

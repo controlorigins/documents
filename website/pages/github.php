@@ -1,4 +1,5 @@
 <?php
+require_once __DIR__ . '/../includes/docs.php';
 // Enable error reporting for debugging
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
@@ -18,7 +19,7 @@ function fetchApiData($url, $token = null)
         curl_setopt($ch, CURLOPT_HTTPHEADER, array('Authorization: token ' . $token));
     }
     
-    curl_setopt($ch, CURLOPT_USERAGENT, 'ControlOriginsDocuments');
+    curl_setopt($ch, CURLOPT_USERAGENT, 'PHPDocSpark');
     $response = curl_exec($ch);
     
     // Check for cURL errors
@@ -145,7 +146,7 @@ function formatTime($seconds) {
             <p class="text-light mb-0">Live data from our GitHub repository</p>
         </div>
         <div>
-            <a href="/?file=ChatGPT%252FSessions%252FGitHub%2BAPI%2BAccess%2BPHP.md" class="btn btn-light btn-sm">
+            <a href="<?= doc_pretty_url('ChatGPT/Sessions/GitHub API Access PHP'); ?>" class="btn btn-light btn-sm">
                 <i class="bi bi-info-circle me-1"></i> How this page was created
             </a>
             <a href="https://github.com/controlorigins/documents/blob/main/website/pages/github.php" target="_blank" class="btn btn-light btn-sm">

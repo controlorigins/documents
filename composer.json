@@ -1,20 +1,20 @@
 {
-    "name": "control-origin/documents",
-    "description": "Control Origins Documents",
-    "type": "project",
-    "license": "",
-    "authors": [
-        {
-            "name": "Mark Hazleton",
-            "email": "mark.hazleton@controlorigins.com"
-        }
-    ],
-    "require": {
-        "php": "^8.0"
-    },
-    "autoload": {
-        "psr-4": {
-            "App\\": "website/"
-        }
+  "name": "control-origin/documents",
+  "description": "PHPDocSpark documentation platform by Mark Hazleton",
+  "type": "project",
+  "license": "",
+  "authors": [
+    {
+      "name": "Mark Hazleton",
+      "email": "mark.hazleton@controlorigins.com"
     }
+  ],
+  "require": {
+    "php": "^8.0"
+  },
+  "autoload": {
+    "psr-4": {
+      "App\\": "website/"
+    }
+  }
 }

@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /**
- * Build script for Control Origins Documentation
+ * Build script for PHPDocSpark Documentation Platform
  * Provides detailed logging and error handling for the Vite build process
  */
 
@@ -208,7 +208,7 @@ async function verifyOutput() {
 async function main() {
     const startTime = Date.now();
     
-    log('🚀 Starting Control Origins build process...', 'bright');
+    log('🚀 Starting PHPDocSpark build process...', 'bright');
     
     try {
         await checkFiles();
@@ -231,7 +231,7 @@ async function main() {
 const args = process.argv.slice(2);
 if (args.includes('--help') || args.includes('-h')) {
     console.log(`
-Control Origins Build Script
+PHPDocSpark Build Script
 
 Usage: node scripts/build.js [options]
 

@@ -1,4 +1,5 @@
 <?php
+require_once __DIR__ . '/../includes/docs.php';
 // Database connection
 $db = new PDO('sqlite:data/database.db');
 
@@ -134,7 +135,7 @@ $contacts = read();
             <p class="text-light mb-0">Create, Read, Update and Delete contacts</p>
         </div>
         <div>
-            <a href="/?file=ChatGPT%252FSessions%252FPHP%2BDatabase%2BCRUD.md" class="btn btn-light btn-sm">
+            <a href="<?= doc_pretty_url('ChatGPT/Sessions/PHP Database CRUD'); ?>" class="btn btn-light btn-sm">
                 <i class="bi bi-info-circle me-1"></i> How this page was created
             </a>
             <a href="https://github.com/controlorigins/documents/blob/main/website/pages/database.php" target="_blank" class="btn btn-light btn-sm">

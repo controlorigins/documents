@@ -1,7 +1,7 @@
 {
   "name": "documents",
   "version": "1.0.0",
-  "description": "Documents for Control Origins",
+  "description": "PHPDocSpark documentation platform by Mark Hazleton",
   "main": "index.js",
   "engines": {
     "node": ">=18.0.0",

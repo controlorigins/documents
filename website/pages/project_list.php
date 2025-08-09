@@ -1,4 +1,5 @@
 <?php
+require_once __DIR__ . '/../includes/docs.php';
 // Load projects data
 $jsonFile = 'data/projects.json';
 $projects = [];
@@ -36,7 +37,7 @@ sort($projectLetters);
             <p class="text-light mb-0">Explore our project portfolio</p>
         </div>
         <div>
-            <a href="/?file=ChatGPT%252FSessions%252FCreate%2BPHP%2BProject%2BTable.md" class="btn btn-light btn-sm">
+            <a href="<?= doc_pretty_url('ChatGPT/Sessions/Create PHP Project Table'); ?>" class="btn btn-light btn-sm">
                 <i class="bi bi-info-circle me-1"></i> How this page was created
             </a>
             <a href="https://github.com/controlorigins/documents/blob/main/website/pages/project_list.php" target="_blank" class="btn btn-light btn-sm">
