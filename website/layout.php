@@ -7,115 +7,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?php echo $pageTitle ?? 'Control Origins Documentation'; ?></title>
-    <!-- Bootstrap 5 CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Bootstrap Icons -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
-    <!-- DataTables Bootstrap 5 Integration -->
-    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/dataTables.bootstrap5.min.css">
+    <!-- Compiled and minified CSS -->
+    <link href="/assets/css/site.css" rel="stylesheet">
     <!-- Custom CSS -->
     <style>
-        :root {
-            --primary-color: #0d6efd;
-            --secondary-color: #6c757d;
-            --accent-color: #ffc107;
-            --light-bg: #f8f9fa;
-            --dark-bg: #212529;
-        }
-        
-        /* Sidebar styles */
-        .sidebar {
-            min-height: 100vh;
-            border-right: 1px solid #dee2e6;
-        }
-        
-        /* Custom card styling */
-        .card {
-            border-radius: 10px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s ease;
-        }
-        
-        .card:hover {
-            transform: translateY(-5px);
-        }
-        
-        .card-header {
-            background: linear-gradient(to right, var(--primary-color), #0b5ed7);
-            color: white;
-            border-radius: 10px 10px 0 0 !important;
-            padding: 1.25rem;
-        }
-        
-        .card-footer {
-            background-color: var(--light-bg);
-            border-radius: 0 0 10px 10px !important;
-        }
-        
-        /* Navbar customization */
-        .navbar-brand {
-            font-weight: 700;
-            font-size: 1.5rem;
-        }
-        
-        /* Button styling */
-        .btn-primary {
-            background-color: var(--primary-color);
-            border-color: var(--primary-color);
-            padding: 0.5rem 1.25rem;
-            border-radius: 5px;
-            font-weight: 500;
-        }
-        
-        .btn-primary:hover {
-            background-color: #0b5ed7;
-            border-color: #0a58ca;
-        }
-        
-        /* Table styling */
-        .table {
-            border-radius: 8px;
-            overflow: hidden;
-        }
-        
-        /* Custom thumbnail image size */
-        .thumbnail-img {
-            max-width: 100px;
-            max-height: 80px;
-            object-fit: cover;
-        }
-        
-        /* Footer styling */
-        footer {
-            background-color: var(--dark-bg);
-            color: white;
-            padding: 1.5rem 0;
-        }
-        
-        /* Animation effects */
-        .fade-in {
-            animation: fadeIn 0.5s ease-in;
-        }
-        
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-
-        /* Navigation pills */
-        .nav-pills .nav-link.active {
-            background-color: var(--primary-color);
-        }
-        
-        /* Responsive adjustments */
-        @media (max-width: 768px) {
-            .sidebar {
-                min-height: auto;
-                border-right: none;
-                border-bottom: 1px solid #dee2e6;
-                margin-bottom: 1rem;
-            }
-        }
+        /* Any page-specific inline styles can go here if needed */
     </style>
 </head>
 <body>
@@ -141,8 +37,8 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/?page=chart">
-                            <i class="bi bi-bar-chart me-1"></i> Charts
+                        <a class="nav-link" href="/?page=database">
+                            <i class="bi bi-database me-1"></i> Database
                         </a>
                     </li>
                     <li class="nav-item">
@@ -153,11 +49,6 @@
                     <li class="nav-item">
                         <a class="nav-link" href="/?page=github">
                             <i class="bi bi-github me-1"></i> GitHub
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/?page=crud">
-                            <i class="bi bi-database me-1"></i> CRUD
                         </a>
                     </li>
                     <li class="nav-item">
@@ -216,23 +107,7 @@
         </div>
     </footer>
 
-    <!-- JavaScript Libraries -->
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
-    <script src="https://cdn.datatables.net/1.13.4/js/dataTables.bootstrap5.min.js"></script>
-    
-    <!-- DataTables Initialization Script -->
-    <script>
-        $(document).ready(function() {
-            if ($('#myTable').length) {
-                $('#myTable').DataTable({
-                    responsive: true,
-                    pageLength: 10,
-                    lengthMenu: [[5, 10, 25, 50, -1], [5, 10, 25, 50, "All"]]
-                });
-            }
-        });
-    </script>
+    <!-- Compiled and minified JavaScript -->
+    <script src="/assets/js/site.js"></script>
 </body>
 </html>

@@ -81,62 +81,6 @@
     </div>
 </div>
 
-<script type="text/javascript">
-    let jokeCount = 0;
-    
-    function fetchJoke() {
-        // Show loading spinner
-        document.getElementById('joke-container').innerHTML = `
-            <div class="d-flex justify-content-center">
-                <div class="spinner-border text-primary" role="status">
-                    <span class="visually-hidden">Loading...</span>
-                </div>
-            </div>
-        `;
-        
-        // Fetch joke with AJAX
-        $.ajax({
-            url: 'pages/fetch_joke.php',
-            method: 'GET',
-            success: function(response) {
-                jokeCount++;
-                
-                // Add animation class
-                const jokeContainer = $('#joke-container');
-                jokeContainer.fadeOut(200, function() {
-                    // Update content
-                    jokeContainer.html(`
-                        <div class="text-center">
-                            <div class="joke-content">
-                                ${response}
-                            </div>
-                            <div class="mt-3 text-muted">
-                                <small>Joke #${jokeCount}</small>
-                            </div>
-                        </div>
-                    `);
-                    
-                    // Fade back in
-                    jokeContainer.fadeIn(200);
-                });
-            },
-            error: function() {
-                $('#joke-container').html(`
-                    <div class="alert alert-danger">
-                        <i class="bi bi-exclamation-triangle me-2"></i>
-                        Oops! Failed to fetch a joke. Please try again later.
-                    </div>
-                `);
-            }
-        });
-    }
-
-    // Use window.onload to ensure jQuery is loaded
-    window.onload = function() {
-        fetchJoke();
-    };
-</script>
-
 <style>
     .joke-card {
         box-shadow: 0 6px 10px rgba(0,0,0,0.08);

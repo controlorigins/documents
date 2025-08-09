@@ -1,10 +1,17 @@
 <?php
+// Enable error reporting for debugging
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+
 // GitHub API integration functions
 function fetchApiData($url, $token = null)
 {
     $ch = curl_init();
     curl_setopt($ch, CURLOPT_URL, $url);
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+    curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+    curl_setopt($ch, CURLOPT_TIMEOUT, 10);
+    curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
     
     // Add authorization header if token is provided
     if ($token) {
@@ -13,8 +20,32 @@ function fetchApiData($url, $token = null)
     
     curl_setopt($ch, CURLOPT_USERAGENT, 'ControlOriginsDocuments');
     $response = curl_exec($ch);
+    
+    // Check for cURL errors
+    if (curl_error($ch)) {
+        error_log('cURL Error: ' . curl_error($ch));
+        curl_close($ch);
+        return null;
+    }
+    
+    $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
     curl_close($ch);
-    return json_decode($response, true);
+    
+    // Check HTTP response code
+    if ($httpCode !== 200) {
+        error_log('HTTP Error: ' . $httpCode . ' for URL: ' . $url);
+        return null;
+    }
+    
+    $data = json_decode($response, true);
+    
+    // Check for JSON decode errors
+    if (json_last_error() !== JSON_ERROR_NONE) {
+        error_log('JSON Error: ' . json_last_error_msg());
+        return null;
+    }
+    
+    return $data;
 }
 
 // Cache settings
@@ -23,18 +54,46 @@ $cacheFile = 'data/commits_cache.json';
 $cacheTime = 60 * 60; // 1 hour
 $repo = 'controlorigins/documents';
 
+$debugMode = false; // Set to false in production
+
 // Check if cache is valid
-if (file_exists($cacheFile) && (time() - filemtime($cacheFile) < $cacheTime)) {
+$cacheIsValid = file_exists($cacheFile) && (time() - filemtime($cacheFile) < $cacheTime);
+$freshDataNeeded = !$cacheIsValid;
+
+if ($debugMode) {
+    echo "<!-- Debug: Cache file exists: " . (file_exists($cacheFile) ? 'Yes' : 'No') . " -->\n";
+    echo "<!-- Debug: Cache valid: " . ($cacheIsValid ? 'Yes' : 'No') . " -->\n";
+    echo "<!-- Debug: Fresh data needed: " . ($freshDataNeeded ? 'Yes' : 'No') . " -->\n";
+}
+
+if ($cacheIsValid) {
     $cachedData = json_decode(file_get_contents($cacheFile), true);
+    if ($debugMode) {
+        echo "<!-- Debug: Using cached data -->\n";
+    }
 } else {
+    if ($debugMode) {
+        echo "<!-- Debug: Fetching fresh data from GitHub API -->\n";
+    }
+    
     // Fetch fresh data from GitHub API
     $repoInfo = fetchApiData("https://api.github.com/repos/{$repo}", $token);
     $commits = fetchApiData("https://api.github.com/repos/{$repo}/commits?per_page=5", $token);
     $contributors = fetchApiData("https://api.github.com/repos/{$repo}/contributors?per_page=10", $token);
     
-    // Fetch commit details
-    foreach ($commits as &$commit) {
-        $commit['details'] = fetchApiData($commit['url'], $token);
+    if ($debugMode) {
+        echo "<!-- Debug: Repo info: " . ($repoInfo ? 'Success' : 'Failed') . " -->\n";
+        echo "<!-- Debug: Commits: " . ($commits ? count($commits) . ' found' : 'Failed') . " -->\n";
+        echo "<!-- Debug: Contributors: " . ($contributors ? count($contributors) . ' found' : 'Failed') . " -->\n";
+    }
+    
+    // Fetch commit details (but only if commits were successfully retrieved)
+    if ($commits && is_array($commits)) {
+        foreach ($commits as &$commit) {
+            if (isset($commit['url'])) {
+                $commit['details'] = fetchApiData($commit['url'], $token);
+            }
+        }
     }
     
     // Cache the data
@@ -45,7 +104,17 @@ if (file_exists($cacheFile) && (time() - filemtime($cacheFile) < $cacheTime)) {
         'timestamp' => time()
     ];
     
-    file_put_contents($cacheFile, json_encode($cachedData));
+    // Only cache if we have at least some data
+    if ($repoInfo || $commits || $contributors) {
+        file_put_contents($cacheFile, json_encode($cachedData));
+        if ($debugMode) {
+            echo "<!-- Debug: Data cached successfully -->\n";
+        }
+    } else {
+        if ($debugMode) {
+            echo "<!-- Debug: No data to cache - API calls may have failed -->\n";
+        }
+    }
 }
 
 // Helper function to format date
@@ -62,9 +131,9 @@ $cacheDate = date('F j, Y g:i A', ($cachedData['timestamp'] ?? filemtime($cacheF
 // Format cache time
 function formatTime($seconds) {
     return sprintf('%02d:%02d:%02d', 
-        floor($seconds / 3600), 
-        floor(($seconds / 60) % 60), 
-        $seconds % 60
+        (int)floor($seconds / 3600), 
+        (int)floor(($seconds / 60) % 60), 
+        (int)($seconds % 60)
     );
 }
 ?>

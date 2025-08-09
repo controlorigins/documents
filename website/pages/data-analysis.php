@@ -290,33 +290,3 @@ if (is_dir($folderPath)) {
         </div>
     </div>
 </div>
-
-<script>
-    $(document).ready(function() {
-        if ($('#dataTable').length) {
-            $('#dataTable').DataTable({
-                responsive: true,
-                pageLength: 10,
-                lengthMenu: [[5, 10, 25, 50, -1], [5, 10, 25, 50, "All"]],
-                dom: 'Bfrtip',
-                buttons: [
-                    {
-                        extend: 'collection',
-                        text: '<i class="bi bi-download"></i> Export',
-                        buttons: [
-                            'csv',
-                            'excel',
-                            'pdf'
-                        ]
-                    },
-                    'colvis'
-                ]
-            });
-        }
-        
-        // Auto-submit when a different CSV file is selected
-        $('input[name="csvFile"]').change(function() {
-            $('#csvSelectForm').submit();
-        });
-    });
-</script>

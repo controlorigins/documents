@@ -1,0 +1,6 @@
+// Main SCSS file - imports all styles
+// Import vendor CSS
+@use './vendor.scss';
+
+// Import custom styles
+@use './custom.scss';

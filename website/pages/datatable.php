@@ -23,38 +23,3 @@
         </tbody>
     </table>
 </div>
-
-<script>
-    $(document).ready(function() {
-        $('#myTable').DataTable({
-            responsive: true,
-            pageLength: 10,
-            lengthMenu: [[5, 10, 25, 50, -1], [5, 10, 25, 50, "All"]],
-            dom: 'Bfrtip',
-            buttons: [
-                {
-                    extend: 'collection',
-                    text: '<i class="bi bi-download"></i> Export',
-                    buttons: [
-                        {
-                            extend: 'csv',
-                            text: '<i class="bi bi-filetype-csv"></i> CSV'
-                        },
-                        {
-                            extend: 'excel',
-                            text: '<i class="bi bi-filetype-xlsx"></i> Excel'
-                        },
-                        {
-                            extend: 'pdf',
-                            text: '<i class="bi bi-filetype-pdf"></i> PDF'
-                        }
-                    ]
-                },
-                {
-                    extend: 'colvis',
-                    text: '<i class="bi bi-eye"></i> Columns'
-                }
-            ]
-        });
-    });
-</script>

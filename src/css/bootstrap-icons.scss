@@ -1,0 +1,19 @@
+// Bootstrap Icons CSS classes 
+// Base styles for icons (overriding the ones from the CSS file)
+.bi::before,
+[class^="bi-"]::before,
+[class*=" bi-"]::before {
+  display: inline-block;
+  font-family: "bootstrap-icons" !important;
+  font-style: normal;
+  font-weight: normal !important;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+  vertical-align: -.125em;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+// Include all the icon definitions (without the problematic font-face)
+@import './bootstrap-icons-content.scss';

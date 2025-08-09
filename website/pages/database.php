@@ -137,7 +137,7 @@ $contacts = read();
             <a href="/?file=ChatGPT%252FSessions%252FPHP%2BDatabase%2BCRUD.md" class="btn btn-light btn-sm">
                 <i class="bi bi-info-circle me-1"></i> How this page was created
             </a>
-            <a href="https://github.com/controlorigins/documents/blob/main/website/pages/crud.php" target="_blank" class="btn btn-light btn-sm">
+            <a href="https://github.com/controlorigins/documents/blob/main/website/pages/database.php" target="_blank" class="btn btn-light btn-sm">
                 <i class="bi bi-code-slash me-1"></i> View Source
             </a>
         </div>
@@ -342,50 +342,3 @@ $contacts = read();
         </div>
     </div>
 </div>
-
-<script>
-    // Initialize DataTable
-    document.addEventListener('DOMContentLoaded', function() {
-        if (document.getElementById('contactsTable')) {
-            $('#contactsTable').DataTable({
-                responsive: true,
-                pageLength: 5,
-                lengthMenu: [[5, 10, 25, -1], [5, 10, 25, "All"]]
-            });
-        }
-        
-        // Handle edit button clicks
-        const editButtons = document.querySelectorAll('.edit-btn');
-        const editModal = new bootstrap.Modal(document.getElementById('editContactModal'));
-        
-        editButtons.forEach(button => {
-            button.addEventListener('click', function() {
-                const id = this.getAttribute('data-id');
-                const name = this.getAttribute('data-name');
-                const email = this.getAttribute('data-email');
-                
-                document.getElementById('edit-id').value = id;
-                document.getElementById('edit-name').value = name;
-                document.getElementById('edit-email').value = email;
-                
-                editModal.show();
-            });
-        });
-        
-        // Handle refresh button
-        const refreshButton = document.getElementById('refreshTable');
-        if (refreshButton) {
-            refreshButton.addEventListener('click', function() {
-                window.location.reload();
-            });
-        }
-        
-        // Auto-dismiss alerts after 5 seconds
-        setTimeout(function() {
-            const alerts = document.querySelectorAll('.alert-dismissible');
-            alerts.forEach(alert => {
-                bootstrap.Alert.getOrCreateInstance(alert).close();
-            });
-        }, 5000);
-    });
-</script>

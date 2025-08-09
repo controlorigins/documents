@@ -188,4 +188,4 @@ php -r "try { new PDO('sqlite:data/database.db'); echo 'SQLite OK'; } catch(Exce
 
 ---
 
-**Remember**: This project structure requires the web server to run from the `/website` directory to properly serve files and handle routing. Always check for existing terminals before creating new ones.
+**Remember**: This project structure requires the web server to run from the `/website` directory to properly serve files and handle routing. Always check for existing terminals before creating new ones. NEVER start the web server in any other directory, it MUST be /website. 

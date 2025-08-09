@@ -8,10 +8,9 @@ $page = $_GET['page'] ?? 'document_view'; // Default page
 $validPages = [
     'document_view',
     'data-analysis',
-    'chart',
+    'database',
     'project_list',
     'github',
-    'crud',
     'joke',
     'search',
     '404'
@@ -26,10 +25,9 @@ if (!in_array($page, $validPages)) {
 $pageTitles = [
     'document_view' => 'Document Viewer',
     'data-analysis' => 'CSV File Analysis',
-    'chart' => 'Interactive Charting',
+    'database' => 'Database CRUD Operations',
     'project_list' => 'Projects List',
     'github' => 'GitHub Repository Info',
-    'crud' => 'Database CRUD',
     'joke' => 'Random Jokes',
     'search' => 'Search Documents',
     '404' => 'Page Not Found'

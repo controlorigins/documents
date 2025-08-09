@@ -4,10 +4,27 @@
   "description": "Documents for Control Origins",
   "main": "index.js",
   "scripts": {
+    "dev": "vite build --watch",
+    "build": "node scripts/build.js",
+    "start": "npm run clean && npm run build && npm run serve",
+    "serve": "php -S localhost:8001 -t website",
+    "clean": "rimraf website/assets/css website/assets/js website/assets/images",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Mark Hazleton",
   "license": "MIT",
   "dependencies": {
+    "bootstrap": "^5.3.2",
+    "bootstrap-icons": "^1.11.2",
+    "datatables.net": "^1.13.7",
+    "datatables.net-bs5": "^1.13.7",
+    "jquery": "^3.7.1"
+  },
+  "devDependencies": {
+    "postcss": "^8.5.6",
+    "rimraf": "^5.0.5",
+    "sass": "^1.69.5",
+    "terser": "^5.43.1",
+    "vite": "^5.0.6"
   }
 }
