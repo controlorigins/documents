@@ -115,7 +115,7 @@ if (isset($_GET['file'])) {
             <h2 class="mb-0">
                 <i class="bi bi-file-earmark-text me-2"></i>Document Viewer
                 <!-- Permanent Toggle Navigator button -->
-                <button type="button" class="btn btn-outline-primary btn-sm ms-3" id="toggleNavigatorHeader" title="Toggle Navigator">
+                <button type="button" class="btn btn-light btn-sm ms-3" id="toggleNavigatorHeader" title="Toggle Navigator">
                     <i class="bi bi-layout-sidebar me-1"></i> <span id="toggleNavigatorText">Hide Navigator</span>
                 </button>
             </h2>

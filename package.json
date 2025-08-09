@@ -36,15 +36,15 @@
     "sass": "^1.90.0",
     "terser": "^5.43.1",
     "vite": "^7.1.1",
-    "concurrently": "^9.1.0",
-    "eslint": "^9.15.0",
-    "@eslint/js": "^9.15.0",
-    "eslint-config-prettier": "^9.1.0",
-    "prettier": "^3.3.3",
-    "stylelint": "^16.10.0",
-    "stylelint-config-standard-scss": "^13.1.0",
+    "concurrently": "^9.2.0",
+    "eslint": "^9.33.0",
+    "@eslint/js": "^9.33.0",
+    "eslint-config-prettier": "^10.1.8",
+    "prettier": "^3.6.2",
+    "stylelint": "^16.23.1",
+    "stylelint-config-standard-scss": "^15.0.1",
     "husky": "^9.1.7",
-    "lint-staged": "^15.2.10",
-    "@types/node": "^22.10.2"
+    "lint-staged": "^16.1.5",
+    "@types/node": "^24.2.1"
   }
 }
