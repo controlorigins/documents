@@ -39,8 +39,9 @@
                 .join(' ');
             });
             const filePath = convertedSegments.join('/') + '.md';
-            
-            const newUrl = '/index.php?page=document_view&file=' + encodeURIComponent(filePath) + hash;
+
+            const newUrl =
+              '/index.php?page=document_view&file=' + encodeURIComponent(filePath) + hash;
             console.log('Doc file redirect to:', newUrl, 'File:', filePath);
             window.location.replace(newUrl);
           }
