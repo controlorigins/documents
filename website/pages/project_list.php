@@ -1,12 +1,72 @@
 <?php
 require_once __DIR__ . '/../includes/docs.php';
-// Load projects data
-$jsonFile = 'data/projects.json';
-$projects = [];
 
-if (file_exists($jsonFile)) {
-    $jsonData = file_get_contents($jsonFile);
-    $projects = json_decode($jsonData, true) ?? [];
+// Load projects data from remote URL
+$projectsUrl = 'https://markhazleton.com/projects.json';
+$localJsonFile = 'data/projects.json'; // Fallback local file
+$projects = [];
+$error = '';
+$dataSource = ''; // Track data source for display
+
+// Function to fetch projects from remote URL
+function fetchProjectsFromUrl($url) {
+    $ch = curl_init();
+    curl_setopt($ch, CURLOPT_URL, $url);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    curl_setopt($ch, CURLOPT_TIMEOUT, 10);
+    curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
+    curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false); // Disable SSL peer verification for local dev
+    curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0); // Disable SSL host verification for local dev
+    curl_setopt($ch, CURLOPT_USERAGENT, 'PHPDocSpark/1.0');
+    
+    $response = curl_exec($ch);
+    $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+    $curlError = curl_error($ch);
+    curl_close($ch);
+    
+    if ($curlError) {
+        return ['error' => 'cURL Error: ' . $curlError, 'data' => false];
+    }
+    
+    if ($httpCode !== 200) {
+        return ['error' => 'HTTP Error: ' . $httpCode, 'data' => false];
+    }
+    
+    return ['error' => '', 'data' => $response];
+}
+
+// Try to fetch from remote URL first
+$remoteResult = fetchProjectsFromUrl($projectsUrl);
+
+if ($remoteResult['data'] !== false) {
+    $projects = json_decode($remoteResult['data'], true) ?? [];
+    if (json_last_error() !== JSON_ERROR_NONE) {
+        $error = 'JSON decode error: ' . json_last_error_msg();
+        $projects = [];
+        $dataSource = 'Remote (failed)';
+    } else {
+        $dataSource = 'Remote';
+        // Convert relative image paths to absolute URLs for remote data
+        $baseUrl = 'https://markhazleton.com/';
+        foreach ($projects as &$project) {
+            if (isset($project['image']) && !filter_var($project['image'], FILTER_VALIDATE_URL)) {
+                $project['image'] = $baseUrl . ltrim($project['image'], '/');
+            }
+        }
+        unset($project); // Break the reference
+    }
+} else {
+    $error = $remoteResult['error'];
+    
+    // Fallback to local file if remote fetch fails
+    if (file_exists($localJsonFile)) {
+        $jsonData = file_get_contents($localJsonFile);
+        $projects = json_decode($jsonData, true) ?? [];
+        $error .= ' (Using local fallback data)';
+        $dataSource = 'Local (fallback)';
+    } else {
+        $dataSource = 'None (no data available)';
+    }
 }
 
 // Group projects by first letter for filtering
@@ -107,7 +167,12 @@ sort($projectLetters);
         
         <?php else: ?>
         <div class="alert alert-warning">
-            <i class="bi bi-exclamation-triangle me-2"></i> No projects found. Please check the JSON data file.
+            <i class="bi bi-exclamation-triangle me-2"></i> 
+            Unable to load projects data. 
+            <?php if (!empty($error)): ?>
+                <br><small class="text-muted">Error: <?php echo htmlspecialchars($error); ?></small>
+            <?php endif; ?>
+            Please try refreshing the page.
         </div>
         <?php endif; ?>
     </div>
@@ -122,6 +187,20 @@ sort($projectLetters);
                     <i class="bi bi-github me-1"></i> View GitHub Repository
                 </a>
             </div>
+        </div>
+        <div class="mt-2 text-center">
+            <small class="text-muted">
+                <i class="bi bi-<?php echo ($dataSource === 'Remote') ? 'cloud-check' : (($dataSource === 'Local (fallback)') ? 'hdd' : 'exclamation-triangle'); ?> me-1"></i>
+                Data source: 
+                <span class="<?php echo ($dataSource === 'Remote') ? 'text-success' : (($dataSource === 'Local (fallback)') ? 'text-warning' : 'text-danger'); ?>">
+                    <?php echo htmlspecialchars($dataSource); ?>
+                </span>
+                <?php if ($dataSource === 'Remote'): ?>
+                    <span class="text-muted">- markhazleton.com/projects.json</span>
+                <?php elseif ($dataSource === 'Local (fallback)'): ?>
+                    <span class="text-muted">- data/projects.json</span>
+                <?php endif; ?>
+            </small>
         </div>
     </div>
 </div>
