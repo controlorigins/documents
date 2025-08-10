@@ -167,6 +167,41 @@ code:not([class*="language-"]) {
   font-size: 0.875em;
 }
 
+// Basic syntax highlighting for code blocks (fallback when PrismJS is disabled)
+pre code {
+  background-color: #f8f9fa;
+  padding: 1rem;
+  border-radius: 5px;
+  border: 1px solid var(--border-color);
+  display: block;
+  overflow-x: auto;
+  
+  // PHP syntax highlighting classes
+  .php-tag {
+    color: #007bff;
+    font-weight: bold;
+  }
+  
+  .php-variable {
+    color: #e83e8c;
+    font-weight: 600;
+  }
+  
+  .php-keyword {
+    color: var(--primary-color);
+    font-weight: bold;
+  }
+  
+  .php-string {
+    color: #28a745;
+  }
+  
+  .php-comment {
+    color: #6c757d;
+    font-style: italic;
+  }
+}
+
 // Links with PHP theme
 a {
   color: var(--primary-color);

@@ -9,24 +9,49 @@ import * as bootstrap from 'bootstrap';
 import 'datatables.net';
 import 'datatables.net-bs5';
 
+// PrismJS implementation following official best practices
+// Set manual mode to prevent auto-highlighting before bundle is ready
+window.Prism = window.Prism || {};
+window.Prism.manual = true;
+
 // Import PrismJS core
 import Prism from 'prismjs';
 
-// Import PrismJS language components
+// Import language components in the correct dependency order
+import 'prismjs/components/prism-markup-templating';  // Required for PHP
 import 'prismjs/components/prism-php';
-import 'prismjs/components/prism-javascript';
+import 'prismjs/components/prism-javascript'; 
 import 'prismjs/components/prism-css';
-import 'prismjs/components/prism-markup'; // HTML/XML
 import 'prismjs/components/prism-json';
-import 'prismjs/components/prism-bash';
 import 'prismjs/components/prism-sql';
+import 'prismjs/components/prism-bash';
 
-// Import PrismJS plugins for enhanced functionality
+// Import essential plugins (avoiding tokenizePlaceholders dependencies)
 import 'prismjs/plugins/line-numbers/prism-line-numbers';
-import 'prismjs/plugins/copy-to-clipboard/prism-copy-to-clipboard';
-import 'prismjs/plugins/toolbar/prism-toolbar';
+import 'prismjs/plugins/normalize-whitespace/prism-normalize-whitespace';
 
-// Make jQuery, Bootstrap, and Prism globally available for any inline scripts
+// Make jQuery and Bootstrap globally available for any inline scripts
 window.$ = window.jQuery = $;
 window.bootstrap = bootstrap;
+
+// Make Prism globally available
 window.Prism = Prism;
+
+// Initialize PrismJS when DOM is ready with proper configuration
+$(document).ready(function() {
+    // Configure normalize-whitespace plugin
+    Prism.plugins.NormalizeWhitespace.setDefaults({
+        'remove-trailing': true,
+        'remove-indent': true,
+        'left-trim': true,
+        'right-trim': true,
+        'break-lines': 80,
+        'indent': 2,
+        'remove-initial-line-feed': false,
+        'tabs-to-spaces': 4,
+        'spaces-to-tabs': 0
+    });
+    
+    // Manual highlighting of all code blocks
+    Prism.highlightAll();
+});

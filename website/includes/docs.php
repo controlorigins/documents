@@ -55,24 +55,40 @@ if (!defined('PHPSPARK_DOCS_INITIALIZED')) {
     function doc_lookup_file_by_slug(string $slugPath): ?string {
         global $DOCS_SLUG_TO_FILE, $DOCS_ROOT_DIR;
         if (isset($DOCS_SLUG_TO_FILE[$slugPath])) return $DOCS_SLUG_TO_FILE[$slugPath];
-        // heuristic search
+        
+        // Only do heuristic search if the exact slug path wasn't found
+        // This prevents false matches like '/doc/seo' matching 'Project/SEO.md'
         $segments = explode('/', $slugPath);
-        $searchBase = $DOCS_ROOT_DIR; $relParts = [];
+        $searchBase = $DOCS_ROOT_DIR; 
+        $relParts = [];
+        
         foreach ($segments as $seg) {
             $found = null;
+            if (!is_dir($searchBase)) return null; // Path doesn't exist
+            
             foreach (scandir($searchBase) as $entry) {
                 if ($entry==='.'||$entry==='..') continue;
                 $full = $searchBase . '/' . $entry;
                 $candidateSeg = is_dir($full)? $entry : preg_replace('/\.md$/i','',$entry);
-                if (doc_slugify_segment($candidateSeg) === $seg) { $found = $entry; break; }
+                if (doc_slugify_segment($candidateSeg) === $seg) { 
+                    $found = $entry; 
+                    break; 
+                }
             }
-            if ($found===null) return null;
+            if ($found===null) return null; // Segment not found at this level
             $relParts[] = $found;
             $searchBase .= '/' . $found;
         }
+        
         $relative = implode('/', $relParts);
         if (!str_ends_with(strtolower($relative), '.md')) $relative .= '.md';
-        return $relative;
+        
+        // Verify the file actually exists before returning
+        if (is_file($DOCS_ROOT_DIR . '/' . $relative)) {
+            return $relative;
+        }
+        
+        return null;
     }
 }
 ?>
