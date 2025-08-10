@@ -1,27 +1,33 @@
-# 🚀 Modern PHP Documentation Platform
+# 🚀 PHPDocSpark: Modern PHP Documentation & Data Platform
 
-## *A World-Class Reference Implementation*
+## *A Comprehensive Reference Implementation*
 
-Welcome to **PHPDocSpark by Mark Hazleton** – a cutting-edge demonstration of how traditional PHP applications can seamlessly integrate with modern frontend build systems to create exceptional web experiences. (Legacy references to controlorigins remain in URLs / repo slug for continuity.)
+Welcome to **PHPDocSpark by Mark Hazleton** – a sophisticated demonstration of how traditional PHP applications can seamlessly integrate with modern frontend build systems to create exceptional web experiences. This project serves as both a functional platform and an educational resource showcasing contemporary PHP development practices.
 
 [![Live Demo](https://img.shields.io/badge/🌐_Live_Demo-phpdocspark.azurewebsites.net-blue?style=flat-square)](https://phpdocspark.azurewebsites.net/)
+[![Canonical](https://img.shields.io/badge/Canonical-phpdocspark.markhazleton.com-orange?style=flat-square)](https://phpdocspark.markhazleton.com)
 [![GitHub](https://img.shields.io/badge/📦_Source_Code-GitHub-black?style=flat-square)](https://github.com/markhazleton/PHPDocSpark)
 [![PHP](https://img.shields.io/badge/PHP-8.2+-777BB4?style=flat-square&logo=php&logoColor=white)](https://php.net)
+[![Node.js](https://img.shields.io/badge/Node.js-18+-339933?style=flat-square&logo=node.js&logoColor=white)](https://nodejs.org)
 [![Vite](https://img.shields.io/badge/Vite-7.1+-646CFF?style=flat-square&logo=vite&logoColor=white)](https://vitejs.dev)
+[![Bootstrap](https://img.shields.io/badge/Bootstrap-5.3-7952B3?style=flat-square&logo=bootstrap&logoColor=white)](https://getbootstrap.com)
 
 ---
 
-## 🎯 Why This Project Matters
+## 🎯 Project Mission & Vision
 
-This isn't just another documentation site – it's a **comprehensive blueprint** for building modern PHP applications that rival contemporary JavaScript frameworks in developer experience while maintaining PHP's strengths in content management and server-side logic.
+This isn't just another documentation site – it's a **comprehensive blueprint** for building modern PHP applications that rival contemporary JavaScript frameworks in developer experience while maintaining PHP's proven strengths in content management, server-side logic, and database integration.
 
-### **🏆 World-Class Architecture Showcase**
+**Part of the WebSpark Suite** - A collection of educational projects demonstrating modern web development patterns and best practices across different technologies and frameworks.
 
-- **🔥 Hybrid Excellence**: PHP backend + Vite frontend = Best of both worlds
-- **⚡ Lightning Performance**: Sub-second builds, optimized assets, intelligent caching
-- **📱 Mobile-First Design**: Bootstrap 5 with custom SCSS compilation
-- **🔍 Advanced Features**: Full-text search, data visualization, API integration
-- **🚀 Production Ready**: Azure DevOps CI/CD, automated deployment
+### **🏆 Architecture Excellence Showcase**
+
+- **🔥 Hybrid Development**: PHP 8.2+ backend with Vite 7.1+ frontend pipeline
+- **⚡ Performance Optimized**: Sub-4-second builds, 85% asset compression, intelligent caching
+- **📱 Mobile-First Design**: Bootstrap 5.3 with custom SCSS compilation and responsive layouts
+- **🔍 Advanced Features**: Full-text search, interactive data visualization, external API integration
+- **🚀 Production Ready**: Azure DevOps CI/CD pipeline with automated deployment and health monitoring
+- **🤖 AI-Enhanced**: GitHub Copilot instructions and AI-assisted development workflows
 
 ---
 
@@ -178,47 +184,53 @@ Explore detailed guides and best practices:
 - **[🔀 Git Workflow](assets/markdown/Git/)** - Version control best practices
 - **[🤖 AI Integration](assets/markdown/ChatGPT/)** - AI-assisted development workflows
 
-### **🛠️ Live Code Examples**
+### **🛠️ Live Feature Demonstrations**
 
-**Every feature is a learning opportunity:**
+**Every component serves as a hands-on learning example:**
 
-| Feature | Technology Demo | Learning Focus |
-|---------|----------------|----------------|
-| **[📊 Data Analysis](/documents/?page=data-analysis)** | CSV processing, statistics | Data handling, visualization |
-| **[🔍 Search System](/documents/?page=search)** | Full-text indexing | Search algorithms, performance |
-| **[🗄️ Database CRUD](/documents/?page=database)** | SQLite operations | Database design, security |
-| **[📱 Project Portfolio](/documents/?page=project_list)** | JSON-driven UI | Dynamic content, filtering |
-| **[🔗 GitHub Integration](/documents/?page=github)** | API consumption | External services, caching |
+| Feature | Technology Stack | Educational Value |
+|---------|-----------------|------------------|
+| **[� Document Viewer](/?page=document_view)** | PHP + Parsedown + Dynamic Navigation | Markdown processing, folder scanning, SEO-friendly URLs |
+| **[�📊 Data Analysis](/?page=data-analysis)** | CSV processing + Chart.js + Statistics | Data handling, visualization, statistical analysis |
+| **[🔍 Full-Text Search](/?page=search)** | File indexing + Relevance scoring | Search algorithms, performance optimization, caching |
+| **[🗄️ Database CRUD](/?page=database)** | SQLite + PDO + Bootstrap Modals | Database operations, security, user interface design |
+| **[📱 Project Portfolio](/?page=project_list)** | JSON API + Responsive Cards + Filtering | Dynamic content, remote data integration, responsive design |
+| **[📝 Article Feed](/?page=article_list)** | RSS parsing + Pagination + Category filtering | XML processing, server-side pagination, content management |
+| **[🔗 GitHub Integration](/?page=github)** | GitHub API + Caching + Error Handling | External APIs, rate limiting, graceful degradation |
+| **[😄 API Demo](/?page=joke)** | JokeAPI + AJAX + Session tracking | API consumption, client-server interaction, state management |
 
 ---
 
 ## 🚀 Get Started in Minutes
 
-### **🏃‍♂️ Quick Start**
+### **🏃‍♂️ Quick Start Guide**
 
-~~~bash
+```bash
 # Clone the repository
 git clone https://github.com/markhazleton/PHPDocSpark.git
-cd documents
+cd PHPDocSpark
 
 # Install dependencies  
-npm install
-composer install
+npm install      # Frontend dependencies (Vite, Bootstrap, etc.)
+composer install # PHP dependencies (minimal - mostly for autoloading)
 
-# Start development server
-npm run dev:serve
+# Start development environment
+npm run dev:serve # Builds assets with file watching + starts PHP server
 
 # Open browser to http://localhost:8001
-~~~
+```
 
 ### **🔧 Development Commands**
 
 | Command | Purpose | Use Case |
 |---------|---------|----------|
-| `npm run dev:serve` | **Full development** | Primary development workflow |
-| `npm run build` | **Production build** | Deployment preparation |  
-| `npm run format` | **Code formatting** | Pre-commit cleanup |
-| `npm run lint:js` | **JavaScript quality** | Code review preparation |
+| `npm run dev:serve` | **Full development server** | Primary development workflow with asset watching |
+| `npm run dev` | **Asset build with watching** | Frontend-only development |
+| `npm run build` | **Production build** | Pre-deployment asset optimization |  
+| `npm run serve` | **PHP server only** | Backend-only development |
+| `npm run format` | **Code formatting** | Pre-commit cleanup with Prettier |
+| `npm run lint:js` | **JavaScript quality check** | ESLint validation |
+| `npm run clean` | **Remove built assets** | Fresh build preparation |
 
 ---
 
@@ -276,30 +288,129 @@ graph TD
 
 ## 📞 Connect & Learn More
 
-### **🔗 Essential Links**
+### **🔗 Essential Resources & Links**
 
-- **🌐 [Live Demo](https://phpdocspark.azurewebsites.net/)** - Experience the platform
-- **📦 [Source Code](https://github.com/markhazleton/PHPDocSpark)** - Explore implementation
-- **📖 [Blog Article](https://markhazleton.com/creating-a-php-website-with-chat-gpt.html)** - Development story
-- **📚 [Documentation Hub](https://phpdocspark.azurewebsites.net/?page=document_view)** - Complete guides
+- **🌐 [Live Demo](https://phpdocspark.azurewebsites.net/)** - Experience the full platform
+- **🌐 [Canonical URL](https://phpdocspark.markhazleton.com)** - Primary production domain
+- **📦 [Source Code](https://github.com/markhazleton/PHPDocSpark)** - Complete implementation
+- **📖 [Development Blog](https://markhazleton.com/creating-a-php-website-with-chat-gpt.html)** - Project creation story
+- **🎯 [Mark Hazleton's Portfolio](https://markhazleton.com)** - Author's main site
+- **🌟 [WebSpark Suite](https://webspark.markhazleton.com)** - Related educational projects
 
-### **🎓 Educational Impact**
+### **🎓 Educational Impact Statement**
 
-> *"This project demonstrates that PHP applications can achieve the same level of developer experience and performance as modern JavaScript frameworks while maintaining the simplicity and reliability that makes PHP a great choice for content-driven applications."*
+> PHPDocSpark demonstrates that PHP applications can achieve the same level of developer experience, performance, and user interface quality as modern JavaScript frameworks, while maintaining the simplicity, reliability, and content-management strengths that make PHP an excellent choice for data-driven applications.
 
-**Perfect for:**
+**Ideal Learning Resource For:**
 
-- **🎓 Computer Science Students** - Real-world application architecture
-- **💼 Development Teams** - Migration strategy from legacy to modern
-- **🚀 Startups** - Rapid prototyping with production-ready patterns
-- **🏢 Enterprises** - Cost-effective modernization approach
+- **🎓 Computer Science Students** - Real-world application architecture patterns
+- **💼 Development Teams** - Migration strategies from legacy to modern PHP
+- **🚀 Startups & Agencies** - Rapid prototyping with production-ready foundations
+- **🏢 Enterprise Teams** - Cost-effective modernization of existing PHP applications
+- **🤖 AI-Assisted Development** - GitHub Copilot integration and best practices
 
 ---
 
-<div align="center">
+**🌟 Star this project on GitHub if it enhances your learning journey!**
 
-**🌟 Star this project if it helps your learning journey!**
+**Built with ❤️ by [Mark Hazleton](https://github.com/markhazleton) as an educational gift to the PHP community**
 
-**Built with ❤️ by [Mark Hazleton](https://github.com/markhazleton) as a gift to the PHP community — part of the WebSpark suite**
+Part of the WebSpark suite of educational web development projects
 
-</div>  
+---
+
+## 🏗️ Technical Architecture Deep Dive
+
+### **Modern Tech Stack Composition**
+
+~~~text
+┌─── Frontend Build System ─────────────────────────┐
+│  Vite 7.1+ │ Sass 1.90+ │ ESLint 9.15+ │ Prettier │  
+├─── UI Framework & Components ─────────────────────┤
+│  Bootstrap 5.3.7 │ Bootstrap Icons │ jQuery 3.7+ │
+├─── Data Visualization & Interaction ─────────────┤  
+│  Chart.js │ DataTables 2.3+ │ Interactive Forms   │
+├─── Server-Side Application ───────────────────────┤
+│  PHP 8.2+ │ SQLite PDO │ Parsedown │ cURL         │
+├─── Content & Data Management ─────────────────────┤
+│  Markdown Files │ JSON APIs │ CSV Analysis │ RSS  │
+├─── DevOps & Deployment ───────────────────────────┤
+│  Azure Pipelines │ Azure Web Apps │ GitHub Actions │
+└────────────────────────────────────────────────────┘
+~~~
+
+### **Request Processing Flow**
+
+~~~mermaid
+graph TD
+    A[Client Request] --> B[index.php Front Controller]
+    B --> C[URL Routing Logic]
+    C --> D{Page Type?}
+    
+    D -->|Static Content| E[Document Viewer]
+    D -->|Data Analysis| F[CSV Processor]  
+    D -->|Database| G[SQLite CRUD]
+    D -->|API Integration| H[External Services]
+    
+    E --> I[Layout Composition]
+    F --> I
+    G --> I
+    H --> I
+    
+    I --> J[Output Buffering]
+    J --> K[Asset Integration]
+    K --> L[Client Response]
+    
+    M[Vite Build Process] --> N[Asset Optimization]
+    N --> K
+~~~
+
+### **Modern Development Workflow**
+
+**Asset Pipeline Features:**
+
+- **⚡ Hot Module Replacement**: Instant CSS/JS updates during development
+- **🎯 Smart Bundling**: Vendor chunks, tree-shaking, compression
+- **📊 Build Analytics**: Performance metrics and size analysis
+- **🔍 Source Maps**: Development debugging support
+
+**PHP Integration Patterns:**
+
+- **🚀 Front Controller**: Clean URL routing through single entry point
+- **📋 Output Buffering**: Template composition and layout inheritance
+- **🛡️ Security Layer**: Input validation, SQL injection prevention, XSS protection
+- **⚡ Performance**: File-based caching, optimized database queries
+
+---
+
+## 📊 Comprehensive Feature Matrix
+
+### **Content Management Features**
+
+| Feature | Technology | Complexity | Educational Value |
+|---------|------------|------------|------------------|
+| **Markdown Processing** | Parsedown | Medium | File handling, parsing, HTML generation |
+| **Dynamic Navigation** | PHP recursion | Advanced | Algorithms, data structures, UI generation |
+| **Full-Text Search** | File scanning + indexing | Advanced | Search algorithms, performance optimization |
+| **Content Caching** | File system cache | Medium | Caching strategies, performance tuning |
+| **SEO-Friendly URLs** | URL rewriting | Medium | Web standards, user experience |
+
+### **Data Processing & Visualization**
+
+| Feature | Technology | Complexity | Educational Value |
+|---------|------------|------------|------------------|
+| **CSV Analysis** | PHP file processing | Advanced | Data analysis, statistics, file I/O |
+| **Interactive Charts** | Chart.js integration | Medium | Data visualization, JavaScript integration |
+| **Statistical Calculations** | PHP math functions | Advanced | Algorithms, mathematical programming |
+| **Data Export** | Multiple formats | Medium | Data transformation, user experience |
+| **Real-time Updates** | AJAX + JSON | Advanced | Client-server communication, state management |
+
+### **Database & API Integration**
+
+| Feature | Technology | Complexity | Educational Value |
+|---------|------------|------------|------------------|
+| **SQLite CRUD** | PDO + prepared statements | Advanced | Database design, security, best practices |
+| **Data Seeding** | SQL + PHP logic | Medium | Database management, testing strategies |
+| **GitHub API** | cURL + JSON processing | Advanced | External APIs, rate limiting, error handling |
+| **RSS Parsing** | SimpleXML | Medium | XML processing, content syndication |
+| **Response Caching** | File-based TTL cache | Advanced | Performance optimization, cache management |  

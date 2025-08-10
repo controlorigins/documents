@@ -174,9 +174,6 @@ sort($articleCategories);
             <div class="d-flex justify-content-between align-items-center mb-3">
                 <h5><i class="bi bi-funnel me-2"></i>Filter Articles</h5>
                 <div class="input-group" style="max-width: 300px;">
-                    <span class="input-group-text">
-                        <i class="bi bi-search"></i>
-                    </span>
                     <form style="display: contents;" method="GET" action="">
                         <input type="hidden" name="page" value="article_list">
                         <?php if ($filterCategory !== 'all'): ?>

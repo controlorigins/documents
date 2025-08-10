@@ -6,8 +6,8 @@ This is a PHP-based documentation and portfolio website that showcases various p
 
 ## Project Structure
 
-- **Root Directory**: `c:\GitHub\ControlOrigins\documents`
-- **Website Directory**: `c:\GitHub\ControlOrigins\documents\website` (All PHP files and web assets)
+- **Root Directory**: `c:\GitHub\MarkHazleton\PHPDocSpark`
+- **Website Directory**: `c:\GitHub\MarkHazleton\PHPDocSpark\website` (All PHP files and web assets)
 - **Entry Point**: `website/index.php`
 - **Pages**: Located in `website/pages/` directory
 - **Assets**: Located in `website/assets/` directory
@@ -32,7 +32,7 @@ This is a PHP-based documentation and portfolio website that showcases various p
 
 ### PHP Development Server
 
-- **Server must run from**: `c:\GitHub\ControlOrigins\documents\website` directory
+- **Server must run from**: `c:\GitHub\MarkHazleton\PHPDocSpark\website` directory
 - **Standard command**: `php -S localhost:8001`
 - **Before starting server**: Check if already running with `Get-Process php`
 - **Stop server**: Use `Stop-Process -Name php -Force` if needed
@@ -44,7 +44,7 @@ This is a PHP-based documentation and portfolio website that showcases various p
 Get-Process php -ErrorAction SilentlyContinue
 
 # 2. Navigate to correct directory
-cd C:\GitHub\ControlOrigins\documents\website
+cd C:\GitHub\MarkHazleton\PHPDocSpark\website
 
 # 3. Start server (only if not running)
 php -S localhost:8001
@@ -53,7 +53,13 @@ php -S localhost:8001
 ## File Structure Rules
 
 - **Website root**: All web-accessible files must be in `/website/` directory
-- **Markdown files**: ALL `.md` files (except root `README.md` which stays as GitHub repository standard) MUST be placed under `/website/assets/markdown/` folder tree
+- **Markdown files**: ALL `.md` files MUST be placed under `/website/assets/markdown/` folder tree with these exceptions:
+  - `/.github/copilot-instructions.md` (GitHub Copilot instructions - stays in .github folder)
+  - `/README.md` (GitHub repository documentation - stays in root)
+- **New markdown organization**:
+  - **Copilot-related files**: `/website/assets/markdown/copilot/` (for AI assistant, deployment, and technical configuration documentation)
+  - **Existing organized folders**: `/website/assets/markdown/ChatGPT/`, `/website/assets/markdown/Git/`, `/website/assets/markdown/PHP/`, `/website/assets/markdown/Project/`
+- **Important**: ALL new `.md` files created by GitHub Copilot or other AI assistants MUST go in `/website/assets/markdown/copilot/`
 - **PHP includes**: Use relative paths from website directory
 - **Database location**: `website/data/database.db`
 - **Page routing**: Handled by `index.php` with `?page=` parameter
@@ -109,7 +115,7 @@ composer update
 Get-Process php -ErrorAction SilentlyContinue
 
 # Start server (from website directory)
-cd C:\GitHub\ControlOrigins\documents\website
+cd C:\GitHub\MarkHazleton\PHPDocSpark\website
 php -S localhost:8001
 
 # Stop server
@@ -190,3 +196,16 @@ php -r "try { new PDO('sqlite:data/database.db'); echo 'SQLite OK'; } catch(Exce
 ---
 
 **Remember**: This project structure requires the web server to run from the `/website` directory to properly serve files and handle routing. Always check for existing terminals before creating new ones. NEVER start the web server in any other directory, it MUST be /website.
+
+## 📁 **CRITICAL: Markdown File Organization**
+
+**ALL new markdown files created by GitHub Copilot or AI assistants MUST go in:**
+
+- `/website/assets/markdown/copilot/`
+
+**The ONLY exceptions are:**
+
+- `/.github/copilot-instructions.md` (GitHub Copilot instructions)
+- `/README.md` (GitHub repository documentation)
+
+**Existing organized files stay in their current folders** (ChatGPT/, Git/, PHP/, Project/).
