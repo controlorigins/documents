@@ -3,7 +3,7 @@
         'name' => 'control-origin/documents',
         'pretty_version' => 'dev-main',
         'version' => 'dev-main',
-        'reference' => 'b9c7c1d02d3f5eba4d32dd8cc8e25f9405fd38a4',
+        'reference' => '7210eb790ba9b0e109c15e0157541cab261bb52e',
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -13,7 +13,7 @@
         'control-origin/documents' => array(
             'pretty_version' => 'dev-main',
             'version' => 'dev-main',
-            'reference' => 'b9c7c1d02d3f5eba4d32dd8cc8e25f9405fd38a4',
+            'reference' => '7210eb790ba9b0e109c15e0157541cab261bb52e',
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
