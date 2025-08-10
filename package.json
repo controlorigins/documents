@@ -29,23 +29,24 @@
     "bootstrap-icons": "^1.13.1",
     "datatables.net": "^2.3.2",
     "datatables.net-bs5": "^2.3.2",
-    "jquery": "^3.7.1"
+    "jquery": "^3.7.1",
+    "prismjs": "^1.30.0"
   },
   "devDependencies": {
-    "postcss": "^8.5.6",
-    "rimraf": "^6.0.1",
-    "sass": "^1.90.0",
-    "terser": "^5.43.1",
-    "vite": "^7.1.1",
+    "@eslint/js": "^9.33.0",
+    "@types/node": "^24.2.1",
     "concurrently": "^9.2.0",
     "eslint": "^9.33.0",
-    "@eslint/js": "^9.33.0",
     "eslint-config-prettier": "^10.1.8",
-    "prettier": "^3.6.2",
-    "stylelint": "^16.23.1",
-    "stylelint-config-standard-scss": "^15.0.1",
     "husky": "^9.1.7",
     "lint-staged": "^16.1.5",
-    "@types/node": "^24.2.1"
+    "postcss": "^8.5.6",
+    "prettier": "^3.6.2",
+    "rimraf": "^6.0.1",
+    "sass": "^1.90.0",
+    "stylelint": "^16.23.1",
+    "stylelint-config-standard-scss": "^15.0.1",
+    "terser": "^5.43.1",
+    "vite": "^7.1.1"
   }
 }

@@ -78,7 +78,7 @@ export default defineConfig(({ mode }) => {
 
     // Optimization
     optimizeDeps: {
-      include: ['bootstrap', 'jquery', 'datatables.net', 'datatables.net-bs5'],
+      include: ['bootstrap', 'jquery', 'datatables.net', 'datatables.net-bs5', 'prismjs'],
     },
 
     // Plugin configuration

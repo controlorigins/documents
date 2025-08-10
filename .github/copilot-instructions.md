@@ -53,6 +53,7 @@ php -S localhost:8001
 ## File Structure Rules
 
 - **Website root**: All web-accessible files must be in `/website/` directory
+- **PHP Files**: ALL `.php` files MUST be placed under `/website/` folder tree but NEVER under `/website/assets/` as that is only for assets (CSS, JS, images, etc.) and documentation 
 - **Markdown files**: ALL `.md` files MUST be placed under `/website/assets/markdown/` folder tree with these exceptions:
   - `/.github/copilot-instructions.md` (GitHub Copilot instructions - stays in .github folder)
   - `/README.md` (GitHub repository documentation - stays in root)

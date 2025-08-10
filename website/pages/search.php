@@ -1,5 +1,6 @@
 <?php
 require_once __DIR__ . '/../includes/docs.php';
+require_once __DIR__ . '/../includes/MarkdownProcessor.php';
 // Define the root folder
 $rootFolder = 'assets/markdown';
 $searchTerm = '';

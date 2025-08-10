@@ -1,12 +1,21 @@
 // Custom styles for PHPDocSpark (Mark Hazleton)
+// Color scheme inspired by the official PHP website (php.net)
 
-// CSS Variables
+// CSS Variables - Official PHP Color Palette (Updated to match official brand)
 :root {
-  --primary-color: #0d6efd;
-  --secondary-color: #6c757d;
-  --accent-color: #ffc107;
-  --light-bg: #f8f9fa;
-  --dark-bg: #212529;
+  --primary-color: #8993BE;    // Official PHP Purple (brand primary)
+  --secondary-color: #232531;  // Official PHP Dark Gray
+  --accent-color: #6181B6;     // PHP Light Blue
+  --success-color: #4CAF50;    // Success green
+  --warning-color: #FF9800;    // Warning orange
+  --danger-color: #f44336;     // Error red
+  --info-color: #2196F3;       // Info blue
+  --light-bg: #f8f9fa;         // Light background
+  --dark-bg: #232531;          // Use official PHP dark gray
+  --php-purple: #8993BE;       // PHP brand primary (same as primary)
+  --text-dark: #333333;        // Primary text
+  --text-muted: #6c757d;       // Muted text
+  --border-color: #dee2e6;     // Border color
 }
 
 // Sidebar styles
@@ -27,10 +36,11 @@
 }
 
 .card-header {
-  background: linear-gradient(to right, var(--primary-color), #0b5ed7);
+  background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
   color: white;
   border-radius: 10px 10px 0 0 !important;
   padding: 1.25rem;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
 }
 
 .card-footer {
@@ -44,17 +54,26 @@
   font-size: 1.5rem;
 }
 
-// Button styling
+// Button styling with PHP branding
 .btn-primary {
-  background-color: var(--primary-color);
-  border-color: var(--primary-color);
+  background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+  border: 1px solid var(--primary-color);
   padding: 0.5rem 1.25rem;
   border-radius: 5px;
   font-weight: 500;
+  color: white;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
 
   &:hover {
-    background-color: #0b5ed7;
-    border-color: #0a58ca;
+    background: linear-gradient(135deg, var(--secondary-color), var(--primary-color));
+    border-color: var(--secondary-color);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 8px rgba(143, 146, 191, 0.3);
+  }
+
+  &:active {
+    transform: translateY(0);
   }
 }
 
@@ -100,9 +119,83 @@ footer {
 // Responsive adjustments
 @media (max-width: 768px) {
   .sidebar {
-    min-height: auto;
+    min-height: 0; // Fix Firefox compatibility
     border-right: none;
-    border-bottom: 1px solid #dee2e6;
+    border-bottom: 1px solid var(--border-color);
     margin-bottom: 1rem;
+  }
+}
+
+// PHP-themed additions
+.php-accent {
+  color: var(--primary-color);
+  font-weight: 600;
+}
+
+.php-badge {
+  background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+  color: white;
+  padding: 0.25rem 0.75rem;
+  border-radius: 20px;
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+
+// Enhanced navigation pills with PHP theme
+.nav-pills .nav-link {
+  border-radius: 20px;
+  transition: all 0.3s ease;
+  
+  &.active {
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    color: white;
+    box-shadow: 0 2px 4px rgba(143, 146, 191, 0.3);
+  }
+  
+  &:not(.active):hover {
+    background-color: rgba(143, 146, 191, 0.1);
+    color: var(--primary-color);
+  }
+}
+
+// Code highlighting to match PHP theme
+code:not([class*="language-"]) {
+  background-color: rgba(143, 146, 191, 0.1);
+  color: var(--secondary-color);
+  padding: 0.125rem 0.375rem;
+  border-radius: 3px;
+  font-size: 0.875em;
+}
+
+// Links with PHP theme
+a {
+  color: var(--primary-color);
+  text-decoration: none;
+  transition: color 0.3s ease;
+  
+  &:hover {
+    color: var(--secondary-color);
+    text-decoration: underline;
+  }
+}
+
+// Table enhancements with PHP theme
+.table {
+  border-radius: 8px;
+  overflow: hidden;
+  border: 1px solid var(--border-color);
+  
+  thead th {
+    background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+    color: white;
+    border: none;
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 0.875rem;
+    letter-spacing: 0.5px;
+  }
+  
+  tbody tr:hover {
+    background-color: rgba(143, 146, 191, 0.05);
   }
 }

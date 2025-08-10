@@ -1,8 +1,40 @@
-/* global $, bootstrap */
+/* global $, bootstrap, Prism */
 // Custom JavaScript for PHPDocSpark (Mark Hazleton)
 
-// DataTables initialization
+// PrismJS Initialization and Configuration
 $(document).ready(function () {
+  // Configure PrismJS if available
+  if (typeof Prism !== 'undefined') {
+    // Manual highlighting mode - we'll trigger it after DOM is ready
+    Prism.manual = false;
+    
+    // Add line numbers to all code blocks automatically
+    $('pre[class*="language-"]').addClass('line-numbers');
+    
+    // Initialize copy-to-clipboard for all code blocks
+    Prism.plugins.toolbar.registerButton('copy-to-clipboard', function (_env) {
+      const button = document.createElement('button');
+      button.innerHTML = '<i class="bi bi-clipboard"></i>';
+      button.title = 'Copy to clipboard';
+      
+      return button;
+    });
+    
+    // Re-highlight any code blocks that might have been loaded dynamically
+    Prism.highlightAll();
+    
+    // Custom event for when highlighting is complete
+    $(document).on('prismHighlightComplete', function() {
+      // PrismJS highlighting completed - ready for custom interactions
+    });
+    
+    // Trigger highlighting complete event
+    setTimeout(function() {
+      $(document).trigger('prismHighlightComplete');
+    }, 100);
+  }
+  
+  // DataTables initialization
   // (debug log removed)
 
   // Initialize DataTables if table exists

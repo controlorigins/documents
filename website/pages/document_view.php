@@ -1,5 +1,6 @@
 <?php
 require_once __DIR__ . '/../includes/docs.php';
+require_once __DIR__ . '/../includes/MarkdownProcessor.php';
 
 // Function to recursively scan a directory and return an array of file paths
 function scanDirectory($dir)
@@ -80,30 +81,51 @@ function renderDocumentTree($items, $basePath = '', $selectedFile = '', $level =
 $markdownContent = '';
 $htmlContent = '';
 $selectedFile = '';
+$processor = new MarkdownProcessor([
+    'cache' => ['enabled' => true, 'ttl' => 3600],
+    'parser' => [
+        'safeMode' => false,
+        'markupEscaped' => false,
+        'urlsLinked' => true
+    ],
+    'metadata' => ['enabled' => false],
+    'debug' => false
+]);
+
 if (isset($_GET['file'])) {
     // File specified via routing system
     $selectedFile = $_GET['file'];
-    $requestedFile = 'assets/markdown/' . urldecode($selectedFile);
-    if (file_exists($requestedFile) && pathinfo($requestedFile, PATHINFO_EXTENSION) === 'md') {
-        // Include the Parsedown library
-        require_once('pages/Parsedown.php');
-        
-        $markdownContent = file_get_contents($requestedFile);
-        // Create a new Parsedown instance
-        $parsedown = new Parsedown();
-        // Parse Markdown to HTML
-        $htmlContent = $parsedown->text($markdownContent);
+    $requestedFile = urldecode($selectedFile);
+    
+    // Ensure the path starts with assets/markdown/ for the processor
+    if (strpos($requestedFile, 'assets/markdown/') !== 0) {
+        $requestedFile = 'assets/markdown/' . $requestedFile;
+    }
+    
+    try {
+        $htmlContent = $processor->convertFile($requestedFile);
+        $markdownContent = 'Processed successfully'; // For display purposes
+    } catch (Exception $e) {
+        $htmlContent = '<div class="alert alert-danger"><i class="bi bi-exclamation-triangle me-2"></i>Error loading file: ' . htmlspecialchars($e->getMessage()) . '</div>';
+        error_log('Document view error: ' . $e->getMessage());
     }
 } elseif (!empty($markdownFiles)) {
     // Default to first file only if no file specified and files exist
     $selectedFile = is_array($markdownFiles[0]) ? '' : $markdownFiles[0]; 
     if ($selectedFile) {
-        $requestedFile = 'assets/markdown/' . urldecode($selectedFile);
-        if (file_exists($requestedFile) && pathinfo($requestedFile, PATHINFO_EXTENSION) === 'md') {
-            require_once('pages/Parsedown.php');
-            $markdownContent = file_get_contents($requestedFile);
-            $parsedown = new Parsedown();
-            $htmlContent = $parsedown->text($markdownContent);
+        $requestedFile = urldecode($selectedFile);
+        
+        // Ensure the path starts with assets/markdown/ for the processor
+        if (strpos($requestedFile, 'assets/markdown/') !== 0) {
+            $requestedFile = 'assets/markdown/' . $requestedFile;
+        }
+        
+        try {
+            $htmlContent = $processor->convertFile($requestedFile);
+            $markdownContent = 'Processed successfully'; // For display purposes
+        } catch (Exception $e) {
+            $htmlContent = '<div class="alert alert-danger"><i class="bi bi-exclamation-triangle me-2"></i>Error loading default file: ' . htmlspecialchars($e->getMessage()) . '</div>';
+            error_log('Document view error: ' . $e->getMessage());
         }
     }
 }
