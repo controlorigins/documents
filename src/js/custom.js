@@ -1,6 +1,88 @@
 /* global $, bootstrap, Prism */
 // Custom JavaScript for PHPDocSpark (Mark Hazleton)
 
+// Global fetchJoke function - defined outside of document ready for immediate availability
+let jokeCount = 0;
+window.fetchJoke = function () {
+  // Show loading spinner
+  const jokeContainer = document.getElementById('joke-container');
+  if (!jokeContainer) {
+    return;
+  }
+  
+  jokeContainer.innerHTML = `
+    <div class="d-flex justify-content-center">
+      <div class="spinner-border text-primary" role="status">
+        <span class="visually-hidden">Loading...</span>
+      </div>
+    </div>
+  `;
+
+  // Use native fetch API for better compatibility
+  fetch('pages/fetch_joke.php')
+    .then(response => {
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+      return response.text();
+    })
+    .then(data => {
+      jokeCount++;
+      
+      // Check if jQuery is available for animations, otherwise just set content
+      if (typeof $ !== 'undefined' && $.fn.fadeOut) {
+        const $jokeContainer = $('#joke-container');
+        $jokeContainer.fadeOut(200, function () {
+          $jokeContainer.html(`
+            <div class="text-center">
+              <div class="joke-content">
+                ${data}
+              </div>
+              <div class="mt-3 text-muted">
+                <small>Joke #${jokeCount}</small>
+              </div>
+            </div>
+          `);
+          $jokeContainer.fadeIn(200);
+        });
+      } else {
+        // Fallback without jQuery animations
+        jokeContainer.innerHTML = `
+          <div class="text-center">
+            <div class="joke-content">
+              ${data}
+            </div>
+            <div class="mt-3 text-muted">
+              <small>Joke #${jokeCount}</small>
+            </div>
+          </div>
+        `;
+      }
+    })
+    .catch(error => {
+      // Show error in the UI instead of console
+      jokeContainer.innerHTML = `
+        <div class="alert alert-danger">
+          <i class="bi bi-exclamation-triangle me-2"></i>
+          Failed to fetch joke: ${error.message}
+        </div>
+      `;
+    });
+};
+
+// Auto-load joke immediately if on joke page
+if (document.getElementById('joke-container')) {
+  // Use DOMContentLoaded to ensure the page is ready but don't wait for all assets
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', () => {
+      setTimeout(() => window.fetchJoke(), 100);
+    });
+  } else {
+    // DOM is already ready
+    setTimeout(() => window.fetchJoke(), 100);
+  }
+}
+
 // PrismJS Initialization and Configuration
 $(document).ready(function () {
   // Configure PrismJS if available
@@ -270,64 +352,6 @@ $(document).ready(function () {
 
     // Initial display
     displayProjects();
-  }
-
-  // Joke Page - AJAX functionality
-  if ($('#joke-container').length) {
-  // (debug log removed)
-    let jokeCount = 0;
-
-    window.fetchJoke = function () {
-      // Show loading spinner
-      document.getElementById('joke-container').innerHTML = `
-                <div class="d-flex justify-content-center">
-                    <div class="spinner-border text-primary" role="status">
-                        <span class="visually-hidden">Loading...</span>
-                    </div>
-                </div>
-            `;
-
-      // Fetch joke with AJAX
-      $.ajax({
-        url: 'pages/fetch_joke.php',
-        method: 'GET',
-        success: function (response) {
-          jokeCount++;
-
-          // Add animation class
-          const jokeContainer = $('#joke-container');
-          jokeContainer.fadeOut(200, function () {
-            // Update content
-            jokeContainer.html(`
-                            <div class="text-center">
-                                <div class="joke-content">
-                                    ${response}
-                                </div>
-                                <div class="mt-3 text-muted">
-                                    <small>Joke #${jokeCount}</small>
-                                </div>
-                            </div>
-                        `);
-
-            // Fade back in
-            jokeContainer.fadeIn(200);
-          });
-        },
-        error: function () {
-          $('#joke-container').html(`
-                        <div class="alert alert-danger">
-                            <i class="bi bi-exclamation-triangle me-2"></i>
-                            Oops! Failed to fetch a joke. Please try again later.
-                        </div>
-                    `);
-        },
-      });
-    };
-
-    // Auto-load first joke
-    if (typeof window.fetchJoke === 'function') {
-      window.fetchJoke();
-    }
   }
 
   // DataTable component initialization (for datatable.php)

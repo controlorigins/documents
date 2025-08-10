@@ -5,9 +5,20 @@ import $ from 'jquery';
 // Import Bootstrap JavaScript and make it globally available
 import * as bootstrap from 'bootstrap';
 
-// Import DataTables
+// Import DataTables core and extensions
 import 'datatables.net';
 import 'datatables.net-bs5';
+
+// Import DataTables Buttons extensions
+import 'datatables.net-buttons';
+import 'datatables.net-buttons-bs5';
+import 'datatables.net-buttons/js/buttons.html5.mjs';
+import 'datatables.net-buttons/js/buttons.print.mjs';
+import 'datatables.net-buttons/js/buttons.colVis.mjs';
+
+// Import JSZip for Excel export functionality
+import JSZip from 'jszip';
+window.JSZip = JSZip;
 
 // PrismJS implementation following official best practices
 // Set manual mode to prevent auto-highlighting before bundle is ready
