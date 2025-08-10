@@ -34,8 +34,8 @@ In Configuration → General Settings:
 ### Step 3: Test Deployment
 
 1. Deploy your updated code with the new configuration files
-2. Visit: `https://controlorigins-docs.azurewebsites.net/diagnostics.php`
-3. Test the URL: `https://controlorigins-docs.azurewebsites.net/doc/chatgpt/sessions/create-php-joke-page`
+2. Visit: `https://phpdocspark.azurewebsites.net/diagnostics.php`
+3. Test the URL: `https://phpdocspark.azurewebsites.net/doc/chatgpt/sessions/create-php-joke-page`
 
 ## Alternative Solutions
 
@@ -72,7 +72,7 @@ error_log("SCRIPT_NAME: " . $_SERVER['SCRIPT_NAME']);
 
 1. Commit and push these changes
 2. Let the Azure Pipeline deploy
-3. Test the URL: <https://controlorigins-docs.azurewebsites.net/doc/chatgpt/sessions/create-php-joke-page>
+3. Test the URL: <https://phpdocspark.azurewebsites.net/doc/chatgpt/sessions/create-php-joke-page>
 4. If still not working, run diagnostics and check the logs
 
 The issue should be resolved after deployment with these configuration files.

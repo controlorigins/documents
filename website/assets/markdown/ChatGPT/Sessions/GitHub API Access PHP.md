@@ -1,7 +1,11 @@
 # GitHub API Commits PHP
-## Mark Hazleton:
-Create a PHP page to call the GitHub.com API to get a list of commits for the https://github.com/controlorigins/documents repository.
-## chatgpt:
+
+## Mark Hazleton
+
+Create a PHP page to call the GitHub.com API to get a list of commits for the <https://github.com/markhazleton/PHPDocSpark> repository.
+
+## chatgpt
+
 Certainly! To call the GitHub API and get a list of commits for a specific repository using PHP, you can use the `curl` library to make HTTP requests. Below is a sample PHP code snippet that demonstrates how to do this.
 
 ```php
@@ -10,7 +14,7 @@ Certainly! To call the GitHub API and get a list of commits for a specific repos
 $ch = curl_init();
 
 // GitHub API URL for the repository
-$apiUrl = "https://api.github.com/repos/controlorigins/documents/commits";
+$apiUrl = "https://api.github.com/repos/markhazleton/PHPDocSpark/commits";
 
 // Set cURL options
 curl_setopt($ch, CURLOPT_URL, $apiUrl);
@@ -47,84 +51,85 @@ curl_close($ch);
 
 To run this code, save it in a `.php` file and upload it to your web server. Make sure that your server has the `curl` extension enabled for PHP.
 
-### Things to Note:
+### Things to Note
 
-1.  GitHub requires a User-Agent header for all requests. You can replace `'YourAppName'` with the name of your application.
-2.  This is a basic example and doesn't include pagination or error handling beyond basic `curl` errors. For a production application, you'd likely want to add those.
+1. GitHub requires a User-Agent header for all requests. You can replace `'YourAppName'` with the name of your application.
+2. This is a basic example and doesn't include pagination or error handling beyond basic `curl` errors. For a production application, you'd likely want to add those.
 
-### References:
+### References
 
-1.  [GitHub API Documentation](https://docs.github.com/en/rest)
-2.  [PHP cURL Documentation](https://www.php.net/manual/en/book.curl.php)
-3.  [GitHub API Rate Limiting](https://docs.github.com/en/rest/overview/resources-in-the-rest-api#rate-limiting)
-4.  [JSON Handling in PHP](https://www.php.net/manual/en/book.json.php)
-5.  [PHP Error Handling](https://www.php.net/manual/en/language.exceptions.php)
+1. [GitHub API Documentation](https://docs.github.com/en/rest)
+2. [PHP cURL Documentation](https://www.php.net/manual/en/book.curl.php)
+3. [GitHub API Rate Limiting](https://docs.github.com/en/rest/overview/resources-in-the-rest-api#rate-limiting)
+4. [JSON Handling in PHP](https://www.php.net/manual/en/book.json.php)
+5. [PHP Error Handling](https://www.php.net/manual/en/language.exceptions.php)
 
 Feel free to modify the code as needed!
-## Mark Hazleton:
+
+## Mark Hazleton
+
 how do I enable the curl extension in my PHP website?
-## chatgpt:
+
+## chatgpt
+
 Enabling the `curl` extension in PHP depends on the environment you're working in. Here are some general guidelines for different setups:
 
 ### On a Linux Server (Ubuntu/Debian)
 
-1.  **Install the `curl` extension**: Open the terminal and run the following command:
-    
+1. **Install the `curl` extension**: Open the terminal and run the following command:
+
     ```bash
     sudo apt-get update
     sudo apt-get install php-curl
     ```
-    
-2.  **Restart the web server**: After installing, you'll need to restart your web server to apply the changes.
-    
-    -   For Apache:
-        
+
+2. **Restart the web server**: After installing, you'll need to restart your web server to apply the changes.
+
+    - For Apache:
+
         ```bash
         sudo systemctl restart apache2
         ```
-        
-    -   For Nginx:
-        
+
+    - For Nginx:
+
         ```bash
         sudo systemctl restart nginx
         ```
-        
 
 ### On a Linux Server (CentOS/RHEL)
 
-1.  **Install the `curl` extension**: Open the terminal and run the following command:
-    
+1. **Install the `curl` extension**: Open the terminal and run the following command:
+
     ```bash
     sudo yum update
     sudo yum install php-curl
     ```
-    
-2.  **Restart the web server**: After installing, you'll need to restart your web server to apply the changes.
-    
+
+2. **Restart the web server**: After installing, you'll need to restart your web server to apply the changes.
+
     ```bash
     sudo systemctl restart httpd
     ```
-    
 
 ### On a Windows Server (Using XAMPP/WAMP)
 
-1.  **Edit `php.ini`**: Open your `php.ini` file, which can usually be found in the `C:\xampp\php\` directory for XAMPP or inside the `bin/php` folder in the WAMP directory.
-    
-2.  **Uncomment the line**: Find the line `;extension=curl` and uncomment it by removing the semicolon (`;`):
-    
+1. **Edit `php.ini`**: Open your `php.ini` file, which can usually be found in the `C:\xampp\php\` directory for XAMPP or inside the `bin/php` folder in the WAMP directory.
+
+2. **Uncomment the line**: Find the line `;extension=curl` and uncomment it by removing the semicolon (`;`):
+
     ```ini
     extension=curl
     ```
-    
-3.  **Restart the web server**: Restart your Apache server through the XAMPP/WAMP control panel.
-    
+
+3. **Restart the web server**: Restart your Apache server through the XAMPP/WAMP control panel.
 
 ### On Shared Hosting
 
 If you're on a shared hosting environment, you may not have direct access to enable extensions. In this case, you can:
 
-1.  Check your hosting control panel (like cPanel) for an option to enable PHP extensions.
-2.  Contact your hosting provider's support for assistance.
+1. Check your hosting control panel (like cPanel) for an option to enable PHP extensions.
+2. Contact your hosting provider's support for assistance.
 
 ### Verify Installation
 
@@ -138,18 +143,22 @@ phpinfo();
 
 Navigate to this file in your web browser, and search for `curl` to ensure it's enabled.
 
-### References:
+### References
 
-1.  [Ubuntu PHP Extensions](https://www.php.net/manual/en/install.unix.debian.php)
-2.  [CentOS PHP Extensions](https://www.php.net/manual/en/install.unix.rpm.php)
-3.  [XAMPP for Windows](https://www.apachefriends.org/index.html)
-4.  [WAMP Server](http://www.wampserver.com/en/)
-5.  [cPanel Documentation](https://docs.cpanel.net/)
+1. [Ubuntu PHP Extensions](https://www.php.net/manual/en/install.unix.debian.php)
+2. [CentOS PHP Extensions](https://www.php.net/manual/en/install.unix.rpm.php)
+3. [XAMPP for Windows](https://www.apachefriends.org/index.html)
+4. [WAMP Server](http://www.wampserver.com/en/)
+5. [cPanel Documentation](https://docs.cpanel.net/)
 
 Feel free to follow the steps that match your environment.
-## Mark Hazleton:
+
+## Mark Hazleton
+
 update the php file to format the results using Bootstrap
-## chatgpt:
+
+## chatgpt
+
 Certainly! To format the results using Bootstrap, you'll need to include the Bootstrap CSS and optionally the JavaScript libraries in your PHP file. Below is the updated PHP code snippet that incorporates Bootstrap for styling:
 
 ```php
@@ -170,7 +179,7 @@ Certainly! To format the results using Bootstrap, you'll need to include the Boo
     $ch = curl_init();
 
     // GitHub API URL for the repository
-    $apiUrl = "https://api.github.com/repos/controlorigins/documents/commits";
+    $apiUrl = "https://api.github.com/repos/markhazleton/PHPDocSpark/commits";
 
     // Set cURL options
     curl_setopt($ch, CURLOPT_URL, $apiUrl);
@@ -215,18 +224,22 @@ Certainly! To format the results using Bootstrap, you'll need to include the Boo
 
 In this updated code, I've wrapped the list of commits in a Bootstrap-styled list group and used Bootstrap's alert component for error messages. The Bootstrap CSS and optional JavaScript libraries are also included in the `<head>` and at the end of the `<body>` respectively.
 
-### References:
+### References
 
-1.  [Bootstrap Documentation](https://getbootstrap.com/docs/4.5/getting-started/introduction/)
-2.  [PHP cURL Documentation](https://www.php.net/manual/en/book.curl.php)
-3.  [GitHub API Documentation](https://docs.github.com/en/rest)
-4.  [Bootstrap List Group](https://getbootstrap.com/docs/4.5/components/list-group/)
-5.  [Bootstrap Alerts](https://getbootstrap.com/docs/4.5/components/alerts/)
+1. [Bootstrap Documentation](https://getbootstrap.com/docs/4.5/getting-started/introduction/)
+2. [PHP cURL Documentation](https://www.php.net/manual/en/book.curl.php)
+3. [GitHub API Documentation](https://docs.github.com/en/rest)
+4. [Bootstrap List Group](https://getbootstrap.com/docs/4.5/components/list-group/)
+5. [Bootstrap Alerts](https://getbootstrap.com/docs/4.5/components/alerts/)
 
 Feel free to modify the code as needed!
-## Mark Hazleton:
+
+## Mark Hazleton
+
 Format the the commit date to be more user friendly using the US style like January 1, 2023 11:00 PM.
-## chatgpt:
+
+## chatgpt
+
 To format the date in a more user-friendly way, you can use PHP's `DateTime` class. Here's how you can modify the code snippet to format the commit date in the U.S. style:
 
 ```php
@@ -247,7 +260,7 @@ To format the date in a more user-friendly way, you can use PHP's `DateTime` cla
     $ch = curl_init();
 
     // GitHub API URL for the repository
-    $apiUrl = "https://api.github.com/repos/controlorigins/documents/commits";
+    $apiUrl = "https://api.github.com/repos/markhazleton/PHPDocSpark/commits";
 
     // Set cURL options
     curl_setopt($ch, CURLOPT_URL, $apiUrl);
@@ -296,17 +309,21 @@ To format the date in a more user-friendly way, you can use PHP's `DateTime` cla
 
 In this updated code, I used PHP's `DateTime` class to create a DateTime object from the commit date string. Then, I used the `format` method to output the date in the desired format: "F j, Y g:i A".
 
-### References:
+### References
 
-1.  [PHP DateTime Class](https://www.php.net/manual/en/class.datetime.php)
-2.  [PHP DateTime::format](https://www.php.net/manual/en/datetime.format.php)
-3.  [Bootstrap Documentation](https://getbootstrap.com/docs/4.5/getting-started/introduction/)
-4.  [GitHub API Documentation](https://docs.github.com/en/rest)
+1. [PHP DateTime Class](https://www.php.net/manual/en/class.datetime.php)
+2. [PHP DateTime::format](https://www.php.net/manual/en/datetime.format.php)
+3. [Bootstrap Documentation](https://getbootstrap.com/docs/4.5/getting-started/introduction/)
+4. [GitHub API Documentation](https://docs.github.com/en/rest)
 
 Feel free to modify the code as needed!
-## Mark Hazleton:
+
+## Mark Hazleton
+
 what else can we add about each commit? Number of file impacted?
-## chatgpt:
+
+## chatgpt
+
 To get more details about each commit, such as the number of files impacted, you'll need to make an additional API call for each commit to fetch its detailed information. The GitHub API provides this data in the `files` array of the detailed commit object, which includes the number of files added, modified, and deleted.
 
 Here's how you can modify the PHP code to include the number of files impacted for each commit:
@@ -335,7 +352,7 @@ Here's how you can modify the PHP code to include the number of files impacted f
     }
 
     $ch = curl_init();
-    $apiUrl = "https://api.github.com/repos/controlorigins/documents/commits";
+    $apiUrl = "https://api.github.com/repos/markhazleton/PHPDocSpark/commits";
     curl_setopt($ch, CURLOPT_URL, $apiUrl);
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
     curl_setopt($ch, CURLOPT_USERAGENT, 'YourAppName');
@@ -379,16 +396,20 @@ In this updated code, I added a function called `fetchCommitDetails` that takes 
 
 **Note**: Making an additional API call for each commit can quickly exhaust your API rate limit, especially if you're not authenticated. You might want to consider using authenticated requests or fetching only a subset of commits to mitigate this.
 
-### References:
+### References
 
-1.  [GitHub API Documentation for Commits](https://docs.github.com/en/rest/reference/repos#get-a-commit)
-2.  [PHP cURL Documentation](https://www.php.net/manual/en/book.curl.php)
-3.  [Bootstrap Documentation](https://getbootstrap.com/docs/4.5/getting-started/introduction/)
+1. [GitHub API Documentation for Commits](https://docs.github.com/en/rest/reference/repos#get-a-commit)
+2. [PHP cURL Documentation](https://www.php.net/manual/en/book.curl.php)
+3. [Bootstrap Documentation](https://getbootstrap.com/docs/4.5/getting-started/introduction/)
 
 Feel free to modify the code as needed!
-## Mark Hazleton:
+
+## Mark Hazleton
+
 limit the request to just the last 5 commits rather than the full history
-## chatgpt:
+
+## chatgpt
+
 To limit the request to just the last 5 commits, you can add a `per_page` parameter to the GitHub API URL. The `per_page` parameter specifies how many items to show per page. By setting it to 5, you'll get only the last 5 commits.
 
 Here's the updated PHP code snippet:
@@ -417,7 +438,7 @@ Here's the updated PHP code snippet:
     }
 
     $ch = curl_init();
-    $apiUrl = "https://api.github.com/repos/controlorigins/documents/commits?per_page=5";
+    $apiUrl = "https://api.github.com/repos/markhazleton/PHPDocSpark/commits?per_page=5";
     curl_setopt($ch, CURLOPT_URL, $apiUrl);
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
     curl_setopt($ch, CURLOPT_USERAGENT, 'YourAppName');
@@ -459,16 +480,20 @@ Here's the updated PHP code snippet:
 
 In this updated code, I changed the `$apiUrl` to include `?per_page=5` at the end. This will limit the number of commits returned to the last 5.
 
-### References:
+### References
 
-1.  [GitHub API Pagination](https://docs.github.com/en/rest/guides/traversing-with-pagination)
-2.  [PHP cURL Documentation](https://www.php.net/manual/en/book.curl.php)
-3.  [Bootstrap Documentation](https://getbootstrap.com/docs/4.5/getting-started/introduction/)
+1. [GitHub API Pagination](https://docs.github.com/en/rest/guides/traversing-with-pagination)
+2. [PHP cURL Documentation](https://www.php.net/manual/en/book.curl.php)
+3. [Bootstrap Documentation](https://getbootstrap.com/docs/4.5/getting-started/introduction/)
 
 Feel free to modify the code as needed!
-## Mark Hazleton:
+
+## Mark Hazleton
+
 update to list the file names impacted
-## chatgpt:
+
+## chatgpt
+
 To list the file names impacted by each commit, you can iterate through the `files` array in the detailed commit information and extract the `filename` property. Here's the updated PHP code snippet:
 
 ```php
@@ -495,7 +520,7 @@ To list the file names impacted by each commit, you can iterate through the `fil
     }
 
     $ch = curl_init();
-    $apiUrl = "https://api.github.com/repos/controlorigins/documents/commits?per_page=5";
+    $apiUrl = "https://api.github.com/repos/markhazleton/PHPDocSpark/commits?per_page=5";
     curl_setopt($ch, CURLOPT_URL, $apiUrl);
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
     curl_setopt($ch, CURLOPT_USERAGENT, 'YourAppName');
@@ -542,16 +567,20 @@ To list the file names impacted by each commit, you can iterate through the `fil
 
 In this updated code, I added a nested `<ul>` list under each commit to display the file names impacted. I iterated through the `files` array of each detailed commit object and extracted the `filename` property to display it.
 
-### References:
+### References
 
-1.  [GitHub API Documentation for Commits](https://docs.github.com/en/rest/reference/repos#get-a-commit)
-2.  [PHP cURL Documentation](https://www.php.net/manual/en/book.curl.php)
-3.  [Bootstrap Documentation](https://getbootstrap.com/docs/4.5/getting-started/introduction/)
+1. [GitHub API Documentation for Commits](https://docs.github.com/en/rest/reference/repos#get-a-commit)
+2. [PHP cURL Documentation](https://www.php.net/manual/en/book.curl.php)
+3. [Bootstrap Documentation](https://getbootstrap.com/docs/4.5/getting-started/introduction/)
 
 Feel free to modify the code as needed!
-## Mark Hazleton:
+
+## Mark Hazleton
+
 Create a way to cache the results for one hour to reduce the load on the api
-## chatgpt:
+
+## chatgpt
+
 Caching the results can indeed help reduce the load on the GitHub API and improve the performance of your application. One simple way to cache the results in PHP is to use a file-based caching mechanism. You can save the API response to a file and serve the content from that file for subsequent requests until the cache expires.
 
 Here's how you can modify the PHP code to include caching for one hour:
@@ -586,7 +615,7 @@ Here's how you can modify the PHP code to include caching for one hour:
         $commits = json_decode(file_get_contents($cacheFile), true);
     } else {
         $ch = curl_init();
-        $apiUrl = "https://api.github.com/repos/controlorigins/documents/commits?per_page=5";
+        $apiUrl = "https://api.github.com/repos/markhazleton/PHPDocSpark/commits?per_page=5";
         curl_setopt($ch, CURLOPT_URL, $apiUrl);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
         curl_setopt($ch, CURLOPT_USERAGENT, 'YourAppName');
@@ -637,17 +666,21 @@ Here's how you can modify the PHP code to include caching for one hour:
 
 In this updated code, I added a caching mechanism using a JSON file (`commits_cache.json`). The code checks if this file exists and if its modification time is within the last hour. If both conditions are met, the code reads the commits from this cache file. Otherwise, it fetches the commits from the GitHub API and updates the cache file.
 
-### References:
+### References
 
-1.  [PHP filemtime function](https://www.php.net/manual/en/function.filemtime.php)
-2.  [PHP file\_put\_contents function](https://www.php.net/manual/en/function.file-put-contents.php)
-3.  [PHP file\_get\_contents function](https://www.php.net/manual/en/function.file-get-contents.php)
-4.  [GitHub API Documentation](https://docs.github.com/en/rest)
+1. [PHP filemtime function](https://www.php.net/manual/en/function.filemtime.php)
+2. [PHP file\_put\_contents function](https://www.php.net/manual/en/function.file-put-contents.php)
+3. [PHP file\_get\_contents function](https://www.php.net/manual/en/function.file-get-contents.php)
+4. [GitHub API Documentation](https://docs.github.com/en/rest)
 
 Feel free to modify the code as needed!
-## Mark Hazleton:
+
+## Mark Hazleton
+
 update the file location for the cach to be in the /data folder. Add a display of the age of the cache to the page in the footer. Include time of cache and time until next refresh
-## chatgpt:
+
+## chatgpt
+
 Certainly! To move the cache file to the `/data` folder, you can update the `$cacheFile` variable to point to `/data/commits_cache.json`. To display the age of the cache, you can calculate the time difference between the current time and the last modified time of the cache file. Then, you can display this information in the footer.
 
 Here's the updated PHP code:
@@ -682,7 +715,7 @@ Here's the updated PHP code:
         $commits = json_decode(file_get_contents($cacheFile), true);
     } else {
         $ch = curl_init();
-        $apiUrl = "https://api.github.com/repos/controlorigins/documents/commits?per_page=5";
+        $apiUrl = "https://api.github.com/repos/markhazleton/PHPDocSpark/commits?per_page=5";
         curl_setopt($ch, CURLOPT_URL, $apiUrl);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
         curl_setopt($ch, CURLOPT_USERAGENT, 'YourAppName');
@@ -746,16 +779,20 @@ Here's the updated PHP code:
 
 In this updated code, I moved the cache file to the `/data` folder and added a footer to display the cache information. The footer shows the time the cache was generated, the age of the cache in seconds, and the time remaining until the next refresh.
 
-### References:
+### References
 
-1.  [PHP filemtime function](https://www.php.net/manual/en/function.filemtime.php)
-2.  [PHP date function](https://www.php.net/manual/en/function.date.php)
-3.  [Bootstrap Documentation](https://getbootstrap.com/docs/4.5/getting-started/introduction/)
+1. [PHP filemtime function](https://www.php.net/manual/en/function.filemtime.php)
+2. [PHP date function](https://www.php.net/manual/en/function.date.php)
+3. [Bootstrap Documentation](https://getbootstrap.com/docs/4.5/getting-started/introduction/)
 
 Feel free to modify the code as needed!
-## Mark Hazleton:
+
+## Mark Hazleton
+
 I got an error Warning: file\_put\_contents(/data/commits\_cache.json): Failed to open stream: No such file or directory in C:\\GitHub\\ControlOrigins\\documents\\website\\pages\\github.php on line 30
-## chatgpt:
+
+## chatgpt
+
 The error suggests that PHP is unable to find the `/data` directory to write the cache file. The path `/data/commits_cache.json` is an absolute path, and it's likely that the directory doesn't exist or PHP doesn't have permission to write to it.
 
 Here are some solutions to consider:
@@ -798,22 +835,26 @@ chmod 777 data
 
 On a Windows system, you can usually set the folder to be writable via the folder's properties dialog.
 
-### References:
+### References
 
-1.  [PHP file\_put\_contents function](https://www.php.net/manual/en/function.file-put-contents.php)
-2.  [PHP file\_exists function](https://www.php.net/manual/en/function.file-exists.php)
-3.  [PHP mkdir function](https://www.php.net/manual/en/function.mkdir.php)
+1. [PHP file\_put\_contents function](https://www.php.net/manual/en/function.file-put-contents.php)
+2. [PHP file\_exists function](https://www.php.net/manual/en/function.file-exists.php)
+3. [PHP mkdir function](https://www.php.net/manual/en/function.mkdir.php)
 
 Try one of these solutions and see if it resolves the issue.
-## Mark Hazleton:
+
+## Mark Hazleton
+
 upon page refresh, I get the following errors. Warning : Undefined array key "files" in C:\\GitHub\\ControlOrigins\\documents\\website\\pages\\github.php on line 43 Fatal error : Uncaught TypeError: count(): Argument #1 ($value) must be of type Countable|array, null given in C:\\GitHub\\ControlOrigins\\documents\\website\\pages\\github.php:43 Stack trace: #0 C:\\GitHub\\ControlOrigins\\documents\\website\\template.php(56): include() #1 C:\\GitHub\\ControlOrigins\\documents\\website\\index.php(18): include('C:\\\\GitHub\\\\Contr...') #2 {main} thrown in C:\\GitHub\\ControlOrigins\\documents\\website\\pages\\github.php on line 43
-## chatgpt:
+
+## chatgpt
+
 The error messages indicate that the `files` key is not present in the `$commitDetails` array, and as a result, the `count()` function is failing because it's trying to count a `null` value.
 
 This could happen for a couple of reasons:
 
-1.  The API request to fetch detailed commit information might be failing, returning `null` or an incomplete object.
-2.  The cache might have stored an incomplete or corrupted object.
+1. The API request to fetch detailed commit information might be failing, returning `null` or an incomplete object.
+2. The cache might have stored an incomplete or corrupted object.
 
 Here's how you can update the code to handle these cases:
 
@@ -862,16 +903,20 @@ if (!empty($commits)) {
 
 In this updated code, I added checks to see if the `files` key exists in the `$commitDetails` array before attempting to count it or iterate through it. This should prevent the errors you're seeing.
 
-### References:
+### References
 
-1.  [PHP isset function](https://www.php.net/manual/en/function.isset.php)
-2.  [PHP count function](https://www.php.net/manual/en/function.count.php)
-3.  [PHP DateTime class](https://www.php.net/manual/en/class.datetime.php)
+1. [PHP isset function](https://www.php.net/manual/en/function.isset.php)
+2. [PHP count function](https://www.php.net/manual/en/function.count.php)
+3. [PHP DateTime class](https://www.php.net/manual/en/class.datetime.php)
 
 Try updating your code with these changes and see if it resolves the issue.
-## Mark Hazleton:
+
+## Mark Hazleton
+
 I am not seeing impacted file counts anymore and I am getting this error Warning: Undefined array key "files" in C:\\GitHub\\ControlOrigins\\documents\\website\\pages\\github.php on line 58
-## chatgpt:
+
+## chatgpt
+
 The issue seems to be that the `files` key is not present in the `$commitDetails` array, which suggests that the API call to fetch detailed commit information might not be working as expected. It's also possible that the cached data is incomplete or corrupted.
 
 To troubleshoot this, you can add some debugging information to see what's actually being returned by the API. You might also want to invalidate the cache to make sure you're not working with stale or corrupted data.
@@ -938,16 +983,20 @@ In this updated code, I added a default value of `'N/A'` for `$filesImpacted` an
 
 I also included a commented-out `var_dump()` line that you can uncomment to see the raw API response. This can help you debug what's actually being returned by the API.
 
-### References:
+### References
 
-1.  [PHP var\_dump function](https://www.php.net/manual/en/function.var-dump.php)
-2.  [PHP isset function](https://www.php.net/manual/en/function.isset.php)
-3.  [PHP is\_array function](https://www.php.net/manual/en/function.is-array.php)
+1. [PHP var\_dump function](https://www.php.net/manual/en/function.var-dump.php)
+2. [PHP isset function](https://www.php.net/manual/en/function.isset.php)
+3. [PHP is\_array function](https://www.php.net/manual/en/function.is-array.php)
 
 Try these updates and see if they help you identify and resolve the issue.
-## Mark Hazleton:
+
+## Mark Hazleton
+
 why is it hitting the api if the cache limit has not been hit?
-## chatgpt:
+
+## chatgpt
+
 If the code is hitting the API even when the cache limit has not been reached, it suggests that the cache-checking logic might not be working as expected. The code should only make an API request if the cache file either doesn't exist or has expired.
 
 Here are some potential reasons and solutions:
@@ -995,22 +1044,25 @@ This version of the code includes debugging `echo` statements that will print me
 
 Try adding these debugging lines to your code to help diagnose why it might be hitting the API even when the cache limit has not been reached.
 
-### References:
+### References
 
-1.  [PHP file\_exists function](https://www.php.net/manual/en/function.file-exists.php)
-2.  [PHP filemtime function](https://www.php.net/manual/en/function.filemtime.php)
-3.  [PHP time function](https://www.php.net/manual/en/function.time.php)
+1. [PHP file\_exists function](https://www.php.net/manual/en/function.file-exists.php)
+2. [PHP filemtime function](https://www.php.net/manual/en/function.filemtime.php)
+3. [PHP time function](https://www.php.net/manual/en/function.time.php)
 
 After adding these debugging lines, you should be able to better understand what's going on with the cache logic.
-## Mark Hazleton:
+
+## Mark Hazleton
+
 what are the api rate limits for GitHub.com api?
-## chatgpt:
+
+## chatgpt
+
 The rate limits for the GitHub API depend on whether you're making authenticated or unauthenticated requests:
 
-1.  **Unauthenticated Requests**: If you're making API requests without any authentication, the rate limit is 60 requests per hour per IP address.
-    
-2.  **Authenticated Requests**: If you're using OAuth or a personal access token for authentication, the rate limit jumps to 5,000 requests per hour per account.
-    
+1. **Unauthenticated Requests**: If you're making API requests without any authentication, the rate limit is 60 requests per hour per IP address.
+
+2. **Authenticated Requests**: If you're using OAuth or a personal access token for authentication, the rate limit jumps to 5,000 requests per hour per account.
 
 It's generally a good idea to authenticate your requests to get a higher rate limit, especially if you're running a service that makes frequent API calls.
 
@@ -1018,9 +1070,9 @@ It's generally a good idea to authenticate your requests to get a higher rate li
 
 You can check your current rate limit status by examining the HTTP headers included in the API responses. The relevant headers are:
 
--   `X-RateLimit-Limit`: The maximum number of requests you're permitted to make per hour.
--   `X-RateLimit-Remaining`: The number of requests remaining in the current rate limit window.
--   `X-RateLimit-Reset`: The time at which the current rate limit window resets, in UTC epoch seconds.
+- `X-RateLimit-Limit`: The maximum number of requests you're permitted to make per hour.
+- `X-RateLimit-Remaining`: The number of requests remaining in the current rate limit window.
+- `X-RateLimit-Reset`: The time at which the current rate limit window resets, in UTC epoch seconds.
 
 You can also check your rate limit status with a simple API call:
 
@@ -1030,16 +1082,20 @@ curl -i https://api.github.com/users/username
 
 Replace `username` with your GitHub username. The rate limit information will be in the headers of the response.
 
-### References:
+### References
 
-1.  [GitHub API Rate Limiting](https://docs.github.com/en/rest/overview/resources-in-the-rest-api#rate-limiting)
-2.  [GitHub API Authentication](https://docs.github.com/en/rest/overview/other-authentication-methods)
-3.  [HTTP Headers](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers)
+1. [GitHub API Rate Limiting](https://docs.github.com/en/rest/overview/resources-in-the-rest-api#rate-limiting)
+2. [GitHub API Authentication](https://docs.github.com/en/rest/overview/other-authentication-methods)
+3. [HTTP Headers](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers)
 
 Remember to handle rate limiting in your application logic to avoid hitting these limits, especially if your app makes frequent API calls.
-## Mark Hazleton:
+
+## Mark Hazleton
+
 update PHP logic to use my personal access token PAT
-## chatgpt:
+
+## chatgpt
+
 Using a Personal Access Token (PAT) for GitHub API requests will increase your rate limit and allow you to make authenticated requests. You can include the token in the `Authorization` header of your cURL requests.
 
 Here's how to update the PHP code to use a Personal Access Token:
@@ -1065,7 +1121,7 @@ if (file_exists($cacheFile) && (time() - filemtime($cacheFile) < $cacheTime)) {
     $commits = json_decode(file_get_contents($cacheFile), true);
 } else {
     $ch = curl_init();
-    $apiUrl = "https://api.github.com/repos/controlorigins/documents/commits?per_page=5";
+    $apiUrl = "https://api.github.com/repos/markhazleton/PHPDocSpark/commits?per_page=5";
     curl_setopt($ch, CURLOPT_URL, $apiUrl);
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
     curl_setopt($ch, CURLOPT_HTTPHEADER, array('Authorization: token ' . $token));
@@ -1089,16 +1145,20 @@ I also updated the `fetchCommitDetails()` function and the main cURL request to 
 
 **Important**: Make sure to keep your Personal Access Token secure. Do not expose it in client-side code or public repositories.
 
-### References:
+### References
 
-1.  [GitHub API Authentication](https://docs.github.com/en/rest/overview/other-authentication-methods)
-2.  [cURL with PHP](https://www.php.net/manual/en/book.curl.php)
-3.  [HTTP Authorization Header](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Authorization)
+1. [GitHub API Authentication](https://docs.github.com/en/rest/overview/other-authentication-methods)
+2. [cURL with PHP](https://www.php.net/manual/en/book.curl.php)
+3. [HTTP Authorization Header](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Authorization)
 
 This should allow you to make authenticated requests to the GitHub API, thereby increasing your rate limit.
-## Mark Hazleton:
+
+## Mark Hazleton
+
 How can I protect the personal access token when I check the code into GitHub?
-## chatgpt:
+
+## chatgpt
+
 Protecting sensitive information like Personal Access Tokens (PATs) is crucial when you're working with version control systems like Git. You should never hardcode such tokens directly into your codebase, especially if you're going to push the code to a public repository. Here are some strategies to protect your PAT:
 
 ### 1\. Environment Variables
@@ -1155,16 +1215,20 @@ If you're storing your PAT in a `.env` file or some other configuration file, ma
 
 If you're using GitHub Actions or another CI/CD service, you can set your PAT as a secret in the CI/CD configuration. GitHub Actions, for example, allows you to [set encrypted secrets](https://docs.github.com/en/actions/security-guides/encrypted-secrets) that are available to the CI/CD pipeline but not exposed in logs.
 
-### References:
+### References
 
-1.  [PHP Dotenv on GitHub](https://github.com/vlucas/phpdotenv)
-2.  [GitHub Actions Encrypted Secrets](https://docs.github.com/en/actions/security-guides/encrypted-secrets)
-3.  [Environment Variables in PHP](https://www.php.net/manual/en/reserved.variables.environment.php)
+1. [PHP Dotenv on GitHub](https://github.com/vlucas/phpdotenv)
+2. [GitHub Actions Encrypted Secrets](https://docs.github.com/en/actions/security-guides/encrypted-secrets)
+3. [Environment Variables in PHP](https://www.php.net/manual/en/reserved.variables.environment.php)
 
 By following these best practices, you can keep your Personal Access Token secure while still being able to use it in your application.
-## Mark Hazleton:
+
+## Mark Hazleton
+
 output the full code in a code block, set the YourAppName to be ControlOriginsDocuments
-## chatgpt:
+
+## chatgpt
+
 Certainly! Below is the full PHP code that incorporates the use of a Personal Access Token (PAT) stored in an environment variable. The code also includes caching and uses the app name `ControlOriginsDocuments` as the user agent for API requests.
 
 ```php
@@ -1199,7 +1263,7 @@ Certainly! Below is the full PHP code that incorporates the use of a Personal Ac
         $commits = json_decode(file_get_contents($cacheFile), true);
     } else {
         $ch = curl_init();
-        $apiUrl = "https://api.github.com/repos/controlorigins/documents/commits?per_page=5";
+        $apiUrl = "https://api.github.com/repos/markhazleton/PHPDocSpark/commits?per_page=5";
         curl_setopt($ch, CURLOPT_URL, $apiUrl);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
         curl_setopt($ch, CURLOPT_HTTPHEADER, array('Authorization: token ' . $token));
@@ -1275,9 +1339,13 @@ Certainly! Below is the full PHP code that incorporates the use of a Personal Ac
 To use this code, you'll need to set the `GITHUB_PAT` environment variable to your actual Personal Access Token. Make sure to do this in a way that doesn't expose the token, such as setting it directly in your server environment or using a `.env` file that is not committed to your repository.
 
 This should provide a complete solution for fetching and displaying GitHub commits, with caching and token-based authentication.
-## Mark Hazleton:
+
+## Mark Hazleton
+
 Update the cache logic to cache the full API response from both calls. so the cache file will now have the main call to get the list of commits AND all the subsequent call to get the file information.
-## chatgpt:
+
+## chatgpt
+
 To cache both the main API response and the subsequent calls for file information, you can create a more complex data structure to hold all the necessary data. Then, you can cache this entire structure.
 
 Here's how you can update the PHP code to implement this:
@@ -1315,7 +1383,7 @@ Here's how you can update the PHP code to implement this:
         $commits = $cachedData['commits'];
     } else {
         $ch = curl_init();
-        $apiUrl = "https://api.github.com/repos/controlorigins/documents/commits?per_page=5";
+        $apiUrl = "https://api.github.com/repos/markhazleton/PHPDocSpark/commits?per_page=5";
         curl_setopt($ch, CURLOPT_URL, $apiUrl);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
         curl_setopt($ch, CURLOPT_HTTPHEADER, array('Authorization: token ' . $token));
@@ -1392,14 +1460,18 @@ Here's how you can update the PHP code to implement this:
 
 In this updated code, I've made the following changes:
 
-1.  The `$commits` array now includes an additional key `'details'` for each commit, which stores the detailed information fetched from the subsequent API calls.
-2.  The entire `$commits` array, complete with details, is stored in a `$cachedData` array, which is then cached to the file system.
-3.  When reading from the cache, the code reads the entire `$cachedData` array, which includes both the main commits list and the details for each commit.
+1. The `$commits` array now includes an additional key `'details'` for each commit, which stores the detailed information fetched from the subsequent API calls.
+2. The entire `$commits` array, complete with details, is stored in a `$cachedData` array, which is then cached to the file system.
+3. When reading from the cache, the code reads the entire `$cachedData` array, which includes both the main commits list and the details for each commit.
 
 This should allow you to cache both the main list of commits and the detailed file information for each commit.
-## Mark Hazleton:
+
+## Mark Hazleton
+
 update the footer to use an unordered list and format the cache age seconds and next refresh seconds into hours, min, seconds
-## chatgpt:
+
+## chatgpt
+
 Certainly! To format the cache age and the time until the next refresh into hours, minutes, and seconds, you can use PHP's built-in functions to perform the necessary calculations. Here's how you can update the footer section:
 
 ```php
@@ -1429,9 +1501,13 @@ Certainly! To format the cache age and the time until the next refresh into hour
 In this updated code, I've used an unordered list (`<ul>`) to display the cache information. I've also used PHP's `sprintf()` function to format the cache age and the time until the next refresh into hours, minutes, and seconds.
 
 This should make the footer information more organized and easier to read.
-## Mark Hazleton:
+
+## Mark Hazleton
+
 Add an API call to the cache to get general information about the repository, output some general information about the repository above the last 5 commits.
-## chatgpt:
+
+## chatgpt
+
 To display general information about the repository, you can make an additional API call to fetch this data. You can then cache this information along with the commits and their details. Here's how you can update the PHP code to include this feature:
 
 ```php
@@ -1465,8 +1541,8 @@ To display general information about the repository, you can make an additional 
     if (file_exists($cacheFile) && (time() - filemtime($cacheFile) < $cacheTime)) {
         $cachedData = json_decode(file_get_contents($cacheFile), true);
     } else {
-        $repoInfo = fetchApiData("https://api.github.com/repos/controlorigins/documents", $token);
-        $commits = fetchApiData("https://api.github.com/repos/controlorigins/documents/commits?per_page=5", $token);
+        $repoInfo = fetchApiData("https://api.github.com/repos/markhazleton/PHPDocSpark", $token);
+        $commits = fetchApiData("https://api.github.com/repos/markhazleton/PHPDocSpark/commits?per_page=5", $token);
 
         foreach ($commits as &$commit) {
             $commit['details'] = fetchApiData($commit['url'], $token);
@@ -1500,15 +1576,19 @@ To display general information about the repository, you can make an additional 
 
 In this updated code, I've made the following changes:
 
-1.  Renamed the `fetchCommitDetails()` function to `fetchApiData()` to make it more general-purpose.
-2.  Added an API call to fetch general repository information and stored it in the `$repoInfo` variable.
-3.  Updated the `$cachedData` array to include both the general repository information (`'repoInfo'`) and the commits (`'commits'`).
-4.  Added a section to display the general repository information above the list of commits.
+1. Renamed the `fetchCommitDetails()` function to `fetchApiData()` to make it more general-purpose.
+2. Added an API call to fetch general repository information and stored it in the `$repoInfo` variable.
+3. Updated the `$cachedData` array to include both the general repository information (`'repoInfo'`) and the commits (`'commits'`).
+4. Added a section to display the general repository information above the list of commits.
 
 This should provide a complete solution for fetching and displaying both general repository information and the last 5 commits, all while caching the data to reduce API calls.
-## Mark Hazleton:
+
+## Mark Hazleton
+
 output the full page code block.
-## chatgpt:
+
+## chatgpt
+
 Certainly! Below is the full PHP code that includes fetching and displaying general repository information, the last 5 commits, and their details, along with caching all this data.
 
 ```php
@@ -1542,8 +1622,8 @@ Certainly! Below is the full PHP code that includes fetching and displaying gene
     if (file_exists($cacheFile) && (time() - filemtime($cacheFile) < $cacheTime)) {
         $cachedData = json_decode(file_get_contents($cacheFile), true);
     } else {
-        $repoInfo = fetchApiData("https://api.github.com/repos/controlorigins/documents", $token);
-        $commits = fetchApiData("https://api.github.com/repos/controlorigins/documents/commits?per_page=5", $token);
+        $repoInfo = fetchApiData("https://api.github.com/repos/markhazleton/PHPDocSpark", $token);
+        $commits = fetchApiData("https://api.github.com/repos/markhazleton/PHPDocSpark/commits?per_page=5", $token);
 
         foreach ($commits as &$commit) {
             $commit['details'] = fetchApiData($commit['url'], $token);
@@ -1605,17 +1685,21 @@ Certainly! Below is the full PHP code that includes fetching and displaying gene
 
 This full-page code includes:
 
-1.  An API call to fetch general information about the repository.
-2.  Display of some general information about the repository.
-3.  An API call to fetch the last 5 commits.
-4.  Display of the last 5 commits and their details.
-5.  Caching logic to store all the fetched data.
-6.  A footer that displays cache information.
+1. An API call to fetch general information about the repository.
+2. Display of some general information about the repository.
+3. An API call to fetch the last 5 commits.
+4. Display of the last 5 commits and their details.
+5. Caching logic to store all the fetched data.
+6. A footer that displays cache information.
 
 Just add your existing code for displaying commits where the comment `// Display commits (your existing code for displaying commits goes here)` is placed, and you should have a complete solution.
-## Mark Hazleton:
+
+## Mark Hazleton
+
 what should the code for displaying commits be? Crate a code block to show
-## chatgpt:
+
+## chatgpt
+
 Certainly! Below is the code block that you can insert into the main PHP file to display the last 5 commits and their details. This code should be placed where the comment `// Display commits (your existing code for displaying commits goes here)` is located.
 
 ```php
@@ -1657,55 +1741,61 @@ if (isset($cachedData['commits']) && !empty($cachedData['commits'])) {
 This code block will display the last 5 commits and their details, including the commit message, author, date, number of files impacted, and the names of the files impacted. It uses Bootstrap classes for styling.
 
 You can insert this code block into the main PHP file where the comment indicates, and it should work seamlessly with the rest of the code to provide a complete solution.
-## Mark Hazleton:
+
+## Mark Hazleton
+
 Write an explanation of what we just did for an executive audience. Highlight that the tasks completed and the goal of learning PHP and the GitHub API access. Summarize the steps taken.
-## chatgpt:
+
+## chatgpt
+
 ### Executive Summary
 
-#### Objective:
+#### Objective
 
-The primary goal of this project was to facilitate a deeper understanding of PHP programming and accessing the GitHub API. We aimed to create a web page that fetches and displays information about a specific GitHub repository, in this case, `https://github.com/controlorigins/documents`. The information displayed includes general repository details as well as the last 5 commits made to the repository.
+The primary goal of this project was to facilitate a deeper understanding of PHP programming and accessing the GitHub API. We aimed to create a web page that fetches and displays information about a specific GitHub repository, in this case, `https://github.com/markhazleton/PHPDocSpark`. The information displayed includes general repository details as well as the last 5 commits made to the repository.
 
-#### Tasks Completed:
+#### Tasks Completed
 
-1.  **API Integration**: Integrated the GitHub API to fetch data about the repository and its commits.
-    
-2.  **Data Display**: Utilized PHP to process the API data and display it on a web page. The information includes general repository details like the name, description, and number of stars, as well as specifics about the last 5 commits.
-    
-3.  **User-Friendly Formatting**: Leveraged Bootstrap for styling and formatted the commit dates to be more user-friendly.
-    
-4.  **Caching Mechanism**: Implemented a caching system to store the API responses locally for one hour, reducing the load on the GitHub API and improving page load times.
-    
-5.  **Security**: Used environment variables to securely store and access the GitHub Personal Access Token (PAT), ensuring that sensitive information is not exposed.
-    
-6.  **Error Handling**: Included basic error handling to gracefully manage issues like API failures or data inconsistencies.
-    
+1. **API Integration**: Integrated the GitHub API to fetch data about the repository and its commits.
 
-#### Summary of Steps Taken:
+2. **Data Display**: Utilized PHP to process the API data and display it on a web page. The information includes general repository details like the name, description, and number of stars, as well as specifics about the last 5 commits.
 
-1.  **Initial Setup**: Created a PHP page and set up the environment, including enabling the cURL extension for API calls.
-    
-2.  **API Calls**: Wrote PHP functions to make API calls to GitHub for fetching repository and commit information.
-    
-3.  **Data Processing**: Processed the API responses to extract relevant data.
-    
-4.  **UI Design**: Used Bootstrap to design the UI and display the processed data.
-    
-5.  **Date Formatting**: Converted the commit dates to a more readable US format.
-    
-6.  **Caching**: Implemented a caching mechanism to store the API responses in a JSON file located in the `/data` folder.
-    
-7.  **Security Measures**: Stored the GitHub PAT in an environment variable to keep it secure.
-    
-8.  **Footer Information**: Added a footer to display cache information, including the cache age and time until the next refresh, formatted in hours, minutes, and seconds.
-    
-9.  **Testing and Debugging**: Conducted tests to ensure that the caching mechanism works as expected and that the GitHub PAT is secure.
-    
+3. **User-Friendly Formatting**: Leveraged Bootstrap for styling and formatted the commit dates to be more user-friendly.
+
+4. **Caching Mechanism**: Implemented a caching system to store the API responses locally for one hour, reducing the load on the GitHub API and improving page load times.
+
+5. **Security**: Used environment variables to securely store and access the GitHub Personal Access Token (PAT), ensuring that sensitive information is not exposed.
+
+6. **Error Handling**: Included basic error handling to gracefully manage issues like API failures or data inconsistencies.
+
+#### Summary of Steps Taken
+
+1. **Initial Setup**: Created a PHP page and set up the environment, including enabling the cURL extension for API calls.
+
+2. **API Calls**: Wrote PHP functions to make API calls to GitHub for fetching repository and commit information.
+
+3. **Data Processing**: Processed the API responses to extract relevant data.
+
+4. **UI Design**: Used Bootstrap to design the UI and display the processed data.
+
+5. **Date Formatting**: Converted the commit dates to a more readable US format.
+
+6. **Caching**: Implemented a caching mechanism to store the API responses in a JSON file located in the `/data` folder.
+
+7. **Security Measures**: Stored the GitHub PAT in an environment variable to keep it secure.
+
+8. **Footer Information**: Added a footer to display cache information, including the cache age and time until the next refresh, formatted in hours, minutes, and seconds.
+
+9. **Testing and Debugging**: Conducted tests to ensure that the caching mechanism works as expected and that the GitHub PAT is secure.
 
 By completing these tasks, we have successfully created a PHP-based web page that interacts with the GitHub API to fetch and display relevant information. This project serves as a practical example of how to leverage PHP for backend development and API interactions, providing valuable insights into real-world applications of these technologies.
-## Mark Hazleton:
+
+## Mark Hazleton
+
 add the executive summary under the footer of the php page format using bootstrap where possible.
-## chatgpt:
+
+## chatgpt
+
 Certainly! You can add the Executive Summary under the footer using Bootstrap classes for better formatting. Here's how you can update the PHP code to include the Executive Summary:
 
 ```php

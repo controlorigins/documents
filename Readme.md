@@ -1,6 +1,6 @@
 # 🚀 PHPDocSpark by Mark Hazleton
 
-[![Live Demo](https://img.shields.io/badge/🌐_Live_Demo-controlorigins--docs.azurewebsites.net-blue?style=for-the-badge)](https://controlorigins-docs.azurewebsites.net/)
+[![Live Demo](https://img.shields.io/badge/🌐_Live_Demo-phpdocspark.azurewebsites.net-blue?style=for-the-badge)](https://phpdocspark.azurewebsites.net/)
 [![Canonical](https://img.shields.io/badge/Canonical-phpdocspark.markhazleton.com-orange?style=for-the-badge)](https://phpdocspark.markhazleton.com)
 [![PHP](https://img.shields.io/badge/PHP-8.2+-777BB4?style=for-the-badge&logo=php&logoColor=white)](https://php.net)
 [![Node.js](https://img.shields.io/badge/Node.js-18+-339933?style=for-the-badge&logo=node.js&logoColor=white)](https://nodejs.org)
@@ -175,7 +175,7 @@ graph TB
 ### **1. Clone & Setup**
 
 ```bash
-git clone https://github.com/controlorigins/documents.git
+git clone https://github.com/markhazleton/PHPDocSpark.git
 cd documents
 
 # Install dependencies
@@ -447,7 +447,7 @@ stages:
 
 ### **Deployment Targets**
 
-- **Production**: [controlorigins-docs.azurewebsites.net](https://controlorigins-docs.azurewebsites.net/)
+- **Production**: [phpdocspark.azurewebsites.net](https://phpdocspark.azurewebsites.net/)
 - **Platform**: Azure Web Apps (Linux)
 - **PHP Version**: 8.1+
 - **Deployment**: Automated via Azure DevOps
@@ -595,7 +595,7 @@ SOFTWARE.
 
 <div align="center">
 
-**[🌐 Live Demo](https://controlorigins-docs.azurewebsites.net/) | [📖 Documentation](https://controlorigins-docs.azurewebsites.net/?page=document_view) | [🔧 GitHub Issues](https://github.com/controlorigins/documents/issues)**
+**[🌐 Live Demo](https://phpdocspark.azurewebsites.net/) | [📖 Documentation](https://phpdocspark.azurewebsites.net/?page=document_view) | [🔧 GitHub Issues](https://github.com/markhazleton/PHPDocSpark/issues)**
 
 Built with ❤️ by [Mark Hazleton](https://markhazleton.com)
 

@@ -51,7 +51,7 @@ $structuredData = [
             'name' => PHPSPARK_AUTHOR,
             'url' => PHPSPARK_AUTHOR_URL,
             'sameAs' => [
-                'https://github.com/controlorigins',
+                'https://github.com/markhazleton',
                 'https://www.linkedin.com/in/markhazleton'
             ]
         ],

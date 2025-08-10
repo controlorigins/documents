@@ -49,6 +49,11 @@
                         </a>
                     </li>
                     <li class="nav-item">
+                        <a class="nav-link" href="/?page=article_list">
+                            <i class="bi bi-journal-text me-1"></i> Articles
+                        </a>
+                    </li>
+                    <li class="nav-item">
                         <a class="nav-link" href="/?page=github">
                             <i class="bi bi-github me-1"></i> GitHub
                         </a>
@@ -87,14 +92,14 @@
                     <h5><?php echo e(PHPSPARK_BRAND); ?></h5>
                     <p>
                         <i class="bi bi-link-45deg"></i> 
-                        <a href="https://controlorigins-docs.azurewebsites.net/" class="text-light">Current Hosting (Temporary)</a>
+                        <a href="https://phpdocspark.azurewebsites.net/" class="text-light">Live Demo</a>
                         <br>
                         <a href="<?php echo e(PHPSPARK_SUITE_URL); ?>" class="text-light">Part of the <?php echo e(PHPSPARK_SUITE_NAME); ?> Suite</a>
                     </p>
                 </div>
                 <div class="col-md-6 text-md-end">
                     <p>
-                        <a href="https://github.com/controlorigins/documents" class="text-light me-3">
+                        <a href="https://github.com/markhazleton/PHPDocSpark" class="text-light me-3">
                             <i class="bi bi-github"></i> GitHub Repository
                         </a>
                         <a href="https://markhazleton.com/creating-a-php-website-with-chat-gpt.html" class="text-light">

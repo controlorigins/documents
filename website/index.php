@@ -81,7 +81,7 @@ if (preg_match('#^/doc(?:/(.*))?$#i', $requestPath, $m)) {
     }
 }
 
-$validPages = [ 'document_view','data-analysis','database','project_list','github','joke','search','404' ];
+$validPages = [ 'document_view','data-analysis','database','project_list','article_list','github','joke','search','404' ];
 if (!in_array($page, $validPages)) { $page = '404'; }
 
 $pageTitles = [
@@ -89,6 +89,7 @@ $pageTitles = [
     'data-analysis' => 'CSV File Analysis',
     'database' => 'Database CRUD Operations',
     'project_list' => 'Projects List',
+    'article_list' => 'Articles List',
     'github' => 'GitHub Repository Info',
     'joke' => 'Random Jokes',
     'search' => 'Search Documents',
@@ -104,6 +105,7 @@ if (!isset($metaDescription)) {
         case 'data-analysis': $metaDescription = 'Analyze CSV datasets interactively with profiling, statistics, and visualizations using PHPDocSpark.'; break;
         case 'database': $metaDescription = 'Demonstration of SQLite CRUD operations with secure PHP patterns in PHPDocSpark.'; break;
         case 'project_list': $metaDescription = 'Project portfolio and examples curated by Mark Hazleton within the PHPDocSpark platform.'; break;
+        case 'article_list': $metaDescription = 'Technical articles and insights from Mark Hazleton\'s RSS feed, covering software development, Azure, and project management.'; break;
         case 'github': $metaDescription = 'Live GitHub repository insights, commits, and contributors integrated into PHPDocSpark.'; break;
         case 'joke': $metaDescription = 'Sample external API integration (JokeAPI) demonstrating JSON fetch and display in PHPDocSpark.'; break;
         case 'search': $metaDescription = 'Full-text search across all markdown documentation within PHPDocSpark by Mark Hazleton.'; break;

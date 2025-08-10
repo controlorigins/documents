@@ -138,7 +138,7 @@ $contacts = read();
             <a href="<?= doc_pretty_url('ChatGPT/Sessions/PHP Database CRUD'); ?>" class="btn btn-light btn-sm">
                 <i class="bi bi-info-circle me-1"></i> How this page was created
             </a>
-            <a href="https://github.com/controlorigins/documents/blob/main/website/pages/database.php" target="_blank" class="btn btn-light btn-sm">
+            <a href="https://github.com/markhazleton/PHPDocSpark/blob/main/website/pages/database.php" target="_blank" class="btn btn-light btn-sm">
                 <i class="bi bi-code-slash me-1"></i> View Source
             </a>
         </div>

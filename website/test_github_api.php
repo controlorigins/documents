@@ -8,7 +8,7 @@ function testApiCall($url) {
     $ch = curl_init();
     curl_setopt($ch, CURLOPT_URL, $url);
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-    curl_setopt($ch, CURLOPT_USERAGENT, 'ControlOriginsDocuments');
+    curl_setopt($ch, CURLOPT_USERAGENT, 'PHPDocSpark');
     curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
     curl_setopt($ch, CURLOPT_TIMEOUT, 10);
     curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
@@ -47,8 +47,8 @@ function testApiCall($url) {
 }
 
 // Test the main repository endpoint
-testApiCall('https://api.github.com/repos/controlorigins/documents');
+testApiCall('https://api.github.com/repos/markhazleton/PHPDocSpark');
 
 // Test commits endpoint
-testApiCall('https://api.github.com/repos/controlorigins/documents/commits?per_page=2');
+testApiCall('https://api.github.com/repos/markhazleton/PHPDocSpark/commits?per_page=2');
 ?>

@@ -125,7 +125,7 @@ if (isset($_GET['file'])) {
             <a href="<?= doc_pretty_url('ChatGPT/Sessions/Markdown PHP File Viewer.md'); ?>" class="btn btn-light btn-sm">
                 <i class="bi bi-info-circle me-1"></i> How this page was created
             </a>
-            <a href="https://github.com/controlorigins/documents/blob/main/website/pages/document_view.php" target="_blank" class="btn btn-light btn-sm">
+            <a href="https://github.com/markhazleton/PHPDocSpark/blob/main/website/pages/document_view.php" target="_blank" class="btn btn-light btn-sm">
                 <i class="bi bi-code-slash me-1"></i> View Source
             </a>
         </div>

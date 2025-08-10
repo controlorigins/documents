@@ -4,8 +4,8 @@
 
 Welcome to **PHPDocSpark by Mark Hazleton** – a cutting-edge demonstration of how traditional PHP applications can seamlessly integrate with modern frontend build systems to create exceptional web experiences. (Legacy references to controlorigins remain in URLs / repo slug for continuity.)
 
-[![Live Demo](https://img.shields.io/badge/🌐_Live_Demo-controlorigins--docs.azurewebsites.net-blue?style=flat-square)](https://controlorigins-docs.azurewebsites.net/)
-[![GitHub](https://img.shields.io/badge/📦_Source_Code-GitHub-black?style=flat-square)](https://github.com/controlorigins/documents)
+[![Live Demo](https://img.shields.io/badge/🌐_Live_Demo-phpdocspark.azurewebsites.net-blue?style=flat-square)](https://phpdocspark.azurewebsites.net/)
+[![GitHub](https://img.shields.io/badge/📦_Source_Code-GitHub-black?style=flat-square)](https://github.com/markhazleton/PHPDocSpark)
 [![PHP](https://img.shields.io/badge/PHP-8.2+-777BB4?style=flat-square&logo=php&logoColor=white)](https://php.net)
 [![Vite](https://img.shields.io/badge/Vite-7.1+-646CFF?style=flat-square&logo=vite&logoColor=white)](https://vitejs.dev)
 
@@ -198,7 +198,7 @@ Explore detailed guides and best practices:
 
 ~~~bash
 # Clone the repository
-git clone https://github.com/controlorigins/documents.git
+git clone https://github.com/markhazleton/PHPDocSpark.git
 cd documents
 
 # Install dependencies  
@@ -278,10 +278,10 @@ graph TD
 
 ### **🔗 Essential Links**
 
-- **🌐 [Live Demo](https://controlorigins-docs.azurewebsites.net/)** - Experience the platform
-- **📦 [Source Code](https://github.com/controlorigins/documents)** - Explore implementation
+- **🌐 [Live Demo](https://phpdocspark.azurewebsites.net/)** - Experience the platform
+- **📦 [Source Code](https://github.com/markhazleton/PHPDocSpark)** - Explore implementation
 - **📖 [Blog Article](https://markhazleton.com/creating-a-php-website-with-chat-gpt.html)** - Development story
-- **📚 [Documentation Hub](https://controlorigins-docs.azurewebsites.net/?page=document_view)** - Complete guides
+- **📚 [Documentation Hub](https://phpdocspark.azurewebsites.net/?page=document_view)** - Complete guides
 
 ### **🎓 Educational Impact**
 
@@ -300,6 +300,6 @@ graph TD
 
 **🌟 Star this project if it helps your learning journey!**
 
-**Built with ❤️ by [Mark Hazleton](https://github.com/controlorigins) as a gift to the PHP community — part of the WebSpark suite**
+**Built with ❤️ by [Mark Hazleton](https://github.com/markhazleton) as a gift to the PHP community — part of the WebSpark suite**
 
 </div>  

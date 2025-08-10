@@ -8,6 +8,7 @@ $pages = [
     '/?page=data-analysis', // legacy parameter pages retained
     '/?page=database',
     '/?page=project_list',
+    '/?page=article_list',
     '/?page=github',
     '/?page=joke',
     '/?page=search'

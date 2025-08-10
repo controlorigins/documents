@@ -100,7 +100,7 @@ sort($projectLetters);
             <a href="<?= doc_pretty_url('ChatGPT/Sessions/Create PHP Project Table'); ?>" class="btn btn-light btn-sm">
                 <i class="bi bi-info-circle me-1"></i> How this page was created
             </a>
-            <a href="https://github.com/controlorigins/documents/blob/main/website/pages/project_list.php" target="_blank" class="btn btn-light btn-sm">
+            <a href="https://github.com/markhazleton/PHPDocSpark/blob/main/website/pages/project_list.php" target="_blank" class="btn btn-light btn-sm">
                 <i class="bi bi-code-slash me-1"></i> View Source
             </a>
         </div>

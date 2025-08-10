@@ -4,7 +4,7 @@ An educational, full-featured PHP 8 demo website showcasing: markdown documentat
 
 **Quick Links:**
 
-- [Published Site](https://controlorigins-docs.azurewebsites.net/)
+- [Published Site](https://phpdocspark.azurewebsites.net/)
 - [Build Article](https://markhazleton.com/creating-a-php-website-with-chat-gpt.html)
 - [Story Origin](https://storybird.ai/library/the-code-conjurer)
 
@@ -144,7 +144,7 @@ Prereqs: PHP 8+, (optional) Composer, Git.
 Clone and serve:
 
 ```bash
-git clone https://github.com/controlorigins/documents.git
+git clone https://github.com/markhazleton/PHPDocSpark.git
 cd documents/website
 php -S localhost:8080
 ```
