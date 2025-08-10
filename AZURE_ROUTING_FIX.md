@@ -1,78 +1,99 @@
-# Azure App Service Configuration for PHP Custom Routing
+# Azure App Service Configuration for PHP Custom Routing (Nginx)
 
 ## The Problem
 
-Your PHP application works locally because PHP's built-in development server automatically handles routing, but Azure App Service requires explicit URL rewriting configuration.
+Your PHP application works locally because PHP's built-in development server automatically handles routing, but Azure App Service on Linux uses Nginx which requires different configuration than Apache's `.htaccess`.
 
-## Files Created
+## Solution for Nginx (Linux App Service)
 
-1. `.htaccess` - Apache URL rewriting rules
-2. `web.config` - IIS URL rewriting rules (backup)
-3. `startup.sh` - Linux startup script
+Based on diagnostics showing `nginx/1.28.0`, we need Nginx-specific configuration.
+
+## Files Created/Updated
+
+1. `nginx.conf` - Nginx server configuration with URL rewriting
+2. `startup.sh` - Custom startup script to apply Nginx config
+3. `web.config` - Legacy IIS config (kept for compatibility)
 4. `diagnostics.php` - Diagnostic tool
-5. `appsettings.json` - App Service configuration
+5. Azure App Service settings configured via Azure CLI
 
-## Manual Azure App Service Configuration
+## Azure Configuration Applied
 
-### Step 1: Configure App Service Settings
+The following settings have been configured via Azure CLI:
 
-In the Azure Portal, go to your App Service → Configuration → Application Settings and add:
+```bash
+# Enable custom startup script
+az webapp config set \
+  --name PHPDocSpark \
+  --resource-group rg-controlorigins-docs \
+  --startup-file "startup.sh"
 
+# Enable app service storage for custom nginx config
+az webapp config appsettings set \
+  --name PHPDocSpark \
+  --resource-group rg-controlorigins-docs \
+  --settings WEBSITES_ENABLE_APP_SERVICE_STORAGE=true
 ```
-WEBSITE_DYNAMIC_CACHE = 0
-WEBSITE_LOCAL_CACHE_OPTION = Never
-PHP_INI_SCAN_DIR = /usr/local/etc/php/conf.d:/home/site
-```
 
-### Step 2: Enable URL Rewriting (if using Apache)
+## How It Works
 
-In Configuration → General Settings:
+1. **nginx.conf** - Contains URL rewriting rules for pretty URLs
+2. **startup.sh** - Copies nginx.conf to the correct location and restarts Nginx
+3. **Azure Config** - Points to startup.sh to run during app startup
 
-- Ensure "Always On" is enabled
-- Set PHP version to 8.1 or higher
+## Testing the Fix
 
-### Step 3: Test Deployment
+After deployment, the routing should work for URLs like:
+- `https://phpdocspark.azurewebsites.net/doc/seo`
+- `https://phpdocspark.azurewebsites.net/doc/chatgpt/sessions/create-php-joke-page`
+
+### Step 3: Verify Configuration
 
 1. Deploy your updated code with the new configuration files
 2. Visit: `https://phpdocspark.azurewebsites.net/diagnostics.php`
-3. Test the URL: `https://phpdocspark.azurewebsites.net/doc/chatgpt/sessions/create-php-joke-page`
+3. Test the URL: `https://phpdocspark.azurewebsites.net/doc/seo`
 
 ## Alternative Solutions
 
-### Option 1: Use Azure CLI to configure
+### Option 1: Manual Azure Portal Configuration
+
+If you prefer using the Azure Portal:
+
+1. Go to App Service → Configuration → General Settings
+2. Set Startup Command to: `startup.sh`
+3. Save and restart the app
+
+### Option 2: Check Deployment Logs
+
+If the fix doesn't work immediately:
 
 ```bash
-az webapp config appsettings set \
-  --name controlorigins-docs \
-  --resource-group <your-resource-group> \
-  --settings \
-    WEBSITE_DYNAMIC_CACHE=0 \
-    WEBSITE_LOCAL_CACHE_OPTION=Never
-
-az webapp restart --name controlorigins-docs --resource-group <your-resource-group>
+az webapp log tail --name PHPDocSpark --resource-group rg-controlorigins-docs
 ```
-
-### Option 2: Check if using Nginx
-
-If Azure App Service is using Nginx instead of Apache, you may need to configure it differently. Check the server software in diagnostics.php.
 
 ## Troubleshooting
 
-1. **404 errors persist**: Check diagnostics.php to see if .htaccess is loaded
+1. **404 errors persist**: Check if startup.sh is executing by viewing logs
 2. **Server errors**: Check Application Logs in Azure Portal
-3. **Still not working**: Try adding this to your index.php (temporary debug):
+3. **Nginx config not applied**: Verify startup command is set to "startup.sh"
+4. **Still not working**: Add debug logging to startup.sh:
 
-```php
-// Add at the top of index.php for debugging
-error_log("REQUEST_URI: " . $_SERVER['REQUEST_URI']);
-error_log("SCRIPT_NAME: " . $_SERVER['SCRIPT_NAME']);
+```bash
+#!/bin/bash
+echo "Starting custom startup script..." >> /home/site/startup.log
+if [ -f /home/site/wwwroot/nginx.conf ]; then
+    cp /home/site/wwwroot/nginx.conf /etc/nginx/sites-available/default
+    echo "Custom nginx configuration applied" >> /home/site/startup.log
+else
+    echo "ERROR: nginx.conf not found" >> /home/site/startup.log
+fi
+service nginx restart >> /home/site/startup.log 2>&1
 ```
 
 ## Next Steps
 
-1. Commit and push these changes
-2. Let the Azure Pipeline deploy
-3. Test the URL: <https://phpdocspark.azurewebsites.net/doc/chatgpt/sessions/create-php-joke-page>
-4. If still not working, run diagnostics and check the logs
+1. **Commit and push** the new `nginx.conf` and updated `startup.sh`
+2. **Azure will automatically deploy** via GitHub Actions
+3. **Test the URL**: <https://phpdocspark.azurewebsites.net/doc/seo>
+4. **Check logs if needed**: `az webapp log tail --name PHPDocSpark --resource-group rg-controlorigins-docs`
 
-The issue should be resolved after deployment with these configuration files.
+The routing should now work correctly with the Nginx configuration!

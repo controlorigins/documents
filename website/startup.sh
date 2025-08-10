@@ -3,21 +3,8 @@
 # Azure App Service startup script for PHP applications with custom routing
 #!/bin/bash
 
-# Copy custom nginx configuration
-if [ -f /home/site/wwwroot/nginx.conf ]; then
-    cp /home/site/wwwroot/nginx.conf /etc/nginx/sites-available/default
-    echo "Custom nginx configuration applied"
-else
-    echo "No custom nginx.conf found, using default"
-fi
-
-# Restart nginx to apply changes
-service nginx restart
-
-# Start PHP-FPM (if not already started)
-service php8.4-fpm start
-
-echo "Startup script completed"
+# Copy custom nginx configuration (official Microsoft approach)
+cp /home/site/wwwroot/nginx.conf /etc/nginx/sites-available/default && service nginx reload
 
 # Set working directory
 cd /home/site/wwwroot
