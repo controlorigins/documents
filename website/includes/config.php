@@ -1,6 +1,6 @@
 <?php
 // Global configuration for PHPDocSpark
-$CANONICAL_BASE = 'https://phpdocspark.markhazleton.com'; // Long-term canonical domain
+$CANONICAL_BASE = 'https://phpdocspark.azurewebsites.net'; // Azure App Service domain (free tier)
 
 // Load version information
 require_once __DIR__ . '/version.php';

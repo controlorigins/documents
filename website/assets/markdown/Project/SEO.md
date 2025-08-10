@@ -43,3 +43,5 @@ PHPDocSpark by Mark Hazleton implements a lightweight but comprehensive technica
 
 ---
 Maintained by Mark Hazleton. Part of the WebSpark suite.
+
+For security and safety information about this platform, see [Security & Safety Information](Security.md).
