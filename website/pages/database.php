@@ -225,14 +225,17 @@ $contacts = read();
                                             <button type="button" class="btn btn-sm btn-primary edit-btn" 
                                                 data-id="<?php echo $contact['id']; ?>"
                                                 data-name="<?php echo htmlspecialchars($contact['name']); ?>"
-                                                data-email="<?php echo htmlspecialchars($contact['email']); ?>">
-                                                <i class="bi bi-pencil"></i>
+                                                data-email="<?php echo htmlspecialchars($contact['email']); ?>"
+                                                title="Edit Contact">
+                                                <i class="bi bi-pencil"></i> Edit
                                             </button>
                                             <form method="post" class="d-inline">
                                                 <input type="hidden" name="action" value="delete">
                                                 <input type="hidden" name="id" value="<?php echo $contact['id']; ?>">
-                                                <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Are you sure you want to delete this contact?')">
-                                                    <i class="bi bi-trash"></i>
+                                                <button type="submit" class="btn btn-sm btn-danger delete-btn" 
+                                                    data-name="<?php echo htmlspecialchars($contact['name']); ?>"
+                                                    title="Delete Contact">
+                                                    <i class="bi bi-trash"></i> Delete
                                                 </button>
                                             </form>
                                         </td>

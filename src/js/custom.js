@@ -1,4 +1,4 @@
-/* global $, bootstrap, Prism */
+/* global $, bootstrap, Prism, confirm */
 // Custom JavaScript for PHPDocSpark (Mark Hazleton)
 
 // Global fetchJoke function - defined outside of document ready for immediate availability
@@ -93,14 +93,16 @@ $(document).ready(function () {
     // Add line numbers to all code blocks automatically
     $('pre[class*="language-"]').addClass('line-numbers');
     
-    // Initialize copy-to-clipboard for all code blocks
-    Prism.plugins.toolbar.registerButton('copy-to-clipboard', function (_env) {
-      const button = document.createElement('button');
-      button.innerHTML = '<i class="bi bi-clipboard"></i>';
-      button.title = 'Copy to clipboard';
-      
-      return button;
-    });
+    // Initialize copy-to-clipboard for all code blocks only if toolbar plugin is available
+    if (Prism.plugins && Prism.plugins.toolbar) {
+      Prism.plugins.toolbar.registerButton('copy-to-clipboard', function (_env) {
+        const button = document.createElement('button');
+        button.innerHTML = '<i class="bi bi-clipboard"></i>';
+        button.title = 'Copy to clipboard';
+        
+        return button;
+      });
+    }
     
     // Re-highlight any code blocks that might have been loaded dynamically
     Prism.highlightAll();
@@ -162,6 +164,12 @@ $(document).ready(function () {
   // Database Page - Initialize DataTable for contacts
   if ($('#contactsTable').length) {
   // (debug log removed)
+    
+    // Check if DataTable is already initialized and destroy it first
+    if ($.fn.DataTable.isDataTable('#contactsTable')) {
+      $('#contactsTable').DataTable().destroy();
+    }
+    
     $('#contactsTable').DataTable({
       responsive: true,
       pageLength: 5,
@@ -169,28 +177,93 @@ $(document).ready(function () {
         [5, 10, 25, -1],
         [5, 10, 25, 'All'],
       ],
+      dom: 'Bfrtip',
+      buttons: [
+        {
+          extend: 'collection',
+          text: '<i class="bi bi-download"></i> Export',
+          buttons: [
+            {
+              extend: 'csv',
+              text: '<i class="bi bi-filetype-csv"></i> CSV',
+              exportOptions: {
+                columns: [0, 1, 2] // Exclude the Actions column
+              }
+            },
+            {
+              extend: 'excel',
+              text: '<i class="bi bi-filetype-xlsx"></i> Excel',
+              exportOptions: {
+                columns: [0, 1, 2] // Exclude the Actions column
+              }
+            },
+            {
+              extend: 'pdf',
+              text: '<i class="bi bi-filetype-pdf"></i> PDF',
+              exportOptions: {
+                columns: [0, 1, 2] // Exclude the Actions column
+              }
+            }
+          ]
+        },
+        {
+          extend: 'colvis',
+          text: '<i class="bi bi-eye"></i> Columns'
+        }
+      ],
+      columnDefs: [
+        {
+          targets: -1, // Last column (Actions)
+          orderable: false,
+          searchable: false
+        }
+      ]
     });
   }
 
-  // Database Page - Handle edit button clicks and modal
-  const editButtons = document.querySelectorAll('.edit-btn');
+  // Database Page - Handle edit button clicks and modal using event delegation
   const editModalElement = document.getElementById('editContactModal');
+  const contactsTable = document.getElementById('contactsTable');
 
-  if (editButtons.length > 0 && editModalElement) {
+  if (editModalElement && contactsTable) {
     const editModal = new bootstrap.Modal(editModalElement);
 
-    editButtons.forEach(button => {
-      button.addEventListener('click', function () {
-        const id = this.getAttribute('data-id');
-        const name = this.getAttribute('data-name');
-        const email = this.getAttribute('data-email');
+    // Use event delegation to handle edit buttons (including dynamically added ones)
+    contactsTable.addEventListener('click', function (e) {
+      if (e.target.closest('.edit-btn')) {
+        const button = e.target.closest('.edit-btn');
+        const id = button.getAttribute('data-id');
+        const name = button.getAttribute('data-name');
+        const email = button.getAttribute('data-email');
 
         document.getElementById('edit-id').value = id;
         document.getElementById('edit-name').value = name;
         document.getElementById('edit-email').value = email;
 
         editModal.show();
-      });
+      }
+    });
+  }
+
+  // Database Page - Handle delete button clicks with enhanced validation using event delegation
+  if (contactsTable) {
+    contactsTable.addEventListener('click', function (e) {
+      if (e.target.closest('.delete-btn')) {
+        e.preventDefault();
+        const button = e.target.closest('.delete-btn');
+        const contactName = button.getAttribute('data-name');
+        const form = button.closest('form');
+        
+        // Enhanced confirmation dialog
+        if (confirm(`Are you sure you want to delete the contact "${contactName}"?\n\nThis action cannot be undone.`)) {
+          // Show loading state
+          button.innerHTML = '<i class="bi bi-hourglass-split"></i> Deleting...';
+          button.disabled = true;
+          
+          // Submit the form
+          form.submit();
+        }
+      }
     });
   }
 
