@@ -81,12 +81,13 @@ if (preg_match('#^/doc(?:/(.*))?$#i', $requestPath, $m)) {
     }
 }
 
-$validPages = [ 'document_view','data-analysis','database','project_list','article_list','github','joke','search','404' ];
+$validPages = [ 'document_view','data-analysis','chart','database','project_list','article_list','github','joke','search','404' ];
 if (!in_array($page, $validPages)) { $page = '404'; }
 
 $pageTitles = [
     'document_view' => 'Document Viewer',
     'data-analysis' => 'CSV File Analysis',
+    'chart' => 'Data Visualization',
     'database' => 'Database CRUD Operations',
     'project_list' => 'Projects List',
     'article_list' => 'Articles List',
@@ -103,6 +104,7 @@ if (!isset($metaDescription)) {
     switch ($page) {
         case 'document_view': $metaDescription = 'Browse and render markdown documentation with the PHPDocSpark viewer and search the knowledge base.'; break;
         case 'data-analysis': $metaDescription = 'Analyze CSV datasets interactively with profiling, statistics, and visualizations using PHPDocSpark.'; break;
+        case 'chart': $metaDescription = 'Create interactive charts and visualizations from CSV data using Chart.js integration in PHPDocSpark.'; break;
         case 'database': $metaDescription = 'Demonstration of SQLite CRUD operations with secure PHP patterns in PHPDocSpark.'; break;
         case 'project_list': $metaDescription = 'Project portfolio and examples curated by Mark Hazleton within the PHPDocSpark platform.'; break;
         case 'article_list': $metaDescription = 'Technical articles and insights from Mark Hazleton\'s RSS feed, covering software development, Azure, and project management.'; break;

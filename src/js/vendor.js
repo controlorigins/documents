@@ -8,6 +8,8 @@ import * as bootstrap from 'bootstrap';
 // Import DataTables core and extensions
 import 'datatables.net';
 import 'datatables.net-bs5';
+import 'datatables.net-responsive';
+import 'datatables.net-responsive-bs5';
 
 // Import DataTables Buttons extensions
 import 'datatables.net-buttons';
@@ -19,6 +21,42 @@ import 'datatables.net-buttons/js/buttons.colVis.mjs';
 // Import JSZip for Excel export functionality
 import JSZip from 'jszip';
 window.JSZip = JSZip;
+
+// Import Chart.js for data visualization
+import {
+    Chart,
+    CategoryScale,
+    LinearScale,
+    BarElement,
+    LineElement,
+    PointElement,
+    PieController,
+    BarController,
+    LineController,
+    Title,
+    Tooltip,
+    Legend,
+    ArcElement
+} from 'chart.js';
+
+// Register Chart.js components
+Chart.register(
+    CategoryScale,
+    LinearScale,
+    BarElement,
+    LineElement,
+    PointElement,
+    PieController,
+    BarController,
+    LineController,
+    Title,
+    Tooltip,
+    Legend,
+    ArcElement
+);
+
+// Make Chart.js globally available
+window.Chart = Chart;
 
 // PrismJS implementation following official best practices
 // Set manual mode to prevent auto-highlighting before bundle is ready

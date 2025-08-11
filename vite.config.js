@@ -28,6 +28,10 @@ export default defineConfig(({ mode }) => {
             }
             return `assets/[name][extname]`;
           },
+          // Ensure everything is bundled into single files
+          manualChunks: undefined,
+          // Force everything into a single bundle
+          inlineDynamicImports: true,
         },
       },
       outDir: 'website/assets',
@@ -86,8 +90,9 @@ export default defineConfig(({ mode }) => {
     
     // Modern JS features
     esbuild: {
-      target: 'es2020',
+      target: 'es2015', // Changed from es2020 for better browser compatibility
       drop: isDev ? [] : ['console', 'debugger'],
+      format: 'iife', // Immediately Invoked Function Expression for better browser compat
     },
   };
 });

@@ -53,7 +53,7 @@ php -S localhost:8001
 ## File Structure Rules
 
 - **Website root**: All web-accessible files must be in `/website/` directory
-- **PHP Files**: ALL `.php` files MUST be placed under `/website/` folder tree but NEVER under `/website/assets/` as that is only for assets (CSS, JS, images, etc.) and documentation 
+- **PHP Files**: ALL `.php` files MUST be placed under `/website/` folder tree but NEVER under `/website/assets/` as that is only for assets (CSS, JS, images, etc.) and documentation
 - **Markdown files**: ALL `.md` files MUST be placed under `/website/assets/markdown/` folder tree with these exceptions:
   - `/.github/copilot-instructions.md` (GitHub Copilot instructions - stays in .github folder)
   - `/README.md` (GitHub repository documentation - stays in root)
@@ -66,6 +66,22 @@ php -S localhost:8001
 - **Page routing**: Handled by `index.php` with `?page=` parameter
 
 ## Coding Standards
+
+### **CRITICAL RULE: No Inline Client-Side Libraries**
+
+**ABSOLUTELY FORBIDDEN:**
+
+- Inline `<script>` tags pointing to CDN URLs (jQuery, DataTables, Bootstrap, etc.)
+- Inline `<link>` tags pointing to external CSS libraries
+- Any direct references to external JavaScript/CSS resources in HTML/PHP files
+
+**REQUIRED APPROACH:**
+
+- All client-side libraries must be installed via `npm install`
+- Libraries must be imported in `src/main.js` or appropriate source files
+- CSS libraries must be imported in `src/css/` SCSS files
+- Use build process (`npm run build`) to compile everything into `site.js` and `site.css`
+- Only reference compiled assets: `/assets/css/site.css` and `/assets/js/site.js`
 
 ### PHP Best Practices
 
@@ -97,7 +113,35 @@ php -S localhost:8001
 - **Icons**: Bootstrap Icons
 - **Responsive**: Mobile-first design
 
+### **CRITICAL RULE: Client-Side Library Management**
+
+**ALL client-side JavaScript libraries MUST be loaded via npm build process - NO EXCEPTIONS:**
+
+- **NO inline CDN links** to JavaScript libraries (jQuery, DataTables, Chart.js, etc.)
+- **NO direct script tags** pointing to external URLs
+- **ALL JavaScript dependencies** must be managed via npm and bundled into `site.js`
+- **ALL CSS dependencies** must be managed via npm and bundled into `site.css`
+- **Build process**: Use `npm run build` to compile all dependencies
+- **Development**: Use `npm run start` for development builds
+- **Asset serving**: Only serve compiled `site.js` and `site.css` from `/assets/` directory
+
 ## Common Commands
+
+### **CRITICAL: Frontend Asset Management**
+
+```bash
+# Install new JavaScript/CSS libraries
+npm install library-name
+
+# Development build (watch mode)
+npm run start
+
+# Production build
+npm run build
+
+# Check build status
+npm run build:check
+```
 
 ### Composer Management
 

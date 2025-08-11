@@ -39,6 +39,11 @@
                         </a>
                     </li>
                     <li class="nav-item">
+                        <a class="nav-link" href="/?page=chart">
+                            <i class="bi bi-bar-chart me-1"></i> Charts
+                        </a>
+                    </li>
+                    <li class="nav-item">
                         <a class="nav-link" href="/?page=database">
                             <i class="bi bi-database me-1"></i> Database
                         </a>

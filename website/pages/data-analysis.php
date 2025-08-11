@@ -1,17 +1,12 @@
 <?php
 require_once __DIR__ . '/../includes/docs.php';
 $folderPath = 'data'; // Specify the folder path
-$selectedFile = '';
-$data = [];
-$header = [];
-$fieldSummaries = [];
+$csvFiles = [];
 
-// Check if the folder exists
+// Check if the folder exists and get CSV files
 if (is_dir($folderPath)) {
     // Open the directory
     if ($dirHandle = opendir($folderPath)) {
-        $csvFiles = [];
-        
         // Loop through the files in the directory
         while (false !== ($file = readdir($dirHandle))) {
             // Check if the file has a ".csv" extension
@@ -25,68 +20,6 @@ if (is_dir($folderPath)) {
         
         // Sort files alphabetically
         sort($csvFiles);
-        
-        // Process selected file
-        if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["csvFile"])) {
-            $selectedFile = $_POST["csvFile"];
-            
-            // Read and parse the CSV file
-            $csvData = file_get_contents("data/" . $selectedFile);
-            $lines = explode(PHP_EOL, $csvData);
-            
-            foreach ($lines as $line) {
-                $cells = str_getcsv($line);
-                if (!$header) {
-                    $header = $cells; // Store the header row
-                } else if (count($cells) === count($header)) {
-                    $data[] = $cells; // Store data rows
-                }
-            }
-            
-            // Calculate field summaries
-            foreach ($header as $index => $field) {
-                $fieldData = array_column($data, $index);
-                
-                // Filter out non-integer and non-string values
-                $filteredFieldData = array_filter($fieldData, function ($value) {
-                    return is_string($value) || is_numeric($value);
-                });
-                
-                if (empty($filteredFieldData)) {
-                    continue;
-                }
-                
-                $min = min($filteredFieldData);
-                $max = max($filteredFieldData);
-                
-                // Check if all values are numeric for average calculation
-                $allNumeric = true;
-                foreach ($filteredFieldData as $value) {
-                    if (!is_numeric($value)) {
-                        $allNumeric = false;
-                        break;
-                    }
-                }
-                
-                $average = $allNumeric ? round(array_sum($filteredFieldData) / count($filteredFieldData), 2) : 'N/A';
-                $distinctCount = count(array_count_values($filteredFieldData));
-                $valueCounts = array_count_values($filteredFieldData);
-                arsort($valueCounts);
-                $mostCommon = key($valueCounts);
-                end($valueCounts);
-                $leastCommon = key($valueCounts);
-                
-                $fieldSummaries[] = [
-                    'field' => $field,
-                    'min' => $min,
-                    'max' => $max,
-                    'average' => $average,
-                    'distinctCount' => $distinctCount,
-                    'mostCommon' => $mostCommon,
-                    'leastCommon' => $leastCommon
-                ];
-            }
-        }
     }
 }
 ?>
@@ -98,6 +31,9 @@ if (is_dir($folderPath)) {
             <p class="text-light mb-0">Analyze and explore your CSV files</p>
         </div>
         <div>
+            <a href="/?page=chart" class="btn btn-primary btn-sm">
+                <i class="bi bi-bar-chart me-1"></i> Create Charts
+            </a>
             <a href="<?= doc_pretty_url('ChatGPT/Sessions/List CSV Files PHP'); ?>" class="btn btn-light btn-sm">
                 <i class="bi bi-info-circle me-1"></i> How this page was created
             </a>
@@ -117,26 +53,27 @@ if (is_dir($folderPath)) {
                     </div>
                     <div class="card-body">
                         <?php if (!empty($csvFiles)): ?>
-                        <form method="POST" action="" id="csvSelectForm">
-                            <div class="mb-3">
-                                <label class="form-label">
-                                    <i class="bi bi-files me-1"></i> Available CSV files:
-                                </label>
-                                
-                                <?php foreach ($csvFiles as $file): ?>
-                                <div class="form-check mb-2">
-                                    <input class="form-check-input" type="radio" name="csvFile" id="<?php echo $file; ?>" value="<?php echo $file; ?>" <?php echo $selectedFile === $file ? 'checked' : ''; ?>>
-                                    <label class="form-check-label" for="<?php echo $file; ?>">
-                                        <i class="bi bi-file-earmark-text me-1"></i> <?php echo $file; ?>
-                                    </label>
-                                </div>
-                                <?php endforeach; ?>
-                            </div>
+                        <div class="mb-3">
+                            <label class="form-label">
+                                <i class="bi bi-files me-1"></i> Available CSV files:
+                            </label>
                             
-                            <button type="submit" class="btn btn-primary w-100">
-                                <i class="bi bi-search me-1"></i> Analyze CSV
-                            </button>
-                        </form>
+                            <?php foreach ($csvFiles as $file): ?>
+                            <div class="form-check mb-2">
+                                <input class="form-check-input csv-file-radio" type="radio" name="csvFile" id="<?php echo $file; ?>" value="<?php echo $file; ?>">
+                                <label class="form-check-label" for="<?php echo $file; ?>">
+                                    <i class="bi bi-file-earmark-text me-1"></i> <?php echo $file; ?>
+                                </label>
+                            </div>
+                            <?php endforeach; ?>
+                        </div>
+                        
+                        <div id="loading-indicator" class="text-center d-none mb-3">
+                            <div class="spinner-border spinner-border-sm text-primary" role="status">
+                                <span class="visually-hidden">Loading...</span>
+                            </div>
+                            <span class="ms-2">Loading data...</span>
+                        </div>
                         <?php else: ?>
                         <div class="alert alert-warning">
                             <i class="bi bi-exclamation-triangle me-2"></i> No CSV files found in the data folder.
@@ -148,118 +85,95 @@ if (is_dir($folderPath)) {
             
             <!-- Analysis Results -->
             <div class="col-md-8">
-                <?php if (!empty($selectedFile)): ?>
-                <div class="card mb-4">
-                    <div class="card-header bg-light">
-                        <h5 class="mb-0">
-                            <i class="bi bi-graph-up me-2"></i>
-                            Analysis of <?php echo $selectedFile; ?>
-                        </h5>
-                    </div>
-                    <div class="card-body">
-                        <!-- Field Summary -->
-                        <h6 class="card-subtitle mb-3 text-muted">
-                            <i class="bi bi-list-columns me-1"></i> Field Summary
-                        </h6>
-                        
-                        <div class="table-responsive mb-4">
-                            <table class="table table-striped table-bordered">
-                                <thead class="table-dark">
-                                    <tr>
-                                        <th>Field</th>
-                                        <th>Minimum</th>
-                                        <th>Average</th>
-                                        <th>Maximum</th>
-                                        <th>Most Common</th>
-                                        <th>Least Common</th>
-                                        <th>Distinct Count</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <?php foreach ($fieldSummaries as $summary): ?>
-                                    <tr>
-                                        <td><strong><?php echo $summary['field']; ?></strong></td>
-                                        <td><?php echo $summary['min']; ?></td>
-                                        <td><?php echo $summary['average']; ?></td>
-                                        <td><?php echo $summary['max']; ?></td>
-                                        <td><?php echo $summary['mostCommon']; ?></td>
-                                        <td><?php echo $summary['leastCommon']; ?></td>
-                                        <td>
-                                            <span class="badge bg-primary rounded-pill">
-                                                <?php echo $summary['distinctCount']; ?>
-                                            </span>
-                                        </td>
-                                    </tr>
-                                    <?php endforeach; ?>
-                                </tbody>
-                            </table>
+                <div id="analysis-results" class="d-none">
+                    <div class="card mb-4">
+                        <div class="card-header bg-light">
+                            <h5 class="mb-0">
+                                <i class="bi bi-graph-up me-2"></i>
+                                Analysis of <span id="current-file-name"></span>
+                            </h5>
                         </div>
-                        
-                        <!-- Quick Stats -->
-                        <div class="row mb-4">
-                            <div class="col-md-4">
-                                <div class="card bg-primary text-white">
-                                    <div class="card-body text-center">
-                                        <h5><i class="bi bi-grid-3x3 me-2"></i>Rows</h5>
-                                        <h2><?php echo count($data); ?></h2>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="card bg-success text-white">
-                                    <div class="card-body text-center">
-                                        <h5><i class="bi bi-columns me-2"></i>Columns</h5>
-                                        <h2><?php echo count($header); ?></h2>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="card bg-info text-white">
-                                    <div class="card-body text-center">
-                                        <h5><i class="bi bi-cells me-2"></i>Cells</h5>
-                                        <h2><?php echo count($data) * count($header); ?></h2>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <!-- Actions Row -->
-                        <div class="d-flex justify-content-between mb-3">
-                            <h6 class="card-subtitle text-muted">
-                                <i class="bi bi-table me-1"></i> Data Table
+                        <div class="card-body">
+                            <!-- Field Summary -->
+                            <h6 class="card-subtitle mb-3 text-muted">
+                                <i class="bi bi-list-columns me-1"></i> Field Summary
                             </h6>
-                            <div>
-                                <a href="/?page=chart" class="btn btn-sm btn-outline-primary">
-                                    <i class="bi bi-bar-chart me-1"></i> Visualize Data
-                                </a>
+                            
+                            <div class="table-responsive mb-4">
+                                <table id="summary-table" class="table table-striped table-bordered">
+                                    <thead class="table-dark">
+                                        <tr>
+                                            <th>Field</th>
+                                            <th>Minimum</th>
+                                            <th>Average</th>
+                                            <th>Maximum</th>
+                                            <th>Most Common</th>
+                                            <th>Least Common</th>
+                                            <th>Distinct Count</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="summary-tbody">
+                                        <!-- Summary data will be loaded here -->
+                                    </tbody>
+                                </table>
                             </div>
-                        </div>
-                        
-                        <!-- Data Table -->
-                        <div class="table-responsive">
-                            <table id="dataTable" class="table table-striped table-bordered table-hover">
-                                <thead class="table-dark">
-                                    <tr>
-                                        <?php foreach ($header as $field): ?>
-                                        <th><?php echo $field; ?></th>
-                                        <?php endforeach; ?>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <?php foreach ($data as $row): ?>
-                                    <tr>
-                                        <?php foreach ($row as $cell): ?>
-                                        <td><?php echo $cell; ?></td>
-                                        <?php endforeach; ?>
-                                    </tr>
-                                    <?php endforeach; ?>
-                                </tbody>
-                            </table>
+                            
+                            <!-- Quick Stats -->
+                            <div class="row mb-4">
+                                <div class="col-md-4">
+                                    <div class="card bg-primary text-white">
+                                        <div class="card-body text-center">
+                                            <h5><i class="bi bi-grid-3x3 me-2"></i>Rows</h5>
+                                            <h2 id="total-rows">0</h2>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="card bg-success text-white">
+                                        <div class="card-body text-center">
+                                            <h5><i class="bi bi-columns me-2"></i>Columns</h5>
+                                            <h2 id="total-columns">0</h2>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="card bg-info text-white">
+                                        <div class="card-body text-center">
+                                            <h5><i class="bi bi-cells me-2"></i>Cells</h5>
+                                            <h2 id="total-cells">0</h2>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Actions Row -->
+                            <div class="d-flex justify-content-between mb-3">
+                                <h6 class="card-subtitle text-muted">
+                                    <i class="bi bi-table me-1"></i> Data Table
+                                </h6>
+                                <div>
+                                    <a href="/?page=chart" class="btn btn-sm btn-outline-primary">
+                                        <i class="bi bi-bar-chart me-1"></i> Visualize Data
+                                    </a>
+                                </div>
+                            </div>
+                            
+                            <!-- Data Table -->
+                            <div class="table-responsive">
+                                <table id="csv-data-table" class="table table-striped table-bordered table-hover" style="width: 100%;">
+                                    <thead class="table-dark" id="data-table-header">
+                                        <!-- Headers will be loaded dynamically -->
+                                    </thead>
+                                    <tbody>
+                                        <!-- Data will be loaded via AJAX -->
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
                     </div>
                 </div>
-                <?php else: ?>
-                <div class="card h-100">
+                
+                <div id="no-selection" class="card h-100">
                     <div class="card-body text-center p-5">
                         <i class="bi bi-file-earmark-spreadsheet text-muted" style="font-size: 5rem;"></i>
                         <h3 class="mt-4 mb-3">Select a CSV File</h3>
@@ -268,7 +182,6 @@ if (is_dir($folderPath)) {
                         </p>
                     </div>
                 </div>
-                <?php endif; ?>
             </div>
         </div>
     </div>

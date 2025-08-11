@@ -23,11 +23,16 @@ export default [
         setTimeout: 'readonly',
         clearTimeout: 'readonly',
         setInterval: 'readonly',
-        clearInterval: 'readonly'
+        clearInterval: 'readonly',
+        URLSearchParams: 'readonly',
+        fetch: 'readonly',
+        Event: 'readonly',
+        alert: 'readonly',
+        Chart: 'readonly'
       }
     },
     rules: {
-      'no-console': 'warn',
+      'no-console': 'off',
       'no-debugger': 'error',
       'no-unused-vars': ['warn', { argsIgnorePattern: '^_' }],
       'prefer-const': 'error',

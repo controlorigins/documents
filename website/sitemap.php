@@ -6,6 +6,7 @@ require_once __DIR__ . '/includes/docs.php';
 $pages = [
     '/',
     '/?page=data-analysis', // legacy parameter pages retained
+    '/?page=chart',
     '/?page=database',
     '/?page=project_list',
     '/?page=article_list',
