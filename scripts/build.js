@@ -205,6 +205,18 @@ async function verifyOutput() {
     }
 }
 
+async function updateVersion() {
+    logInfo('Updating version information...');
+    
+    try {
+        execSync('node scripts/update-version.js', { stdio: 'inherit' });
+        logSuccess('Version information updated');
+    } catch (error) {
+        logError('Failed to update version information', error);
+        throw error;
+    }
+}
+
 async function main() {
     const startTime = Date.now();
     
@@ -212,6 +224,7 @@ async function main() {
     
     try {
         await checkFiles();
+        await updateVersion();
         await cleanAssets();
         await runViteBuild();
         await copyAssets();

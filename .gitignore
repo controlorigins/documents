@@ -7,6 +7,9 @@ website/assets/vendor/
 dist/
 build/
 
+# Build counter (local development only)
+build-counter.json
+
 # Environment files
 .env
 .env.local

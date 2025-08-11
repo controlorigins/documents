@@ -2,20 +2,20 @@
 /**
  * Version and Build Information
  * This file is automatically updated during the build process
- * Last updated: 2025-08-09 21:54:48
+ * Last updated: 2025-08-11 01:36:36
  */
 
 // Version number (from package.json)
 define('SITE_VERSION', '1.2.0');
 
 // Build timestamp (updated automatically by build process)
-define('SITE_BUILD_TIMESTAMP', '2025-08-09 21:54:48');
+define('SITE_BUILD_TIMESTAMP', '2025-08-11 01:36:36');
 
-// Build number (from Azure DevOps or GitHub Actions)
-define('SITE_BUILD_NUMBER', '1');
+// Build number (incremented automatically)
+define('SITE_BUILD_NUMBER', '3');
 
 // Git commit hash (if available)
-define('SITE_GIT_COMMIT', '0b9682a811cf9b47587ba19fed5e2259dcb85559');
+define('SITE_GIT_COMMIT', '2719a2f1a2d7661c56e8d3f88df1e7dce321bfdb');
 
 /**
  * Get formatted build information

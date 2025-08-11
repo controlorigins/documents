@@ -117,7 +117,7 @@
                 <div class="col-12 text-center">
                     <small>© <?php echo date('Y'); ?> <?php echo e(PHPSPARK_AUTHOR); ?>. Released under the MIT License. <a href="/LICENSE" class="text-decoration-underline text-light">View License</a>.</small>
                     <br>
-                    <small class="text-muted">
+                    <small class="text-light">
                         <i class="bi bi-code-square me-1"></i>
                         <?php echo e(getSiteBuildString()); ?>
                     </small>

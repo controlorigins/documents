@@ -2,7 +2,8 @@
 
 /**
  * Build Script - Updates version information
- * This script is run during the Azure DevOps build process
+ * This script is run during the build process to increment build numbers
+ * and track version history
  */
 
 const fs = require('fs');
@@ -12,6 +13,7 @@ const { execSync } = require('child_process');
 // Configuration
 const VERSION_FILE = path.join(__dirname, '../website/includes/version.php');
 const PACKAGE_JSON = path.join(__dirname, '../package.json');
+const BUILD_COUNTER_FILE = path.join(__dirname, '../build-counter.json');
 
 // Read current version from package.json
 let packageVersion = '1.2.0';
@@ -24,11 +26,39 @@ try {
     console.log('Warning: Could not read package.json version, using default');
 }
 
-// Get build number from environment or increment
-let buildNumber = process.env.BUILD_BUILDNUMBER || process.env.GITHUB_RUN_NUMBER || '1';
-if (buildNumber.includes('.')) {
-    // If it's a full build number like "20250809.1", extract the last part
-    buildNumber = buildNumber.split('.').pop();
+// Handle build number increment
+let buildNumber = process.env.BUILD_BUILDNUMBER || process.env.GITHUB_RUN_NUMBER;
+
+if (!buildNumber) {
+    // Local development - use and increment local counter
+    let buildCounter = { count: 0, lastBuild: null };
+    
+    try {
+        if (fs.existsSync(BUILD_COUNTER_FILE)) {
+            buildCounter = JSON.parse(fs.readFileSync(BUILD_COUNTER_FILE, 'utf8'));
+        }
+    } catch (error) {
+        console.log('Warning: Could not read build counter, starting from 0');
+    }
+    
+    // Increment build number
+    buildCounter.count = (buildCounter.count || 0) + 1;
+    buildCounter.lastBuild = new Date().toISOString();
+    
+    // Save updated counter
+    try {
+        fs.writeFileSync(BUILD_COUNTER_FILE, JSON.stringify(buildCounter, null, 2));
+    } catch (error) {
+        console.log('Warning: Could not save build counter');
+    }
+    
+    buildNumber = buildCounter.count.toString();
+} else {
+    // CI/CD environment - extract build number
+    if (buildNumber.includes('.')) {
+        // If it's a full build number like "20250809.1", extract the last part
+        buildNumber = buildNumber.split('.').pop();
+    }
 }
 
 // Get Git commit hash
@@ -60,7 +90,7 @@ define('SITE_VERSION', '${packageVersion}');
 // Build timestamp (updated automatically by build process)
 define('SITE_BUILD_TIMESTAMP', '${buildTimestamp}');
 
-// Build number (from Azure DevOps or GitHub Actions)
+// Build number (incremented automatically)
 define('SITE_BUILD_NUMBER', '${buildNumber}');
 
 // Git commit hash (if available)
