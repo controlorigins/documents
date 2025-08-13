@@ -21,9 +21,21 @@ jobs:
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
         with:
-          php-version: '8.0'
+          php-version: '8.2'
+
+      - name: Install Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install npm dependencies and build assets
+        run: |
+          cd website
+          npm ci
+          npm run build
 
       - name: Check if composer.json exists and run composer install
+        working-directory: website
         run: |
           if [ -f "composer.json" ]; then
             echo "composer.json exists, running composer commands..."

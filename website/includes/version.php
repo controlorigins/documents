@@ -2,20 +2,20 @@
 /**
  * Version and Build Information
  * This file is automatically updated during the build process
- * Last updated: 2025-08-11 01:36:36
+ * Last updated: 2025-08-13 17:48:51
  */
 
 // Version number (from package.json)
 define('SITE_VERSION', '1.2.0');
 
 // Build timestamp (updated automatically by build process)
-define('SITE_BUILD_TIMESTAMP', '2025-08-11 01:36:36');
+define('SITE_BUILD_TIMESTAMP', '2025-08-13 17:48:51');
 
 // Build number (incremented automatically)
-define('SITE_BUILD_NUMBER', '3');
+define('SITE_BUILD_NUMBER', '7');
 
 // Git commit hash (if available)
-define('SITE_GIT_COMMIT', '2719a2f1a2d7661c56e8d3f88df1e7dce321bfdb');
+define('SITE_GIT_COMMIT', 'da2bb2c89fe8cb6aaf6185470800433ff225943d');
 
 /**
  * Get formatted build information
