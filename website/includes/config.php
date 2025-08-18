@@ -1,4 +1,7 @@
 <?php
+
+declare(strict_types=1);
+
 // Global configuration for PHPDocSpark
 $CANONICAL_BASE = 'https://phpdocspark.azurewebsites.net'; // Azure App Service domain (free tier)
 

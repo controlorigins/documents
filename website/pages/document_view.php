@@ -1,9 +1,12 @@
 <?php
+
+declare(strict_types=1);
+
 require_once __DIR__ . '/../includes/docs.php';
 require_once __DIR__ . '/../includes/MarkdownProcessor.php';
 
 // Function to recursively scan a directory and return an array of file paths
-function scanDirectory($dir)
+function scanDirectory(string $dir): array
 {
     $files = [];
     $subfolderFiles = [];

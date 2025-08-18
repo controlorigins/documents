@@ -1,4 +1,7 @@
 <?php
+
+declare(strict_types=1);
+
 /**
  * Version and Build Information
  * This file is automatically updated during the build process

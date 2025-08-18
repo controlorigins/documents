@@ -1,4 +1,7 @@
 <?php
+
+declare(strict_types=1);
+
 // Centralized documentation utilities: slug generation, lookup, pretty URLs
 // Builds bidirectional maps between physical markdown files and cleaned slugs.
 

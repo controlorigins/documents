@@ -1,4 +1,7 @@
 <?php
+
+declare(strict_types=1);
+
 require_once __DIR__ . '/../includes/docs.php';
 require_once __DIR__ . '/../includes/MarkdownProcessor.php';
 // Define the root folder
@@ -13,7 +16,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     
     if (!empty($searchTerm)) {
         // Function to recursively search for files containing the search term
-        function searchFiles($folder, $searchTerm, $relativePath = '')
+        function searchFiles(string $folder, string $searchTerm, string $relativePath = ''): array
         {
             $results = [];
             $files = scandir($folder);

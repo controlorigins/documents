@@ -1,4 +1,7 @@
 <?php
+
+declare(strict_types=1);
+
 // layout.php - Base Layout Template
 ?>
 <!DOCTYPE html>

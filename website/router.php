@@ -1,4 +1,7 @@
 <?php
+
+declare(strict_types=1);
+
 /**
  * Router for PHP applications - works for both local development and Azure App Service
  * Start locally with: php -S localhost:8001 router.php

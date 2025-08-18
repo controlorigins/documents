@@ -1,4 +1,7 @@
 <?php
+
+declare(strict_types=1);
+
 header('Content-Type: application/xml; charset=UTF-8');
 require_once __DIR__ . '/includes/config.php';
 require_once __DIR__ . '/includes/docs.php';
@@ -15,7 +18,7 @@ $pages = [
     '/?page=search'
 ];
 
-function listMarkdown($dir, $base = '') {
+function listMarkdown(string $dir, string $base = ''): array {
     $items = [];
     foreach (scandir($dir) as $f) {
         if ($f === '.' || $f === '..') continue;

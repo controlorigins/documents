@@ -1,4 +1,7 @@
 <?php
+
+declare(strict_types=1);
+
 require_once 'includes/config.php';
 
 echo "<h1>Version Information Test</h1>";

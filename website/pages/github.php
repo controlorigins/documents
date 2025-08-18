@@ -1,11 +1,14 @@
 <?php
+
+declare(strict_types=1);
+
 require_once __DIR__ . '/../includes/docs.php';
 // Enable error reporting for debugging
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
 // GitHub API integration functions
-function fetchApiData($url, $token = null)
+function fetchApiData(string $url, ?string $token = null): ?array
 {
     $ch = curl_init();
     curl_setopt($ch, CURLOPT_URL, $url);
@@ -119,7 +122,7 @@ if ($cacheIsValid) {
 }
 
 // Helper function to format date
-function formatDate($dateString) {
+function formatDate(string $dateString): string {
     $date = new DateTime($dateString);
     return $date->format('F j, Y g:i A');
 }
@@ -130,7 +133,7 @@ $nextRefresh = $cacheTime - $cacheAge;
 $cacheDate = date('F j, Y g:i A', ($cachedData['timestamp'] ?? filemtime($cacheFile)));
 
 // Format cache time
-function formatTime($seconds) {
+function formatTime(int $seconds): string {
     return sprintf('%02d:%02d:%02d', 
         (int)floor($seconds / 3600), 
         (int)floor(($seconds / 60) % 60), 

@@ -1,4 +1,8 @@
-<?php require_once __DIR__ . '/../includes/docs.php'; ?>
+<?php 
+
+declare(strict_types=1);
+
+require_once __DIR__ . '/../includes/docs.php'; ?>
 <div class="card shadow-sm fade-in">
     <div class="card-header d-flex justify-content-between align-items-center">
         <div>

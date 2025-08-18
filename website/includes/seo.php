@@ -1,4 +1,7 @@
 <?php
+
+declare(strict_types=1);
+
 // SEO helper include. Requires config loaded (index.php loads config before layout)
 if (!function_exists('canonical_url')) {
     require_once __DIR__ . '/config.php';

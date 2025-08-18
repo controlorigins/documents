@@ -1,4 +1,7 @@
 <?php
+
+declare(strict_types=1);
+
 require_once __DIR__ . '/../includes/docs.php';
 // Database connection
 $db = new PDO('sqlite:data/database.db');
@@ -10,7 +13,7 @@ $db->exec("CREATE TABLE IF NOT EXISTS contacts (
             email TEXT)");
 
 // Function to check if a record already exists
-function recordExists($name, $email, $excludeId = null)
+function recordExists(string $name, string $email, ?int $excludeId = null): bool
 {
     global $db;
     $query = 'SELECT * FROM contacts WHERE name = :name AND email = :email';
@@ -25,7 +28,7 @@ function recordExists($name, $email, $excludeId = null)
 }
 
 // Function to insert a new record
-function create($name, $email)
+function create(string $name, string $email): bool
 {
     if (!recordExists($name, $email)) {
         global $db;
@@ -37,7 +40,7 @@ function create($name, $email)
 }
 
 // Function to read all records
-function read()
+function read(): array
 {
     global $db;
     $stmt = $db->query('SELECT * FROM contacts');
@@ -45,7 +48,7 @@ function read()
 }
 
 // Function to update a record
-function update($id, $name, $email)
+function update(int $id, string $name, string $email): bool
 {
     if (!recordExists($name, $email, $id)) {
         global $db;
@@ -57,7 +60,7 @@ function update($id, $name, $email)
 }
 
 // Function to delete a record
-function delete($id)
+function delete(int $id): bool
 {
     global $db;
     $stmt = $db->prepare('DELETE FROM contacts WHERE id = :id');
@@ -66,7 +69,7 @@ function delete($id)
 }
 
 // Function to seed the database with Star Trek characters
-function seedDatabase()
+function seedDatabase(): bool
 {
     global $db;
     $characters = [
